@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JFT Reading & Quiz Tracker</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --text-color: #333;
+            --success-color: #2ec4b6;
+            --danger-color: #e71d36;
+            --border-radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #eef2f7;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .selector-zone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 2px solid var(--primary-color);
+            background: white;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .reading-box {
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            white-space: pre-line;
+            background: var(--secondary-color);
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #fdfdfd;
+            border: 1px solid #e1e8ed;
+        }
+
+        .options-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .option-item {
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-item:hover {
+            background-color: #f1f3f5;
+        }
+
+        .option-item input {
+            cursor: pointer;
+        }
+
+        /* Status Jawaban */
+        .option-item.correct {
+            background-color: #d4edda !important;
+            border-color: var(--success-color) !important;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .option-item.wrong {
+            background-color: #f8d7da !important;
+            border-color: var(--danger-color) !important;
+            color: #721c24;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Tabel Kosakata */
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .vocab-table th, .vocab-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .vocab-table th {
+            background-color: var(--secondary-color);
+        }
+
+        /* Bagian Esai / Pertanyaan Isian */
+        .essay-block {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            border-radius: 3px;
+        }
+        
+        .essay-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .essay-answer {
+            display: none;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>JFT-Basic Reading Practice</h1>
+        <div class="selector-zone">
+            <label for="dateSelect">Pilih Tanggal Belajar:</label>
+            <select id="dateSelect" onchange="loadData()"></select>
+        </div>
+    </header>
+
+    <!-- Bagian Membaca -->
+    <section class="card">
+        <h2>読み物 (Bacaan)</h2>
+        <div id="readingContent" class="reading-box"></div>
+    </section>
+
+    <!-- Bagian Kuis Pilihan Ganda -->
+    <section class="card">
+        <h2>読解問題 (Kuis Pilihan Ganda)</h2>
+        <div id="quizContent"></div>
+        <button class="btn" onclick="checkAnswers()">Periksa Jawaban</button>
+        <div id="scoreDisplay" class="score-display"></div>
+    </section>
+
+    <!-- Bagian Pertanyaan Terbuka / Esai (Jika Ada) -->
+    <section class="card" id="essaySection" style="display:none;">
+        <h2>質問に答えてください (Pertanyaan Isian)</h2>
+        <div id="essayContent"></div>
+    </section>
+
+    <!-- Bagian Kosakata (Jika Ada) -->
+    <section class="card" id="vocabSection" style="display:none;">
+        <h2>語彙 (Kosakata)</h2>
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th>Kata Kerja / Benda</th>
+                    <th>Arti (Bahasa Indonesia)</th>
+                </tr>
+            </thead>
+            <tbody id="vocabContent"></tbody>
+        </table>
+    </section>
+</div>
+
+<script>
+    // DATA UTAMA: Anda cukup menambah objek baru di dalam array ini di masa depan!
+    const jftDatabase = [
+        {
+            date: "22 Juni 2026",
+            readingText: `私は最近（さいきん）、ダイエットを始（はじ）めました。
+毎日（まいにち）ダイエットメニューを見（み）る予定（よてい）です。体（からだ）にいいレシピを探（さが）しています。野菜（やさい）をできるだけたくさん食（た）べましょう。野菜を食べないのはよくないです。
+私はできるだけ魚（さかな）を選（えら）びます。ダイエット中（ちゅう）は魚を食べましょう。魚は体にいいと思（おも）います。お茶（ちゃ）は飲（の）み物（もの）の一種（いっしゅ）ですので、よく飲みます。
+昨日（きのう）、友達（ともだち）とレストランへ行（い）きました。そのレストランはちょっと高（たか）いです。高いご飯（ごはん）より安（やす）いサンドウィッチを選びました。
+友達はハンバーガーを注文（ちゅうもん）しました。私は「このハンバーガーは体に悪（わる）いと思います」と言いました。友達は「ハンバーガーは体に悪いよ。でも、おいしいよ」と言いました。そのハンバーガーはカロリーが高（たか）いです。
+今日（きょう）の夜（よる）ご飯は焼肉（やきにく）です。焼肉は野菜と一緒（いっしゅ）に食べます。ケーキもありましたが、そのケーキはカロリーが高いと思います。体に悪いと聞（き）いたので、私はサラダにしました。
+先週（せんしゅう）、おすすめのサラダを作（つく）りました。今週（こんしゅう）はおすすめのスープを作る予定です。できるだけ魚も食べますよ。
+私は毎日アイスクリームを食べません。これからも健康（けんこう）のために、野菜や魚をたくさん食べたいです。`,
+            questions: [
+                {
+                    q: "私は何を始めましたか。",
+                    options: ["A. 勉強", "B. ダイエット", "C. 仕事"],
+                    correct: 1 // indeks B
+                },
+                {
+                    q: "私はできるだけ何を選びますか。",
+                    options: ["A. 肉", "B. ケーキ", "C. 魚"],
+                    correct: 2 // indeks C
+                },
+                {
+                    q: "レストランはどうでしたか。",
+                    options: ["A. ちょっと高い", "B. とても安い", "C. 小さい"],
+                    correct: 0 // indeks A
+                },
+                {
+                    q: "今日の夜ご飯は何ですか。",
+                    options: ["A. サラダ", "B. 焼肉", "C. ハンバーガー"],
+                    correct: 1 // indeks B
+                },
+                {
+                    q: "私は毎日何を食べませんか。",
+                    options: ["A. 魚", "B. 野菜", "C. アイスクリーム"],
+                    correct: 2 // indeks C
+                }
+            ],
+            essayQuestions: [
+                { q: "なぜ私はサラダにしましたか。", a: "体に悪いと聞いたからです。" },
+                { q: "今週は何を作る予定ですか。", a: "おすすめのスープを作る予定です。" },
+                { q: "私はよく何を飲みますか。", a: "お茶をよく飲みます。" }
+            ],
+            vocabulary: [] // Kosong untuk tanggal ini
+        },
+        {
+            date: "23 Juni 2026",
+            readingText: `今日は暖（あたた）かい日（ひ）です。
+今朝（けさ）、私はニュースを読（よ）んでテレビを見（み）ました。そして正（ただ）しい情報（じょうほう）について考（かんが）えました。
+午後（ごご）は友達（ともだち）と新（あたら）しいレストランについて調（しら）べました。ネットでレストランのレビューを調べました。そのレストランは有名（ゆうめい）で、予約（よやく）が難（むずか）しいです。スタッフが親切（しんせつ）で、また泊（と）まりたいというレビューもありました。
+友達は「後（あと）で注文（ちゅうもん）します」と言いました。私は「昨日（きのう）は何（なに）も注文しませんでした」と答（こた）えました。
+そのあと、公園（こうえん）へ行きました。子供達（こどもたち）は公園で遊（あそ）んでいました。私たちも少（すこ）し外（そと）で遊びました。
+夕方（ゆうがた）、母（はは）と一緒（いっしゅ）に家（いえ）を飾（かざ）りました。入り口（いりぐち）も飾りました。母は「お正月（しょうがつ）の飾（かざ）りも出（だ）しましょう」と言いました。
+夜（よる）、家族（かぞく）と一緒に過（す）ごす時間（じかん）を待（ま）ちました。両親（りょうしん）は私のことを心配（しんぱい）していますが、いつも応援（おうえん）してくれます。
+そのとき、友達からメッセージが来（き）ました。
+「午前（ごぜん）9時に会（あ）いましょう。」
+私は「はい、会いましょう」と返事（へんじ）をしました。
+明日（あした）は会議（かいぎ）があります。ノートパソコンを充電（じゅうでん）して、会議に持（も）って行（い）く予定（よてい）です。`,
+            questions: [
+                {
+                    q: "今朝、私は何をしましたか。",
+                    options: ["A. 公園で遊びました", "B. ニュースを読んでテレビを見ました", "C. 銀行へ行きました"],
+                    correct: 1
+                },
+                {
+                    q: "レストランはどうですか。",
+                    options: ["A. 有名ではありません", "B. スタッフが不親切です", "C. 有名で予約が難しいです"],
+                    correct: 2
+                },
+                {
+                    q: "子供達はどこで遊びましたか。",
+                    options: ["A. スーパー", "B. 公園", "C. スタジオ"],
+                    correct: 1
+                },
+                {
+                    q: "誰と一緒に家を飾りましたか。",
+                    options: ["A. 父", "B. 友達", "C. 母"],
+                    correct: 2
+                },
+                {
+                    q: "明日は何がありますか。",
+                    options: ["A. 試験", "B. 会議", "C. 結婚式"],
+                    correct: 1
+                }
+            ],
+            essayQuestions: [],
+            vocabulary: [
+                { word: "心配する (しんぱいする)", meaning: "khawatir" },
+                { word: "飾る (かざる)", meaning: "menghias" },
+                { word: "調べる (しらべる)", meaning: "mencari, memeriksa" },
+                { word: "注文する (ちゅうもんする)", meaning: "memesan" },
+                { word: "情報 (じょうほう)", meaning: "informasi" },
+                { word: "親切 (しんせつ)", meaning: "ramah" },
+                { word: "予約 (よやく)", meaning: "reservasi" },
+                { word: "入り口 (いりぐち)", meaning: "pintu masuk" },
+                { word: "充電する (じゅうでんする)", meaning: "mengisi daya" },
+                { word: "持って行く (もっていく)", meaning: "membawa" }
+            ]
+        },
+        {
+            date: "24 Juni 2026",
+            readingText: `私は高校生（こうこうせい）です。
+大抵（たいてい）は白（しろ）いスニーカーを履（は）くと思（おも）いますが、時々（ときどき）サンダルも好（す）きです。学校（がっこう）にはピンクの体操服（たいそうふく）があります。私の体操服は少（すこ）し古（ふる）いですが、まだ着（き）ています。
+先週（せんしゅう）、先生に聞きました。
+「大工（だいく）の授業（じゅぎょう）はスニーカーで大丈夫ですか。」
+先生は、
+「はい、スニーカーで大丈夫ですよ。みんな体操服を着ていますよ。」
+と言（い）いました。
+今日は学校の屋上（おくじょう）へ行きました。友達が、
+「屋上でみんなと会うのはどうですか。」
+と言いました。
+私は、
+「いいですね。」
+と答（こた）えました。
+もうすぐチャイムが鳴（な）ると思いました。友達が、
+「もうすぐチャイムがなりますか。」
+と聞くと、先生は、
+「はい。もうすぐ昼休みですよ。」
+と言いました。
+昼休みは短（みじか）いです。
+友達が、
+「昼休みに一緒（いっしょ）にご飯（ごはん）を食べませんか。」
+と言いました。
+私は、
+「はい、ぜひ。」
+と答えました。
+昼ご飯の時、友達が聞きました。
+「いつも何を飲みますか。」
+私は、
+「いつもスポーツドリンクを飲みます。」
+と答えました。
+午後（ごご）の授業の後、図書館（としょかん）へ行きました。私はマンガを読みました。本はあまり読まないけど、ゲームをします。
+放課後（ほうかご）、新しい部活（ぶかつ）の説明会（せつめいかい）がありました。私は部活が好きです。でも、疲（つか）れているとあまり遊びません。
+友達は、
+「放課後に多分（たぶん）カフェへ行きます。」
+と言いました。
+私は宿題（しゅくだい）があったので、一緒に行きませんでした。
+家に帰（かえ）ってから、動画（どうが）を少し見ました。そして放課後の宿題をしました。
+分からない問題（もんだい）があったので調（しら）べましたが、分かりませんでした。
+今日は少し疲れていました。よく休まないので、ちょっと眠（ねむ）いです。
+テレビを見ないで寝（ね）ました。`,
+            questions: [
+                {
+                    q: "私は大抵何を履きますか。",
+                    options: ["A. サンダル", "B. スニーカー", "C. ブーツ"],
+                    correct: 1
+                },
+                {
+                    q: "昼休みはどうでしたか。",
+                    options: ["A. 長い", "B. 楽しくない", "C. 短い"],
+                    correct: 2
+                },
+                {
+                    q: "私はいつも何を飲みますか。",
+                    options: ["A. お茶", "B. ジュース", "C. スポーツドリンク"],
+                    correct: 2
+                },
+                {
+                    q: "放課後に何がありましたか。",
+                    options: ["A. 試験", "B. 部活の説明会", "C. お祭り"],
+                    correct: 1
+                },
+                {
+                    q: "なぜ友達とカフェへ行きませんでしたか。",
+                    options: ["A. 宿題があったから", "B. お金がなかったから", "C. 雨だったから"],
+                    correct: 0
+                }
+            ],
+            essayQuestions: [], // Tidak ada pertanyaan esai di data Anda kali ini
+            vocabulary: [
+                { word: "屋上 (おくじょう)", meaning: "atap sekolah" },
+                { word: "昼休み (ひるやすみ)", meaning: "istirahat siang" },
+                { word: "放課後 (ほうかご)", meaning: "setelah sekolah" },
+                { word: "部活 (ぶかつ)", meaning: "ekstrakurikuler" },
+                { word: "宿題 (しゅくだい)", meaning: "PR" },
+                { word: "体操服 (たいそうふく)", meaning: "seragam olahraga" },
+                { word: "チャイム", meaning: "bel sekolah" }
+            ]
+        },
+        {
+            date: "25 Juni 2026",
+            readingText: `私は高校生（こうこうせい）です。昼休（ひるやす）みが好（す）きです。でも、昼休みは短（みじか）いです。
+今日は友達（ともだち）に「屋上（おくじょう）でご飯（ごはん）を食べませんか。」と聞（き）きました。友達は「いいですね。」と言（い）いました。
+チャイムがもうすぐなので、「少（すこ）し待（ま）ちませんか。」と言いました。そして、私は「私はまず並（なら）びますので、みんなは後（あと）で来（き）てもいいですよ。」と言いました。
+昼休みのあと、友達は「今日は公園（こうえん）で犬（いぬ）と遊（あそ）びます。」と言いました。でも、私は「今日は行（い）かないと思います。」と答（こた）えました。まだ新しい友達とはあまり遊びません。また今度（こんど）話（はな）したいと思います。
+午後（ごご）は部活（ぶかつ）がありました。私は部活が好（す）きです。友達が「部活では何（なに）을しますか。」と聞くと、先生は今日の予定（よてい）を説明（せつめい）しました。
+部活のあと、私は少（すこ）し疲（つか）れていました。疲れているとあまり遊びません。学校（がっこう）の後（あと）もあまり遊びません。
+家（いえ）へ帰（かえ）る前（まえ）に、店（みせ）で少し並びました。冷（つめ）たいスポーツドリンクを選（えら）んで飲（の）みました。私はスポーツドリンクをよく飲みます。
+家では動画（どうが）のアプリで少し動画を見ました。でも、テレビは見ませんでした。そのあと、ご飯を食べて宿題（しゅくだい）をしました。
+私は新しい部活を始（はじ）めたいと思っています。来週（らいしゅう）は新しい塾（じゅく）も始まります。忙（いそが）しいですが、毎日（まいにち）が楽（たの）しみです。`,
+            questions: [
+                {
+                    q: "私はどこでご飯を食べたいですか。",
+                    options: ["A. 教室", "B. 屋上", "C. 公園"],
+                    correct: 1
+                },
+                {
+                    q: "私は何をよく飲みますか。",
+                    options: ["A. 牛乳", "B. お茶", "C. スポーツドリンク"],
+                    correct: 2
+                },
+                {
+                    q: "疲れていると私はどうしますか。",
+                    options: ["A. たくさん遊びます。", "B. あまり遊びません。", "C. プールへ行きます。"],
+                    correct: 1
+                },
+                {
+                    q: "家で何をしましたか。",
+                    options: ["A. テレビを見ました。", "B. 宿題をしました。", "C. 映画を見ました。"],
+                    correct: 1
+                },
+                {
+                    q: "来週何が始まりますか。",
+                    options: ["A. 新しい仕事", "B. 新しい塾", "C. 新しいアルバイト"],
+                    correct: 1
+                }
+            ],
+            essayQuestions: [], 
+            vocabulary: [
+                { word: "屋上 (おくじょう)", meaning: "atap sekolah" },
+                { word: "並ぶ (ならぶ)", meaning: "mengantre/berbaris" },
+                { word: "予定 (よてい)", meaning: "rencana/jadwal" },
+                { word: "説明する (せつめいする)", meaning: "menjelaskan" },
+                { word: "冷たい (つめたい)", meaning: "dingin (untuk benda)" },
+                { word: "塾 (じゅく)", meaning: "tempat les/bimbel" },
+                { word: "忙しい (いそがしい)", meaning: "sibuk" }
+            ]
+        }
+        // <--- DI SINI TANGGAL BERIKUTNYA BISA ANDA TAMBAHKAN DI MASA DEPAN
+    ];
+
+    // Inisialisasi Pilihan Tanggal
+    const dateSelect = document.getElementById('dateSelect');
+    jftDatabase.forEach((data, index) => {
+        let option = document.createElement('option');
+        option.value = index;
+        option.textContent = data.date;
+        dateSelect.appendChild(option);
+    });
+
+    // Memuat Data Berdasarkan Tanggal yang Dipilih
+    function loadData() {
+        const index = dateSelect.value;
+        const currentData = jftDatabase[index];
+
+        // 1. Load Teks Bacaan
+        document.getElementById('readingContent').textContent = currentData.readingText;
+
+        // 2. Load Soal Pilihan Ganda
+        const quizContent = document.getElementById('quizContent');
+        quizContent.innerHTML = "";
+        document.getElementById('scoreDisplay').style.display = "none";
+
+        currentData.questions.forEach((quiz, qIdx) => {
+            let qBlock = document.createElement('div');
+            qBlock.className = 'question-block';
+            qBlock.innerHTML = `<p><strong>Q${qIdx + 1}. ${quiz.q}</strong></p>`;
+
+            let oList = document.createElement('ul');
+            oList.className = 'options-list';
+
+            quiz.options.forEach((opt, oIdx) => {
+                let li = document.createElement('li');
+                li.className = 'option-item';
+                li.innerHTML = `
+                    <input type="radio" name="q${qIdx}" value="${oIdx}" id="q${qIdx}_o${oIdx}">
+                    <label for="q${qIdx}_o${oIdx}">${opt}</label>
+                `;
+                oList.appendChild(li);
+            });
+
+            qBlock.appendChild(oList);
+            quizContent.appendChild(qBlock);
+        });
+
+        // 3. Load Soal Esai / Pertanyaan Terbuka (Jika ada)
+        const essaySection = document.getElementById('essaySection');
+        const essayContent = document.getElementById('essayContent');
+        if(currentData.essayQuestions && currentData.essayQuestions.length > 0) {
+            essaySection.style.display = "block";
+            essayContent.innerHTML = "";
+            currentData.essayQuestions.forEach((eq, eqIdx) => {
+                let eqBlock = document.createElement('div');
+                eqBlock.className = 'essay-block';
+                eqBlock.innerHTML = `
+                    <p><strong>問${eqIdx + 1}: ${eq.q}</strong></p>
+                    <button class="essay-btn" onclick="toggleEssayAnswer(${eqIdx})">Lihat Jawaban</button>
+                    <p id="essayAns_${eqIdx}" class="essay-answer">Kunci Jawaban: ${eq.a}</p>
+                `;
+                essayContent.appendChild(eqBlock);
+            });
+        } else {
+            essaySection.style.display = "none";
+        }
+
+        // 4. Load Kosakata (Jika ada)
+        const vocabSection = document.getElementById('vocabSection');
+        const vocabContent = document.getElementById('vocabContent');
+        if (currentData.vocabulary && currentData.vocabulary.length > 0) {
+            vocabSection.style.display = "block";
+            vocabContent.innerHTML = "";
+            currentData.vocabulary.forEach(v => {
+                let row = document.createElement('tr');
+                row.innerHTML = `<td><strong>${v.word}</strong></td><td>${v.meaning}</td>`;
+                vocabContent.appendChild(row);
+            });
+        } else {
+            vocabSection.style.display = "none";
+        }
+    }
+
+    // Fungsi Cek Kunci Jawaban Kuis
+    function checkAnswers() {
+        const index = dateSelect.value;
+        const currentData = jftDatabase[index];
+        let score = 0;
+        let totalQuestions = currentData.questions.length;
+
+        currentData.questions.forEach((quiz, qIdx) => {
+            const selectedOpt = document.querySelector(`input[name="q${qIdx}"]:checked`);
+            const optionsItems = document.querySelectorAll(`input[name="q${qIdx}"]`);
+
+            optionsItems.forEach((input, oIdx) => {
+                let parentLi = input.parentElement;
+                // Reset styling kelas dulu
+                parentLi.classList.remove('correct', 'wrong');
+
+                // Jika ini adalah jawaban yang benar, beri warna hijau
+                if (oIdx === quiz.correct) {
+                    parentLi.classList.add('correct');
+                }
+                
+                // Jika user memilih opsi ini dan salah, beri warna merah
+                if (selectedOpt && parseInt(selectedOpt.value) === oIdx && oIdx !== quiz.correct) {
+                    parentLi.classList.add('wrong');
+                }
+            });
+
+            if (selectedOpt && parseInt(selectedOpt.value) === quiz.correct) {
+                score++;
+            }
+        });
+
+        // Tampilkan Nilai Akhir
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        scoreDisplay.style.display = "block";
+        scoreDisplay.innerHTML = `Skor Anda: ${score} / ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
+    }
+
+    // Fungsi Toggle Menampilkan Kunci Jawaban Isian
+    function toggleEssayAnswer(idx) {
+        const ans = document.getElementById(`essayAns_${idx}`);
+        if(ans.style.display === "block") {
+            ans.style.display = "none";
+        } else {
+            ans.style.display = "block";
+        }
+    }
+
+    // Load Pertama Kali Saat Buka Halaman
+    window.onload = loadData;
+</script>
+
+</body>
+</html>
