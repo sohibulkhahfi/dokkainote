@@ -140,6 +140,11 @@
             align-items: center;
             gap: 8px;
             transition: background 0.2s;
+
+            position: sticky;        /* Membuat tombol dapat menempel saat di-scroll */
+            top: 10px;               /* Jarak tempel dari batas atas layar sebesar 10px */
+            z-index: 999;            /* Memastikan tombol berada di atas lapisan teks bacaan */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Memberikan bayangan halus saat melayang */
         }
 
         .btn-back:hover {
@@ -307,6 +312,26 @@
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
+
+        /* Mengatur spasi antar baris agar furigana tidak saling bertabrakan */
+        .reading-box {
+            line-height: 2.5; /* Dinaikkan dari 1.6 ke 2.5 agar ada ruang untuk furigana */
+        }
+
+        /* Mengatur tampilan huruf kanji/ruby */
+        ruby {
+            ruby-position: over; /* Memastikan furigana selalu berada di atas kanji */
+            font-size: 20px;     /* Ukuran kanji sedikit diperbesar agar lebih mudah dibaca */
+        }
+
+        /* Mengatur tampilan teks furigana (huruf kecil di atas kanji) */
+        rt {
+            font-size: 0.55em;      /* Ukuran furigana ideal (sekitar 50-60% dari ukuran kanji) */
+            color: #555;            /* Mengubah warna furigana sedikit abu-abu agar mata fokus ke kanjinya */
+            letter-spacing: 0.5px;  /* Memberi sedikit jarak antar huruf furigana */
+            padding-bottom: 0.2em;  /* Memberi sedikit jarak vertikal antara kanji dan furigana */
+            user-select: none;      /* Opsional: Membuat furigana tidak ikut terseleksi saat teks di-copy */
+        }
     </style>
 </head>
 <body>
@@ -374,14 +399,20 @@
         {
             date: "22 Juni 2026",
             title: "ダイエットの始まり<br>(Awal Diet)",
-            readingText: `私は最近（さいきん）、ダイエットを始（はじ）めました。
-毎日（まいにち）ダイエットメニューを見（み）る予定（よてい）です。体（からだ）にいいレシピを探（さが）しています。野菜（やさい）をできるだけたくさん食（た）べましょう。野菜を食べないのはよくないです。
-私はできるだけ魚（さかな）を選（えら）びます。ダイエット中（ちゅう）は魚を食べましょう。魚は体にいいと思（おも）います。お茶（ちゃ）は飲（の）み物（もの）の一種（いっしゅ）ですので、よく飲みます。
-昨日（きのう）、友達（ともだち）とレストランへ行（い）きました。そのレストランはちょっと高（たか）いです。高いご飯（ごはん）より安（やす）いサンドウィッチを選びました。
-友達はハンバーガーを注文（ちゅうもん）しました。私は「このハンバーガーは体に悪（わる）いと思います」と言いました。友達は「ハンバーガーは体に悪いよ。でも、おいしいよ」と言いました。そのハンバーガーはカロリーが高（たか）いです。
-今日（きょう）の夜（よる）ご飯は焼肉（やきにく）です。焼肉は野菜と一緒（いっしゅ）に食べます。ケーキもありましたが、そのケーキはカロリーが高いと思います。体に悪いと聞（き）いたので、私はサラダにしました。
-先週（せんしゅう）、おすすめのサラダを作（つく）りました。今週（こんしゅう）はおすすめのスープを作る予定です。できるだけ魚も食べますよ。
-私は毎日アイスクリームを食べません。これからも健康（けんこう）のために、野菜や魚をたくさん食べたいです。`,
+            readingText: `<ruby>私<rt>わたし</rt></ruby>は<ruby>最近<rt>さいきん</rt></ruby>、ダイエットを<ruby>始<rt>はじ</rt></ruby>めました。  
+<ruby>毎日<rt>まいにち</rt></ruby>ダイエットメニューを<ruby>見<rt>み</rt></ruby>る<ruby>予定<rt>よてい</rt></ruby>です。<ruby>体<rt>からだ</rt></ruby>にいいレシピを<ruby>探<rt>さが</rt></ruby>しています。<ruby>野菜<rt>やさい</rt></ruby>をできるだけたくさん<ruby>食<rt>た</rt></ruby>べましょう。野菜を食べないのはよくないです。  
+
+<ruby>私<rt>わたし</rt></ruby>はできるだけ<ruby>魚<rt>さかな</rt></ruby>を<ruby>選<rt>えら</rt></ruby>びます。ダイエット<ruby>中<rt>ちゅう</rt></ruby>は魚を食べましょう。魚は体にいいと<ruby>思<rt>おも</rt></ruby>います。お<ruby>茶<rt>ちゃ</rt></ruby>は<ruby>飲<rt>の</rt></ruby>み<ruby>物<rt>もの</rt></ruby>の<ruby>一種<rt>いっしゅ</rt></ruby>ですので、よく飲みます。  
+
+<ruby>昨日<rt>きのう</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby>とレストランへ<ruby>行<rt>い</rt></ruby>きました。そのレストランはちょっと<ruby>高<rt>たか</rt></ruby>いです。高い<ruby>ご飯<rt>ごはん</rt></ruby>より<ruby>安<rt>やす</rt></ruby>いサンドウィッチを選びました。  
+
+友達はハンバーガーを<ruby>注文<rt>ちゅうもん</rt></ruby>しました。私は「このハンバーガーは体に<ruby>悪<rt>わる</rt></ruby>いと思います」と言いました。友達は「ハンバーガーは体に悪いよ。でも、おいしいよ」と言いました。そのハンバーガーはカロリーが<ruby>高<rt>たか</rt></ruby>いです。  
+
+<ruby>今日<rt>きょう</rt></ruby>の<ruby>夜<rt>よる</rt></ruby>ご飯は<ruby>焼肉<rt>やきにく</rt></ruby>です。焼肉は野菜と<ruby>一緒<rt>いっしょ</rt></ruby>に食べます。ケーキもありましたが、そのケーキはカロリーが高いと思います。体に悪いと<ruby>聞<rt>き</rt></ruby>いたので、私はサラダにしました。  
+
+<ruby>先週<rt>せんしゅう</rt></ruby>、おすすめのサラダを<ruby>作<rt>つく</rt></ruby>りました。<ruby>今週<rt>こんしゅう</rt></ruby>はおすすめのスープを<ruby>作<rt>つく</rt></ruby>る予定です。できるだけ魚も食べますよ。  
+
+<ruby>私<rt>わたし</rt></ruby>は毎日アイスクリームを食べません。これからも<ruby>健康<rt>けんこう</rt></ruby>のために、野菜や魚をたくさん食べたいです。`,
             questions: [
                 { q: "私は何を始めましたか。", options: ["A. 勉強", "B. ダイエット", "C. 仕事"], correct: 1 },
                 { q: "私はできるだけ何を選びますか。", options: ["A. 肉", "B. ケーキ", "C. 魚"], correct: 2 },
@@ -585,7 +616,90 @@
                 { word: "優先席 (ゆうせんせき)", meaning: "kursi prioritas" },
                 { word: "展示 (てんじ)", meaning: "pameran" }
             ]
-        }
+        },
+        {
+    date: "28 Juni 2026",
+    title: "テストとお正月<br>(Ujian & Tahun Baru)",
+    readingText: `もうレポートを<ruby>書<rt>か</rt></ruby>きました。まだ<ruby>練習<rt>れんしゅう</rt></ruby>をしていませんが、もうノートをまとめました。
+<ruby>来週<rt>らいしゅう</rt></ruby>はテストがあります。やっと<ruby>明日<rt>あした</rt></ruby>テストですね。私は<ruby>英語<rt>えいご</rt></ruby>を<ruby>復習<rt>ふくしゅう</rt></ruby>して、<ruby>外国語<rt>がいこくご</rt></ruby>の<ruby>単語<rt>たんご</rt></ruby>を<ruby>覚<rt>おぼ</rt></ruby>えます。<ruby>漢字<rt>かんじ</rt></ruby>は<ruby>難<rt>むずか</rt></ruby>しいですが、<ruby>頑張<rt>がんば</rt></ruby>ります。
+
+<ruby>友達<rt>ともだち</rt></ruby>が「この<ruby>問題<rt>もんだい</rt></ruby>の<ruby>答<rt>こた</rt></ruby>えは何ですか。この答えは<ruby>正<rt>ただ</rt></ruby>しいですか。」と聞きました。でも、先生は「まず<ruby>自分<rt>じぶん</rt></ruby>で<ruby>考<rt>かんが</rt></ruby>えてください。」と言いました。
+
+オンライン<ruby>授業<rt>じゅぎょう</rt></ruby>のとき、先生が「<ruby>画面<rt>がめん</rt></ruby>が見えますか。」と聞きました。私は「はい、見えます。でも、マイクが<ruby>遠<rt>とお</rt></ruby>いので<ruby>聞<rt>き</rt></ruby>こえません。<ruby>音<rt>おと</rt></ruby>が<ruby>小<rt>ちい</rt></ruby>さいです。」と答えました。そのあと、先生は「<ruby>今<rt>いま</rt></ruby>、ミュートにしますね。」と言いました。
+
+授業の<ruby>後<rt>あと</rt></ruby>、ジムへ行きました。ジムで<ruby>音楽<rt>おんがく</rt></ruby>を<ruby>聴<rt>き</rt></ruby>きながら<ruby>運動<rt>うんどう</rt></ruby>しました。たくさん<ruby>汗<rt>あせ</rt></ruby>をかきました。でも、<ruby>肩<rt>かた</rt></ruby>が<ruby>少<rt>すこ</rt></ruby>し<ruby>痛<rt>いた</rt></ruby>かったので、あまり運動をしませんでした。今日は<ruby>自転車<rt>じてんしゃ</rt></ruby>にも<ruby>乗<rt>の</rt></ruby>りました。
+
+もうすぐお<ruby>正月<rt>しょうがつ</rt></ruby>です。<ruby>家<rt>いえ</rt></ruby>を<ruby>掃除<rt>そうじ</rt></ruby>して、リビングを<ruby>飾<rt>かざ</rt></ruby>りました。お正月にはおせち<ruby>料理<rt>りょうり</rt></ruby>を食べます。そして<ruby>神社<rt>じんじゃ</rt></ruby>で<ruby>願<rt>ねが</rt></ruby>い<ruby>事<rt>ごと</rt></ruby>をして、<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>ります。
+
+<ruby>夜<rt>よる</rt></ruby>は<ruby>家族<rt>かぞく</rt></ruby>とカウントダウンを<ruby>待<rt>ま</rt></ruby>ちました。みんなでおせち料理を<ruby>楽<rt>たの</rt></ruby>しみ、<ruby>新年<rt>しんねん</rt></ruby>のあいさつをしました。
+「あけましておめでとうございます。<ruby>今年<rt>ことし</rt></ruby>もよろしくお願いします。」`,
+    questions: [
+        { q: "私は何をまとめましたか。", options: ["A. 宿題", "B. ノート", "C. 本"], correct: 1 },
+        { q: "私は何を復習しますか。", options: ["A. 数学", "B. 英語", "C. 理科"], correct: 1 },
+        { q: "ジムで何をしましたか。", options: ["A. サッカーをしました。", "B. 音楽を聴きながら運動しました。", "C. 映画を見ました。"], correct: 1 },
+        { q: "お正月に何を食べますか。", options: ["A. ラーメン", "B. ピザ", "C. おせち料理"], correct: 2 },
+        { q: "お正月にどこで願い事をしますか。", options: ["A. 学校", "B. 神社", "C. 駅"], correct: 1 }
+    ],
+    essayQuestions: [
+        { q: "なぜ先生の声が聞こえませんでしたか。", a: "マイクが遠いので聞こえませんでした。" },
+        { q: "私はジムでどうなりましたか。", a: "たくさん汗をかきました。" },
+        { q: "家族と何を待ちましたか。", a: "カウントダウンを待ちました。" },
+        { q: "新年のあいさつは何と言いましたか。", a: "「あけましておめでとうございます。今年もよろしくお願いします。」と言いました。" }
+    ],
+    vocabulary: [
+        { word: "復習する (ふくしゅうする)", meaning: "Mengulang pelajaran (Review)" },
+        { word: "単語 (たんご)", meaning: "Kosakata (Vocabulary)" },
+        { word: "画面 (がめん)", meaning: "Layar (Screen)" },
+        { word: "運動する (うんどうする)", meaning: "Berolahraga / Beraktivitas fisik" },
+        { word: "お正月 (おしょうがつ)", meaning: "Tahun Baru" },
+        { word: "おせち料理 (おせちりょうり)", meaning: "Makanan khas tahun baru Jepang" },
+        { word: "神社 (じんじゃ)", meaning: "Kuil Shinto" }
+    ]
+},
+        {
+    date: "29 Juni 2026",
+    title: "学生会館のイベントとクリスマス<br>(Event di Gedung Mahasiswa & Natal)",
+    readingText: `私は<ruby>大学生<rt>だいがくせい</rt></ruby>です。私のいとこは<ruby>看護師<rt>かんごし</rt></ruby>です。
+<ruby>今日<rt>きょう</rt></ruby>の<ruby>昼休<rt>ひるやす</rt></ruby>みに<ruby>動画<rt>どうが</rt></ruby>を<ruby>見<rt>み</rt></ruby>ました。そのあと、<ruby>学生会館<rt>がくせいかいかん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きました。私は学生会館のイベントがとても<ruby>好<rt>す</rt></ruby>きです。
+
+<ruby>入口<rt>いりぐち</rt></ruby>で<ruby>友達<rt>ともだち</rt></ruby>が「どうしましたか。」と<ruby>聞<rt>き</rt></ruby>きました。
+私は「ちょっとお<ruby>腹<rt>なか</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>いです。」と<ruby>答<rt>こた</rt></ruby>えました。
+友達は「<ruby>必<rt>かなら</rt></ruby>ず<ruby>水<rt>みず</rt></ruby>を<ruby>飲<rt>の</rt></ruby>んでください。」と言いました。私はいつもスポーツドリンクもよく飲みます。
+
+イベントで<ruby>新<rt>あたら</rt></ruby>しいお<ruby>知<rt>し</rt></ruby>らせをもらいました。友達が「もう見ましたか。」と聞いたので、「はい、見ました。」と答えました。
+
+昼ご飯は<ruby>家<rt>いえ</rt></ruby>で<ruby>作<rt>つく</rt></ruby>ったおにぎりとオムレツを食べて、かわいい<ruby>弁当箱<rt>べんとうばこ</rt></ruby>を<ruby>持<rt>も</rt></ruby>って行きました。オムレツはいろいろな<ruby>国<rt>くに</rt></ruby>で<ruby>人気<rt>にんき</rt></ruby>があります。<ruby>日本<rt>にほん</rt></ruby>の<ruby>朝<rt>あさ</rt></ruby>ご飯では<ruby>漬物<rt>つけもの</rt></ruby>も食べます。漬物はしょっぱいですが、おいしいです。食べ<ruby>終<rt>お</rt></ruby>わったあと、パンを<ruby>紙袋<rt>かみぶくろ</rt></ruby>に入れました。この紙袋もかわいいと思います。
+
+<ruby>午後<rt>ごご</rt></ruby>、みんなはあそこで集まりました。明日もまた集まる<ruby>予定<rt>よてい</rt></ruby>です。
+
+もうすぐ<ruby>冬<rt>ふゆ</rt></ruby>になります。クリスマスは<ruby>特別<rt>とくべつ</rt></ruby>な<ruby>日<rt>ひ</rt></ruby>です。家でクリスマスツリーを<ruby>飾<rt>かざ</rt></ruby>ります。クリスマスは<ruby>音楽<rt>おんがく</rt></ruby>がにぎやかで、<ruby>夜<rt>よる</rt></ruby>にイベントがあります。みんなで<ruby>祝<rt>いわ</rt></ruby>います。
+友達が「日本のクリスマスツリーも<ruby>海外<rt>かいがい</rt></ruby>と<ruby>同<rt>おなじ</rt></ruby>ですか。」と聞きました。
+先生は「はい、ほとんど同じですよ。」と答えました。
+
+<ruby>春<rt>はる</rt></ruby>は<ruby>桜<rt>さくら</rt></ruby>がとても<ruby>美<rt>うつく</rt></ruby>しいです。<ruby>秋<rt>あき</rt></ruby>はもみじが<ruby>赤<rt>あか</rt></ruby>くなります。<ruby>去年<rt>きょねん</rt></ruby>、私はもみじの<ruby>下<rt>した</rt></ruby>で<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>りました。`,
+    questions: [
+        { q: "私のいとこの仕事は何ですか。", options: ["A. 先生", "B. 看護師", "C. 運転手"], correct: 1 },
+        { q: "私は昼ご飯に何を食べましたか。", options: ["A. パンとサラダ", "B. おおにぎりとオムレツ", "C. ラーメン"], correct: 1 },
+        { q: "私は何を持って行きましたか。", options: ["A. 水筒", "B. 弁当箱", "C. ノート"], correct: 2 },
+        { q: "クリスマスはいつイベントがありますか。", options: ["A. 朝", "B. 昼", "C. 夜"], correct: 2 },
+        { q: "秋は何が赤くなりますか。", options: ["A. 桜", "B. ハート", "C. もみじ"], correct: 2 }
+    ],
+    essayQuestions: [
+        { q: "友達は私に何を飲んでくださいと言いましたか。", a: "必ず水を飲んでくださいと言いました。" },
+        { q: "パンを何に入れましたか。", a: "紙袋に入れました。" },
+        { q: "明日もみんなは何をしますか。", a: "また集まります。" },
+        { q: "去年、私はどこで写真を撮りましたか。", a: "もみじの下で写真を撮りました。" }
+    ],
+    vocabulary: [
+        { word: "看護師 (かんごし)", meaning: "Perawat" },
+        { word: "学生会館 (がくせいかいかん)", meaning: "Gedung/Aula Mahasiswa" },
+        { word: "必ず (かならず)", meaning: "Pasti / Harus" },
+        { word: "漬物 (つけもの)", meaning: "Acar khas Jepang" },
+        { word: "弁当箱 (べんとうばこ)", meaning: "Kotak Bekal (Bento)" },
+        { word: "紙袋 (かみぶくろ)", meaning: "Kantong Kertas" },
+        { word: "特別 (とくべつ)", meaning: "Spesial / Istimewa" }
+    ]
+}
     ];
 
     let activeQuizIndex = -1;
@@ -635,7 +749,7 @@
 
         const currentData = jftDatabase[index];
         document.getElementById('quizMainTitle').innerHTML = currentData.title;
-        document.getElementById('readingContent').textContent = currentData.readingText;
+        document.getElementById('readingContent').innerHTML = currentData.readingText;
 
         const quizContent = document.getElementById('quizContent');
         quizContent.innerHTML = "";
