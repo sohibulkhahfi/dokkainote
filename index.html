@@ -332,6 +332,43 @@
             padding-bottom: 0.2em;  /* Memberi sedikit jarak vertikal antara kanji dan furigana */
             user-select: none;      /* Opsional: Membuat furigana tidak ikut terseleksi saat teks di-copy */
         }
+
+        .grid-card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    border: 2px solid #eef2f7;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.grid-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
+}
+
+/* Warna background kustom berdasarkan status pengerjaan */
+.grid-card.sedang-dipelajari {
+    background-color: #f0f7ff;
+    border-color: #b3d7ff;
+}
+
+.grid-card.perlu-review {
+    background-color: #fff9db;
+    border-color: #ffe066;
+}
+
+.grid-card.gold {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
+    border-color: #f1c40f;
+}
     </style>
 </head>
 <body>
@@ -831,34 +868,96 @@
     let activeQuizIndex = -1;
     let isChecked = false; // Status penanda apakah jawaban sudah diperiksa
 
-    function renderGrid() {
-        const homeView = document.getElementById('homeView');
-        homeView.innerHTML = "";
+function renderGrid() {
+    const homeView = document.getElementById('homeView');
+    homeView.innerHTML = "";
 
-        jftDatabase.forEach((data, index) => {
-            const storageKey = `jft_quiz_${data.date.replace(/ /g, "_")}`;
-            const count = parseInt(localStorage.getItem(storageKey)) || 0;
+    // 1. AMBIL DATABASE MASTER (Jika belum ada, buat objek kosong {})
+    const masterDB = JSON.parse(localStorage.getItem('jft_quiz_master_db')) || {};
 
-            let card = document.createElement('div');
-            card.className = 'grid-card';
+    jftDatabase.forEach((data, index) => {
+        // Membuat sub-kunci unik berdasarkan tanggal kuis (contoh: "22_Juni_2026")
+        const quizKey = data.date.replace(/ /g, "_");
+        
+        // 2. AMBIL DATA KUIS SPESIFIK dari dalam objek master
+        const quizData = masterDB[quizKey] || {
+            count: 0,
+            bestScore: 0,
+            lastScore: 0,
+            lastDate: null
+        };
 
-            if (count > 5) {
-                card.classList.add("gold");
-            } else if (count > 0) {
-                card.classList.add("selesai");
+        let statusText = "Belum dikerjakan";
+        let cardClass = "";
+        let stars = "☆☆☆☆☆";
+
+        // Logika Penentuan Status & Bintang berdasarkan Jumlah Percobaan (count)
+        if (quizData.count === 0) {
+            statusText = "Belum dikerjakan";
+            stars = "☆☆☆☆☆";
+        } else if (quizData.count >= 1 && quizData.count <= 2) {
+            statusText = "Sedang dipelajari";
+            cardClass = "sedang-dipelajari";
+            stars = "★★★☆☆";
+        } else if (quizData.count >= 3 && quizData.count <= 5) {
+            statusText = "Perlu review";
+            cardClass = "perlu-review";
+            stars = "★★★★☆";
+        } else if (quizData.count > 5) {
+            statusText = "Sudah sering dilatih";
+            cardClass = "gold";
+            stars = "★★★★★";
+        }
+
+        // Logika Hitung "Berapa hari lalu" & Peringatan Seminggu
+        let waktuLaluText = "-";
+        let peringatanTambahan = "";
+
+        if (quizData.lastDate) {
+            const tglTerakhir = new Date(quizData.lastDate);
+            const tglSekarang = new Date();
+            const selisihWaktu = tglSekarang.getTime() - tglTerakhir.getTime();
+            const selisihHari = Math.floor(selisihWaktu / (1000 * 3600 * 24));
+
+            if (selisihHari === 0) {
+                waktuLaluText = "Hari ini";
+            } else {
+                waktuLaluText = `${selisihHari} hari lalu`;
             }
 
-            const countText = count > 0 ? `<br><small style="opacity: 0.8;">(${count}x Selesai)</small>` : "";
+            if (selisihHari >= 7) {
+                peringatanTambahan = `<div style="color: #e71d36; font-weight: bold; font-size: 0.8rem; margin-top: 5px;">⚠️ Perlu dilatih kembali</div>`;
+            }
+        }
 
-            card.innerHTML = `
-                <h3>${data.title}${countText}</h3>
-                <p>Ditambahkan: ${data.date}</p>
-            `;
+        let card = document.createElement('div');
+        card.className = `grid-card ${cardClass}`;
+
+        const tanggalRingkas = data.date.split(" ").slice(0, 2).join(" ");
+
+        card.innerHTML = `
+            <div style="font-size: 0.9rem; color: #666; font-weight: bold;">${tanggalRingkas}</div>
+            <div style="font-size: 1.4rem; color: #f1c40f; margin: 5px 0;">${stars}</div>
             
-            card.onclick = () => openQuiz(index);
-            homeView.appendChild(card);
-        });
-    }
+            ${quizData.count > 0 ? `
+                <div style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">${quizData.lastScore}%</div>
+                <div style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">Review ${quizData.count}x</div>
+                
+                <div style="border-top: 1px dashed #ddd; padding-top: 5px; width: 100%; text-align: left; font-size: 0.75rem; color: #666;">
+                    <div>Percobaan: <b>${quizData.count}</b></div>
+                    <div>Nilai Terbaik: <b style="color: #2ec4b6;">${quizData.bestScore}%</b></div>
+                    <div>Terakhir: <b>${waktuLaluText}</b></div>
+                </div>
+            ` : `
+                <div style="font-size: 0.9rem; color: #999; margin: 10px 0;">${statusText}</div>
+            `}
+            ${peringatanTambahan}
+        `;
+        
+        card.onclick = () => openQuiz(index);
+        homeView.appendChild(card);
+    });
+}
 
     function openQuiz(index) {
         activeQuizIndex = index;
@@ -963,15 +1062,12 @@ function checkAnswers() {
     const currentData = jftDatabase[activeQuizIndex];
     let totalQuestions = currentData.questions.length;
 
-    // --- VALIDASI JAWABAN DENGAN CUSTOM ALERT ---
+    // Validasi Jawaban Belum Selesai
     const answeredCount = document.querySelectorAll('#quizContent input[type="radio"]:checked').length;
-
     if (answeredCount < totalQuestions) {
-        // Memanggil alert buatan kita yang lebih cantik
         showCustomAlert("Ada soal yang belum diselesaikan. Mohon isi semua jawaban terlebih dahulu sebelum memeriksa!");
         return; 
     }
-    // --------------------------------------------
 
     let score = 0;
 
@@ -983,7 +1079,6 @@ function checkAnswers() {
             let parentLi = input.parentElement;
             parentLi.classList.remove('correct', 'wrong');
 
-            // Berikan warna tanda jawaban
             if (oIdx === quiz.correct) {
                 parentLi.classList.add('correct');
             }
@@ -991,7 +1086,6 @@ function checkAnswers() {
                 parentLi.classList.add('wrong');
             }
 
-            // MATIKAN INPUT: Semua radio button dinonaktifkan agar tidak bisa dipilih lagi
             input.disabled = true;
         });
 
@@ -1004,13 +1098,43 @@ function checkAnswers() {
     scoreDisplay.style.display = "block";
     scoreDisplay.innerHTML = `Skor Anda: ${score} / ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
 
-    // Update progress di local storage
-    const storageKey = `jft_quiz_${currentData.date.replace(/ /g, "_")}`;
-    let currentCount = parseInt(localStorage.getItem(storageKey)) || 0;
-    currentCount += 1;
-    localStorage.setItem(storageKey, currentCount);
+    // =================================================================
+    // === BAGIAN UPDATE BARU: LOGIKA 1 OBJECT MASTER DI LOCAL STORAGE ===
+    // =================================================================
+    
+    // 1. Ambil database master seluruh kuis
+    let masterDB = JSON.parse(localStorage.getItem('jft_quiz_master_db')) || {};
+    
+    // Buat sub-key berdasarkan tanggal (contoh: "22_Juni_2026")
+    const quizKey = currentData.date.replace(/ /g, "_");
+    
+    // 2. Ambil data spesifik kuis ini (jika belum ada, buat struktur default)
+    let quizData = masterDB[quizKey] || {
+        count: 0,
+        bestScore: 0,
+        lastScore: 0,
+        lastDate: null
+    };
 
-    // UBAH TOMBOL: Set status menjadi true, ganti teks tombol, dan ubah warnanya
+    const skorPersen = Math.round((score / totalQuestions) * 100);
+
+    // 3. Perbarui isi data kuis spesifik tersebut
+    quizData.count += 1;
+    quizData.lastScore = skorPersen;
+    quizData.lastDate = new Date().toISOString();
+
+    if (skorPersen > quizData.bestScore) {
+        quizData.bestScore = skorPersen;
+    }
+
+    // 4. Masukkan kembali data kuis yang diperbarui ke dalam objek master
+    masterDB[quizKey] = quizData;
+
+    // 5. Simpan seluruh objek master ke localStorage dengan satu nama key saja
+    localStorage.setItem('jft_quiz_master_db', JSON.stringify(masterDB));
+    
+    // =================================================================
+
     isChecked = true;
     const actionBtn = document.getElementById('actionBtn');
     actionBtn.innerText = "Mulai Lagi";
