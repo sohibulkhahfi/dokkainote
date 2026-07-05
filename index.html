@@ -422,6 +422,9 @@
 
         <section class="card" id="vocabSection" style="display:none;">
             <h2>語彙 (Kosakata)</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <button onclick="startVocabQuiz()" style="background-color: #4a90e2; color: white; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.85rem; margin: 10px;">Tebak Kosakata 🎮</button>
+            </div>
             <table class="vocab-table">
                 <thead>
                     <tr>
@@ -442,6 +445,31 @@
         <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.3rem;">Belum Selesai!</h3>
         <p id="customAlertMessage" style="color: #666; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5;"></p>
         <button onclick="closeCustomAlert()" style="background-color: #4a90e2; color: white; border: none; padding: 10px 30px; font-size: 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; transition: background 0.2s;">Mengerti</button>
+    </div>
+</div>
+
+<div id="vocabQuizModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center;">
+    <div style="background-color: white; padding: 25px; border-radius: 12px; max-width: 450px; width: 90%; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative;">
+        <span onclick="closeVocabQuiz()" style="position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: #aaa;">&times;</span>
+        
+        <h3 style="color: #2c3e50; margin-bottom: 5px; font-size: 1.2rem;">Mini Kuis Kosakata</h3>
+        <p id="vocabProgress" style="font-size: 0.8rem; color: #888; margin-bottom: 20px;">Soal 1 dari 5</p>
+        
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; border: 1px solid #e9ecef;">
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">Apa arti dari kata berikut?</p>
+            <h2 id="vocabQuestionWord" style="color: #4a90e2; font-size: 1.6rem; word-break: break-all;">-</h2>
+        </div>
+        
+        <div id="vocabOptionsContainer" style="display: flex; flex-direction: column; gap: 10px;">
+        </div>
+
+        <div id="vocabSentenceContainer" style="display: none; background-color: #f0f7ff; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4a90e2; text-align: left;">
+            <p style="font-size: 0.75rem; color: #4a90e2; font-weight: bold; margin-bottom: 5px;">Konteks Kalimat:</p>
+            <p id="vocabExampleSentence" style="font-size: 0.95rem; color: #2c3e50; font-weight: 500; line-height: 1.4; margin-bottom: 5px;"></p>
+            <p id="vocabExampleMeaning" style="font-size: 0.85rem; color: #666; font-style: italic; line-height: 1.4;"></p>
+        </div>
+
+        <button id="vocabNextBtn" onclick="nextVocabQuestion()" style="display: none; background-color: #2ec4b6; color: white; border: none; padding: 12px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px;">Pertanyaan Berikutnya &rarr;</button>
     </div>
 </div>
 
@@ -476,7 +504,32 @@
                 { q: "今週は何を作る予定ですか。", a: "おすすめのスープを作る予定です。" },
                 { q: "私はよく何を飲みますか。", a: "お茶をよく便利に飲みます。" }
             ],
-            vocabulary: []
+            vocabulary: [
+                { word: "最近 (さいきん)", meaning: "Baru-baru ini / Akhir-akhir ini", sentence: "私は最近、ダイエットを始めました。", meaningSentence: "Saya baru-baru ini memulai diet." },
+                { word: "ダイエット", meaning: "Diet", sentence: "私は最近、ダイエットを始めました。", meaningSentence: "Saya baru-baru ini memulai diet." },
+                { word: "始める (はじめる)", meaning: "Memulai", sentence: "私は最近、ダイエットを始めました。", meaningSentence: "Saya baru-baru ini memulai diet." },
+                { word: "予定 (よてい)", meaning: "Rencana / Jadwal", sentence: "毎日ダイエットメニューを見る予定です。", meaningSentence: "Saya berencana untuk melihat menu diet setiap hari." },
+                { word: "体 (からだ)", meaning: "Tubuh / Badan", sentence: "体にいいレシピを探しています。", meaningSentence: "Saya sedang mencari resep yang bagus untuk tubuh." },
+                { word: "探す (さがす)", meaning: "Mencari", sentence: "体にいいレシピを探しています。", meaningSentence: "Saya sedang mencari resep yang bagus untuk tubuh." },
+                { word: "野菜 (やさい)", meaning: "Sayuran", sentence: "野菜をできるだけたくさん食べましょう。", meaningSentence: "Mari kita makan sayuran sebanyak mungkin." },
+                { word: "魚 (さかな)", meaning: "Ikan", sentence: "私はできるだけ魚を選びます。", meaningSentence: "Saya memilih ikan sebanyak mungkin." },
+                { word: "選ぶ (えらぶ)", meaning: "Memilih", sentence: "私はできるだけ魚を選びます。", meaningSentence: "Saya memilih ikan sebanyak mungkin." },
+                { word: "〜中 (〜ちゅう)", meaning: "Sedang dalam proses / Selama", sentence: "ダイエット中は魚を食べましょう。", meaningSentence: "Mari kita makan ikan selama masa diet." },
+                { word: "お茶 (おちゃ)", meaning: "Teh", sentence: "お茶は飲み物の一種ですので、よく飲みます。", meaningSentence: "Karena teh adalah salah satu jenis minuman, saya sering meminumnya." },
+                { word: "飲み物 (のみもの)", meaning: "Minuman", sentence: "お茶は飲み物の一種ですので、よく飲みます。", meaningSentence: "Karena teh adalah salah satu jenis minuman, saya sering meminumnya." },
+                { word: "一種 (いっしゅ)", meaning: "Jenis / Macam", sentence: "お茶は飲み物の一種ですので、よく飲みます。", meaningSentence: "Karena teh adalah salah satu jenis minuman, saya sering meminumnya." },
+                { word: "高い (たかい)", meaning: "Mahal / Tinggi", sentence: "そのレストランはちょっと高いです。", meaningSentence: "Restoran itu sedikit mahal." },
+                { word: "安い (やすい)", meaning: "Murah", sentence: "高いご飯より安いサンドウィッチを選びました。", meaningSentence: "Saya memilih sandwich yang murah daripada makanan yang mahal." },
+                { word: "注文する (ちゅうもんする)", meaning: "Memesan", sentence: "友達はハンバーガーを注文しました。", meaningSentence: "Teman saya memesan hamburger." },
+                { word: "悪い (わるい)", meaning: "Buruk / Jelek", sentence: "私は「このハンバーガーは体に悪いと思います」と言いました。", meaningSentence: "Saya berkata, Saya pikir hamburger ini buruk untuk tubuh." },
+                { word: "夜ご飯 (よるごはん)", meaning: "Makan malam", sentence: "今日の夜ご飯は焼肉です。", meaningSentence: "Makan malam hari ini adalah daging panggang (yakiniku)." },
+                { word: "焼肉 (やきにく)", meaning: "Daging panggang / Yakiniku", sentence: "今日の夜ご飯は焼肉です。", meaningSentence: "Makan malam hari ini adalah daging panggang (yakiniku)." },
+                { word: "一緒 (いっしゅ)", meaning: "Bersama", sentence: "焼肉は野菜と一緒に食べます。", meaningSentence: "Daging panggang dimakan bersama dengan sayuran." },
+                { word: "先週 (せんしゅう)", meaning: "Minggu lalu", sentence: "先週、おすすめのサラダを作りました。", meaningSentence: "Minggu lalu, saya membuat salad rekomendasi." },
+                { word: "今週 (こんしゅう)", meaning: "Minggu ini", sentence: "今週はおすすめのスープを作る予定です。", meaningSentence: "Minggu ini, saya berencana membuat sup rekomendasi." },
+                { word: "健康 (けんこう)", meaning: "Kesehatan", sentence: "これからも健康のために、野菜や魚をたくさん食べたいです。", meaningSentence: "Mulai sekarang pun demi kesehatan, saya ingin makan banyak sayur dan ikan." },
+                { word: "作る (つくる)", meaning: "Membuat", sentence: "先週、おすすめ of サラダを作りました。", meaningSentence: "Minggu lalu, saya membuat salad rekomendasi." }
+            ]
         },
         {
             date: "23 Juni 2026",
@@ -501,16 +554,16 @@
             ],
             essayQuestions: [],
             vocabulary: [
-                { word: "心配する (しんぱいする)", meaning: "khawatir" },
-                { word: "飾る (かざる)", meaning: "menghias" },
-                { word: "調べる (しらべる)", meaning: "mencari, memeriksa" },
-                { word: "注文する (ちゅうもんする)", meaning: "memesan" },
-                { word: "情報 (じょうほう)", meaning: "informasi" },
-                { word: "親切 (しんせつ)", meaning: "ramah" },
-                { word: "予約 (よやく)", meaning: "reservasi" },
-                { word: "入り口 (いりぐち)", meaning: "pintu masuk" },
-                { word: "充電する (じゅうでんする)", meaning: "mengisi daya" },
-                { word: "持って行く (もっていく)", meaning: "membawa" }
+                { word: "心配する (しんぱいする)", meaning: "Khawatir", sentence: "両親は私のことを心配していますが、いつも応援してくれます。", meaningSentence: "Orang tua saya mengkhawatirkan saya, tetapi mereka selalu mendukung saya." },
+                { word: "飾る (かざる)", meaning: "Menghias", sentence: "夕方、母と一緒に家を飾りました。", meaningSentence: "Di sore hari, saya menghias rumah bersama ibu saya." },
+                { word: "調べる (しらべる)", meaning: "Mencari / Memeriksa", sentence: "午後は友達と新しいレストランについて調べました。", meaningSentence: "Siang harinya, saya mencari tahu tentang restoran baru bersama teman." },
+                { word: "注文する (ちゅうもんする)", meaning: "Memesan", sentence: "友達は「後で注文します」と言いました。", meaningSentence: "Teman saya berkata, Saya akan memesan nanti." },
+                { word: "情報 (じょうほう)", meaning: "Informasi", sentence: "そして正しい情報について考えました。", meaningSentence: "Kemudian, saya memikirkan tentang informasi yang benar." },
+                { word: "親切 (しんせつ)", meaning: "Ramah", sentence: "スタッフが親切で、また泊まりたいというレビューもありました。", meaningSentence: "Ada juga ulasan yang mengatakan bahwa stafnya ramah dan ingin menginap lagi." },
+                { word: "予約 (よやく)", meaning: "Reservasi", sentence: "そのレストランは有名で、予約が難しいです。", meaningSentence: "Restoran itu terkenal dan reservasinya sulit." },
+                { word: "入り口 (いりぐち)", meaning: "Pintu masuk", sentence: "入り口も飾りました。", meaningSentence: "Kami juga menghias pintu masuk." },
+                { word: "充電する (じゅうでんする)", meaning: "Mengisi daya", sentence: "ノートパソコンを充電して、会議に持って行く予定です。", meaningSentence: "Saya berencana mengisi daya laptop dan membawanya ke rapat." },
+                { word: "持って行く (もっていく)", meaning: "Membawa", sentence: "ノートパソコンを充電して、会議に持って行く予定です。", meaningSentence: "Saya berencana mengisi daya laptop dan membawanya ke rapat." }
             ]
         },
         {
@@ -542,13 +595,22 @@
             ],
             essayQuestions: [], 
             vocabulary: [
-                { word: "屋上 (おくじょう)", meaning: "atap sekolah" },
-                { word: "昼休み (ひるやすみ)", meaning: "istirahat siang" },
-                { word: "放課後 (ほうかご)", meaning: "setelah sekolah" },
-                { word: "部活 (ぶかつ)", meaning: "ekstrakurikuler" },
-                { word: "宿題 (しゅくだい)", meaning: "PR" },
-                { word: "体操服 (たいそうふく)", meaning: "seragam olahraga" },
-                { word: "チャイム", meaning: "bel sekolah" }
+                { word: "大抵 (たいてい)", meaning: "Biasanya / Umumnya", sentence: "大抵は白いスニーカーを履くと思います。", meaningSentence: "Saya pikir biasanya orang memakai sneaker putih." },
+                { word: "履く (はく)", meaning: "Memakai (sepatu/sandal/bawahan)", sentence: "大抵は白いスニーカーを履くと思います。", meaningSentence: "Saya pikir biasanya orang memakai sneaker putih." },
+                { word: "体操服 (たいそうふく)", meaning: "Seragam olahraga", sentence: "学校にはピンクの体操服があります。", meaningSentence: "Di sekolah ada seragam olahraga berwarna merah muda." },
+                { word: "授業 (じゅぎょう)", meaning: "Pelajaran / Kelas", sentence: "「大工の授業はスニーカーで大丈夫ですか。」", meaningSentence: "「Apakah kelas pertukangan kayu tidak apa-apa menggunakan sneaker?」" },
+                { word: "屋上 (おくじょう)", meaning: "Atap gedung / Rooftop", sentence: "今日は学校の屋上へ行きました。", meaningSentence: "Hari ini saya pergi ke atap gedung sekolah." },
+                { word: "チャイム", meaning: "Bel sekolah", sentence: "もうすぐチャイムが鳴ると思いました。", meaningSentence: "Saya pikir sebentar lagi bel sekolah akan berbunyi." },
+                { word: "昼休み (ひるやすみ)", meaning: "Istirahat siang", sentence: "昼休みは短いです。", meaningSentence: "Istirahat siang itu singkat." },
+                { word: "図書館 (としょかん)", meaning: "Perpustakaan", sentence: "午後の授業の後、図書館へ行きました。", meaningSentence: "Setelah kelas sore, saya pergi ke perpustakaan." },
+                { word: "放課後 (ほうかご)", meaning: "Sepulang sekolah", sentence: "放課後、新しい部活の説明会がありました。", meaningSentence: "Sepulang sekolah, ada sesi penjelasan untuk klub sekolah yang baru." },
+                { word: "部活 (ぶかつ)", meaning: "Klub sekolah / Ekstrakurikuler", sentence: "放課後、新しい部活の説明会がありました。", meaningSentence: "Sepulang sekolah, ada sesi penjelasan untuk klub sekolah yang baru." },
+                { word: "説明会 (せつめいかい)", meaning: "Sesi penjelasan / Sosialisasi", sentence: "放課後、新しい部活の説明会がありました。", meaningSentence: "Sepulang sekolah, ada sesi penjelasan untuk klub sekolah yang baru." },
+                { word: "多分 (たぶん)", meaning: "Mungkin", sentence: "友達は、「放課後に多分カフェへ行きます。」と言いました。", meaningSentence: "Teman saya berkata, 「Sepulang sekolah mungkin saya akan pergi ke kafe.」" },
+                { word: "宿題 (しゅくだい)", meaning: "Pekerjaan rumah / PR", sentence: "私は宿題があったので、一緒に行きませんでした。", meaningSentence: "Karena saya ada PR, saya tidak pergi bersama." },
+                { word: "動画 (どうが)", meaning: "Video", sentence: "家に帰ってから、動画を少し見ました。", meaningSentence: "Setelah pulang ke rumah, saya menonton video sebentar." },
+                { word: "調べる (しらべる)", meaning: "Memeriksa / Mencari tahu", sentence: "分からない問題があったので調べましたが、分かりませんでした。", meaningSentence: "Karena ada soal yang tidak saya mengerti, saya mencarinya, tetapi tetap tidak mengerti." },
+                { word: "眠い (ねむい)", meaning: "Ngantuk", sentence: "よく休まないので、ちょっと眠いです。", meaningSentence: "Karena tidak beristirahat dengan baik, saya sedikit mengantuk." }
             ]
         },
         {
@@ -572,13 +634,20 @@
             ],
             essayQuestions: [], 
             vocabulary: [
-                { word: "屋上 (おくじょう)", meaning: "atap sekolah" },
-                { word: "並ぶ (ならぶ)", meaning: "mengantre/berbaris" },
-                { word: "予定 (よてい)", meaning: "rencana/jadwal" },
-                { word: "説明する (せつめいする)", meaning: "menjelaskan" },
-                { word: "冷たい (つめたい)", meaning: "dingin (untuk benda)" },
-                { word: "塾 (じゅく)", meaning: "tempat les/bimbel" },
-                { word: "忙しい (いそがしい)", meaning: "sibuk" }
+                { word: "屋上 (おくじょう)", meaning: "Atap sekolah", sentence: "今日は友達に「屋上でご飯を食べませんか。」と聞きました。", meaningSentence: "Hari ini saya bertanya kepada teman, Maukah kamu makan siang di atap sekolah?" },
+                { word: "短かい (みじかい)", meaning: "Singkat / Pendek", sentence: "でも、昼休みは短いです。", meaningSentence: "Namun, istirahat siang itu singkat." },
+                { word: "並ぶ (ならぶ)", meaning: "Mengantre / Berbaris", sentence: "そして、私は「私はまず並びますので、みんなは後で来てもいいですよ。」と言いました。", meaningSentence: "Lalu, saya berkata, Karena saya akan mengantre duluan, kalian boleh datang belakangan." },
+                { word: "今度 (こんど)", meaning: "Lain kali / Berikutnya", sentence: "また今度話したいと思います。", meaningSentence: "Saya ingin berbicara lagi lain kali." },
+                { word: "部活 (ぶかつ)", meaning: "Klub sekolah / Ekskul", sentence: "午後は部活がありました。", meaningSentence: "Siang harinya ada kegiatan klub sekolah." },
+                { word: "予定 (よてい)", meaning: "Rencana / Jadwal", sentence: "友達が「部活では何をしますか。」と聞くと、先生は今日の予定を説明しました。", meaningSentence: "Ketika teman bertanya, Apa yang akan dilakukan di klub?, guru menjelaskan rencana hari ini." },
+                { word: "説明する (せつめいする)", meaning: "Menjelaskan", sentence: "友達が「部活では何をしますか。」と聞くと、先生は今日の予定を説明しました。", meaningSentence: "Ketika teman bertanya, Apa yang akan dilakukan di klub?, guru menjelaskan rencana hari ini." },
+                { word: "疲れる (つかれる)", meaning: "Lelah / Capek", sentence: "部活のあと、私は少し疲れていました。", meaningSentence: "Setelah kegiatan klub, saya sedikit lelah." },
+                { word: "冷たい (つめたい)", meaning: "Dingin (untuk benda)", sentence: "冷たいスポーツドリンクを選んで降みました。", meaningSentence: "Saya memilih dan meminum minuman olahraga yang dingin." },
+                { word: "選ぶ (えらぶ)", meaning: "Memilih", sentence: "冷たいスポーツドリンクを選んで降みました。", meaningSentence: "Saya memilih dan meminum minuman olahraga yang dingin." },
+                { word: "動画 (どうが)", meaning: "Video", sentence: "家では動画のアプリで少し動画を見ました。", meaningSentence: "Di rumah, saya menonton video sebentar di aplikasi video." },
+                { word: "宿題 (しゅくだい)", meaning: "Pekerjaan rumah / PR", sentence: "そのあと、ご飯を食べて宿題をしました。", meaningSentence: "Setelah itu, saya makan dan mengerjakan PR." },
+                { word: "塾 (じゅく)", meaning: "Tempat les / Bimbel", sentence: "来週は新しい塾も始まります。", meaningSentence: "Minggu depan tempat les yang baru juga akan dimulai." },
+                { word: "忙しい (いそがしい)", meaning: "Sibuk", sentence: "忙しいですが、毎日が楽しみです。", meaningSentence: "Meskipun sibuk, setiap hari terasa menyenangkan." }
             ]
         },
         {
@@ -610,9 +679,29 @@
                 { q: "私は何色の水着が欲しいですか。", a: "青い水着です。" }
             ],
             vocabulary: [
-                { word: "塾 (じゅく)", meaning: "tempat les/bimbel" },
-                { word: "脱ぐ (ぬぐ)", meaning: "melepas (pakaian/sepatu)" },
-                { word: "間に合う (まニアう)", meaning: "sempat/tepat waktu" }
+                { word: "塾 (じゅく)", meaning: "Tempat les / Bimbel", sentence: "毎日、塾に行っています。", meaningSentence: "Setiap hari, saya pergi ke tempat les." },
+                { word: "高校生 (こうこうせい)", meaning: "Siswa SMA", sentence: "私は高校生です。", meaningSentence: "Saya adalah seorang siswa SMA." },
+                { word: "放課後 (ほうかご)", meaning: "Sepulang sekolah", sentence: "学校では放課後の部活があります。", meaningSentence: "Di sekolah ada kegiatan klub sepulang sekolah." },
+                { word: "部活 (ぶかつ)", meaning: "Klub sekolah / Ekstrakurikuler", sentence: "学校では放課後の部活があります。", meaningSentence: "Di sekolah ada kegiatan klub sepulang sekolah." },
+                { word: "忙しい (いそがしい)", meaning: "Sibuk", sentence: "私は部活もやってみたいですが、忙しいです。", meaningSentence: "Saya juga ingin mencoba ikut kegiatan klub, tetapi sibuk." },
+                { word: "多分 (たぶん)", meaning: "Mungkin", sentence: "今日の部活の後、多分友達とカフェに行きます。", meaningSentence: "Setelah kegiatan klub hari ini, mungkin saya akan pergi ke kafe bersama teman." },
+                { word: "昼休み (ひるやすみ)", meaning: "Istirahat siang", sentence: "昼休みにはスポーツドリンクを飲みながら動画を見ます。", meaningSentence: "Pada waktu istirahat siang, saya menonton video sambil meminum minuman olahraga." },
+                { word: "動画 (どうが)", meaning: "Video", sentence: "昼休みにはスポーツドリンクを飲みながら動画を見ます。", meaningSentence: "Pada waktu istirahat siang, saya menonton video sambil meminum minuman olahraga." },
+                { word: "泳ぐ (およぐ)", meaning: "Berenang", sentence: "でも、私はプールで泳ぎます。", meaningSentence: "Namun, saya berenang di kolam renang." },
+                { word: "水着 (みずぎ)", meaning: "Baju renang", sentence: "青い水着が欲しいです。", meaningSentence: "Saya ingin baju renang berwarna biru." },
+                { word: "欲しい (ほしい)", meaning: "Ingin / Mau (benda)", sentence: "青い水着が欲しいです。", meaningSentence: "Saya ingin baju renang berwarna biru." },
+                { word: "待つ (まつ)", meaning: "Menunggu", sentence: "泳がない友達は「ここで待っています」と言いました。", meaningSentence: "Teman yang tidak berenang berkata, Saya akan menunggu di sini." },
+                { word: "先月 (せんげつ)", meaning: "Bulan lalu", sentence: "先月、ホームステイをしました。", meaningSentence: "Bulan lalu, saya melakukan home-stay." },
+                { word: "文化 (ぶんか)", meaning: "Budaya", sentence: "ホームステイで新しい文化を学びました。", meaningSentence: "Saya mempelajari budaya baru saat home-stay." },
+                { word: "脱ぐ (ぬぐ)", meaning: "Melepas (pakaian/sepatu)", sentence: "友達の家では靴を脱ぎます。", meaningSentence: "Di rumah teman, kami melepas sepatu." },
+                { word: "屋上 (おくじょう)", meaning: "Atap gedung / Rooftop", sentence: "今日は学校の屋上へ行きました。", meaningSentence: "Hari ini saya pergi ke atap sekolah." },
+                { word: "疲れる (つかれる)", meaning: "Lelah / Capek", sentence: "疲れていると、あまり遊びません。", meaningSentence: "Kalau sedang lelah, saya tidak begitu banyak bermain." },
+                { word: "予定 (よてい)", meaning: "Rencana / Jadwal", sentence: "午後は帰らない予定です。", meaningSentence: "Siang harinya, rencananya saya tidak akan pulang." },
+                { word: "宿題 (しゅくだい)", meaning: "Pekerjaan rumah / PR", sentence: "放課後の宿題をしてから駅へ行きます。", meaningSentence: "Setelah mengerjakan PR sepulang sekolah, saya akan pergi ke stasiun." },
+                { word: "乗り換える (のりかえる)", meaning: "Transit / Mengganti kendaraan", sentence: "駅では電車に乗り換えます。", meaningSentence: "Di stasiun, saya akan berganti kereta." },
+                { word: "何番 (なんばん)", meaning: "Nomor berapa", sentence: "「電車は何番ホームですか。」", meaningSentence: "Keretanya di peron nomor berapa?" },
+                { word: "ホーム", meaning: "Peron stasiun", sentence: "「４番ホームですよ。」", meaningSentence: "Di peron nomor 4 lho." },
+                { word: "間に合う (まにあう)", meaning: "Sempat / Tepat waktu", sentence: "「まだ間に合いますか。」", meaningSentence: "Apakah masih sempat?" }
             ]
         },
         {
@@ -661,11 +750,23 @@
                 { q: "優先席が空いていましたか。", a: "はい、空いていました。" }
             ],
             vocabulary: [
-                { word: "遊園地 (ゆうえんち)", meaning: "taman bermain" },
-                { word: "快速 (かいそく)", meaning: "kereta cepat (rapid train)" },
-                { word: "乗り換える (のりかえる)", meaning: "transit/pindah kereta" },
-                { word: "優先席 (ゆうせんせき)", meaning: "kursi prioritas" },
-                { word: "展示 (てんじ)", meaning: "pameran" }
+                { word: "遊園地 (ゆうえんち)", meaning: "Taman bermain", sentence: "今日は友達と遊園地へ行く約束があります。", meaningSentence: "Hari ini saya ada janji pergi ke taman bermain bersama teman." },
+                { word: "約束 (やくそく)", meaning: "Janji", sentence: "今日は友達と遊園地へ行く約束があります。", meaningSentence: "Hari ini saya ada janji pergi ke taman bermain bersama teman." },
+                { word: "集まる (あつまる)", meaning: "Berkumpul", sentence: "「私たちは何番ホームで集まりますか。」", meaningSentence: "Kita berkumpul di peron nomor berapa?" },
+                { word: "切符売り場 (きっぷうりば)", meaning: "Tempat penjualan tiket", sentence: "駅に着いてから、切符売り場を探しました。", meaningSentence: "Setelah tiba di stasiun, saya mencari tempat penjualan tiket." },
+                { word: "探す (さがす)", meaning: "Mencari", sentence: "駅に着いてから、切符売り場を探しました。", meaningSentence: "Setelah tiba di stasiun, saya mencari tempat penjualan tiket." },
+                { word: "快速 (かいそく)", meaning: "Kereta cepat (Rapid train)", sentence: "そのあと、快速に乗りました。", meaningSentence: "Setelah itu, saya naik kereta cepat." },
+                { word: "便利 (べんり)", meaning: "Praktis / Praktis", sentence: "「快速が便利ですよ。」", meaningSentence: "Kereta cepat praktis lho." },
+                { word: "途中 (とちゅう)", meaning: "Di tengah jalan / Di perjalanan", sentence: "途中で２回乗り換えました。", meaningSentence: "Di tengah perjalanan, kami transit/berganti kereta sebanyak dua kali." },
+                { word: "乗り換える (のりかえる)", meaning: "Transit / Pindah kendaraan", sentence: "途中で２回乗り換えました。", meaningSentence: "Di tengah perjalanan, kami transit/berganti kereta sebanyak dua kali." },
+                { word: "終電 (しゅうでん)", meaning: "Kereta terakhir", sentence: "でも、終電までまだ時間があったので、急ぎませんでした。", meaningSentence: "Namun, karena masih ada waktu sampai kereta terakhir, kami tidak terburu-buru." },
+                { word: "急ぐ (いそぐ)", meaning: "Terburu-buru / Bergegas", sentence: "でも、終電までまだ時間があったので、急ぎませんでした。", meaningSentence: "Namun, karena masih ada waktu sampai kereta terakhir, kami tidak terburu-buru." },
+                { word: "優先席 (ゆうせんせき)", meaning: "Kursi prioritas", sentence: "電車の中では優先席が空いていました。", meaningSentence: "Di dalam kereta, kursi prioritasnya kosong." },
+                { word: "空く (あく)", meaning: "Kosong", sentence: "電車の中では優先席が空いていました。", meaningSentence: "Di dalam kereta, kursi prioritasnya kosong." },
+                { word: "展示 (てんじ)", meaning: "Pameran / Display", sentence: "遊園地で友達と会ってから、近くの展示を見に行きました。", meaningSentence: "Setelah bertemu dengan teman di taman bermain, kami pergi melihat pameran di dekat sana." },
+                { word: "今夜 (こんや)", meaning: "Malam ini", sentence: "「今夜は何を食べたいですか。」", meaningSentence: "Malam ini kamu ingin makan apa?" },
+                { word: "牛肉 (ぎゅうにく)", meaning: "Daging sapi", sentence: "「牛肉料理が食べたいです。」", meaningSentence: "Saya ingin makan hidangan daging sapi." },
+                { word: "商店街 (しょうてんがい)", meaning: "Kawasan perbelanjaan / Pertokoan", sentence: "帰る前に商店街を歩きました。", meaningSentence: "Sebelum pulang, kami berjalan kaki menyusuri kawasan pertokoan." }
             ]
         },
         {
@@ -698,13 +799,23 @@
         { q: "新年のあいさつは何と言いましたか。", a: "「あけましておめでとうございます。今年もよろしくお願いします。」と言いました。" }
     ],
     vocabulary: [
-        { word: "復習する (ふくしゅうする)", meaning: "Mengulang pelajaran (Review)" },
-        { word: "単語 (たんご)", meaning: "Kosakata (Vocabulary)" },
-        { word: "画面 (がめん)", meaning: "Layar (Screen)" },
-        { word: "運動する (うんどうする)", meaning: "Berolahraga / Beraktivitas fisik" },
-        { word: "お正月 (おしょうがつ)", meaning: "Tahun Baru" },
-        { word: "おせち料理 (おせちりょうり)", meaning: "Makanan khas tahun baru Jepang" },
-        { word: "神社 (じんじゃ)", meaning: "Kuil Shinto" }
+        { word: "練習 (れんしゅう)", meaning: "Latihan", sentence: "まだ練習をしていませんが、もうノートをまとめました。", meaningSentence: "Saya belum berlatih, tetapi saya sudah merangkum catatan." },
+        { word: "復習する (ふくしゅうする)", meaning: "Mengulang pelajaran (Review)", sentence: "私は英語を復習して、外国語の単語を覚えます。", meaningSentence: "Saya mengulas kembali bahasa Inggris dan menghafal kosakata bahasa asing." },
+        { word: "単語 (たんご)", meaning: "Kosakata (Vocabulary)", sentence: "私は英語を復習して、外国語の単語を覚えます。", meaningSentence: "Saya mengulas kembali bahasa Inggris dan menghafal kosakata bahasa asing." },
+        { word: "覚える (おぼえる)", meaning: "Mengingat / Menghafal", sentence: "私は英語を復習して、外国語の単語を覚えます。", meaningSentence: "Saya mengulas kembali bahasa Inggris dan menghafal kosakata bahasa asing." },
+        { word: "問題 (もんだい)", meaning: "Masalah / Soal", sentence: "友達が「この問題の答えは何ですか。この答えは正しいですか。」と聞きました。", meaningSentence: "Teman saya bertanya, Apa jawaban untuk soal ini? Apakah jawaban ini benar?" },
+        { word: "自分 (じぶん)", meaning: "Diri sendiri", sentence: "でも、先生は「まず自分で考えてください。」と言いました。", meaningSentence: "Namun, guru berkata, Pertama-tama, silakan pikirkan sendiri." },
+        { word: "画面 (がめん)", meaning: "Layar (Screen)", sentence: "オンライン授業のとき、先生が「画面が見えますか。」と聞きました。", meaningSentence: "Saat kelas online, guru bertanya, Apakah layarnya terlihat?" },
+        { word: "授業 (じゅぎょう)", meaning: "Pelajaran / Kelas", sentence: "オンライン授業のとき、先生が「画面が見えますか。」と聞きました。", meaningSentence: "Saat kelas online, guru bertanya, Apakah layarnya terlihat?" },
+        { word: "遠い (とおい)", meaning: "Jauh", sentence: "私は「はい、見えます。でも、マイクが遠いので聞こえません。音が小さいです。」と答えました。", meaningSentence: "Saya menjawab, Ya, terlihat. Namun, karena mikrofonnya jauh, tidak terdengar. Suaranya kecil." },
+        { word: "運動する (うんどうする)", meaning: "Berolahraga / Beraktivitas fisik", sentence: "ジムで音楽を聴きながら運動しました。", meaningSentence: "Saya berolahraga di gym sambil mendengarkan musik." },
+        { word: "汗をかく (あせをかく)", meaning: "Berkeringat", sentence: "たくさん汗をかきました。", meaningSentence: "Saya sudah mengeluarkan banyak keringat." },
+        { word: "肩 (かた)", meaning: "Bahu / Pundak", sentence: "でも、肩が少し痛かったので、あまり運動をしませんでした。", meaningSentence: "Namun, karena bahu saya agak sakit, saya tidak begitu banyak berolahraga." },
+        { word: "お正月 (おしょうがつ)", meaning: "Tahun Baru", sentence: "もうすぐお正月です。", meaningSentence: "Sebentar lagi Tahun Baru." },
+        { word: "掃除する (そうじする)", meaning: "Membersihkan", sentence: "家を掃除して、リビングを飾りました。", meaningSentence: "Saya membersihkan rumah dan menghias ruang tamu." },
+        { word: "おせち料理 (おせちりょうり)", meaning: "Makanan khas tahun baru Jepang", sentence: "お正月にはおせち料理を食べます。", meaningSentence: "Pada hari Tahun Baru, kami makan hidangan Osechi." },
+        { word: "神社 (じんじゃ)", meaning: "Kuil Shinto", sentence: "そして神社で願い事をして、写真を撮ります。", meaningSentence: "Kemudian kami berdoa di kuil Shinto dan mengambil foto." },
+        { word: "願い事 (ねがいごと)", meaning: "Keinginan / Doa", sentence: "そして神社で願い事をして、写真を撮ります。", meaningSentence: "Kemudian kami berdoa di kuil Shinto dan mengambil foto." }
     ]
 },
         {
@@ -742,16 +853,23 @@
         { q: "去年、私はどこで写真を撮りましたか。", a: "もみじの下で写真を撮りました。" }
     ],
     vocabulary: [
-        { word: "看護師 (かんごし)", meaning: "Perawat" },
-        { word: "学生会館 (がくせいかいかん)", meaning: "Gedung/Aula Mahasiswa" },
-        { word: "必ず (かならず)", meaning: "Pasti / Harus" },
-        { word: "漬物 (つけもの)", meaning: "Acar khas Jepang" },
-        { word: "弁当箱 (べんとうばこ)", meaning: "Kotak Bekal (Bento)" },
-        { word: "紙袋 (かみぶくろ)", meaning: "Kantong Kertas" },
-        { word: "特別 (とくべつ)", meaning: "Spesial / Istimewa" }
+        { word: "看護師 (かんごし)", meaning: "Perawat", sentence: "私のいとこは看護師です。", meaningSentence: "Sepupu saya adalah seorang perawat." },
+        { word: "学生会館 (がくせいかいかん)", meaning: "Gedung / Aula Mahasiswa", sentence: "そのあと、学生会館へ行きました。", meaningSentence: "Setelah itu, saya pergi ke gedung mahasiswa." },
+        { word: "お腹が痛い (おなかがいたい)", meaning: "Sakit perut", sentence: "私は「ちょっとお腹が痛いです。」と答えました。", meaningSentence: "Saya menjawab, Perut saya agak sakit." },
+        { word: "必ず (かならず)", meaning: "Pasti / Harus", sentence: "友達は「必ず水を飲んでください。」と言いました。", meaningSentence: "Teman saya berkata, Kamu harus minum air." },
+        { word: "お祝いらせ (おしらせ)", meaning: "Pengumuman / Pemberitahuan", sentence: "イベントで新しいお知らせをもらいました。", meaningSentence: "Saya mendapatkan pengumuman baru di acara tersebut." },
+        { word: "弁当箱 (べんとうばこ)", meaning: "Kotak bekal (Bento)", sentence: "昼ご飯は家で作ったおにぎりとオムレツを食べて、かわいい弁当箱を持って行きました。", meaningSentence: "Untuk makan siang, saya makan onigiri dan omelet buatan rumah, dan membawa kotak bekal yang lucu." },
+        { word: "漬物 (つけもの)", meaning: "Acar khas Jepang", sentence: "日本の朝ご飯では漬物も食べます。", meaningSentence: "Pada sarapan ala Jepang, kami juga makan acar." },
+        { word: "紙袋 (かみぶくろ)", meaning: "Kantong kertas", sentence: "食べ終わったあと、パンを紙袋に入れました。", meaningSentence: "Setelah selesai makan, saya memasukkan roti ke dalam kantong kertas." },
+        { word: "集まる (あつまる)", meaning: "Berkumpul", sentence: "午後、みんなはあそこで集まりました。", meaningSentence: "Siang harinya, semua orang berkumpul di sana." },
+        { word: "特別 (とくべつ)", meaning: "Spesial / Istimewa", sentence: "クリスマスは特別な日です。", meaningSentence: "Hari Natal adalah hari yang spesial." },
+        { word: "祝う (いわう)", meaning: "Merayakan", sentence: "みんなで祝います。", meaningSentence: "Kami merayakannya bersama-sama." },
+        { word: "海外 (かいがい)", meaning: "Luar negeri", sentence: "友達が「日本のクリスマスツリーも海外と同じですか。」と聞きました。", meaningSentence: "Teman saya bertanya, Apakah pohon Natal di Jepang juga sama dengan yang di luar negeri?" },
+        { word: "秋 (あき)", meaning: "Musim gugur", sentence: "秋のもみじが赤くなります。", meaningSentence: "Di musim gugur, daun momiji berubah menjadi merah." },
+        { word: "去年 (きょねん)", meaning: "Tahun lalu", sentence: "去年、私はもみじの下で写真を撮りました。", meaningSentence: "Tahun lalu, saya mengambil foto di bawah pohon momiji." }
     ]
 },
-{
+        {
             date: "30 Juni 2026",
             title: "学園祭の準備<br>(Persiapan Festival Sekolah)",
             readingText: `<ruby>来月<rt>らいげつ</rt></ruby>、<ruby>学校<rt>がっこう</rt></ruby>で<ruby>学園祭<rt>がくえんさい</rt></ruby>があります。私たちのクラスはケーキとメロンジュースの<ruby>店<rt>みせ</rt></ruby>を<ruby>出<rt>だ</rt></ruby>します。
@@ -801,14 +919,19 @@
                 { q: "みんなはどうしてイベントはうまくいったと思いましたか。", a: "みんなで作ったからです。" }
             ],
             vocabulary: [
-                { word: "学園祭 (がくえんさい)", meaning: "Festival Sekolah / Kampus" },
-                { word: "話し合う (はなしあう)", meaning: "Berdiskusi / Saling berbicara" },
-                { word: "準備 (じゅんび)", meaning: "Persiapan" },
-                { word: "看板 (かんばん)", meaning: "Papan nama / Papan iklan" },
-                { word: "のり", meaning: "Lem" },
-                { word: "会計 (かいけい)", meaning: "Kasir / Pembayaran" },
-                { word: "売り切れ (うりきれ)", meaning: "Habis terjual" },
-                { word: "大成功 (だいせいこう)", meaning: "Sukses besar" }
+                { word: "学園祭 (がくえんさい)", meaning: "Festival sekolah / kampus", sentence: "来月、学校で学園祭があります。", meaningSentence: "Bulan depan, ada festival sekolah di sekolah." },
+                { word: "店を出す (みせをだす)", meaning: "Membuka kedai / stan", sentence: "私たちのクラスはケーキとメロンジュースの店を出します。", meaningSentence: "Kelas kami akan membuka kedai kue dan jus melon." },
+                { word: "話し合う (はなしあう)", meaning: "Berdiskusi / Saling berbicara", sentence: "今日はクラスのみんなで話し合いました。", meaningSentence: "Hari ini kami semua sekelas berdiskusi bersama." },
+                { word: "準備 (じゅんび)", meaning: "Persiapan", sentence: "クラスのリーダーが「みんな準備を始めましょう。」と言いました。", meaningSentence: "Ketua kelas berkata, Semuanya, mari kita mulai persiapannya." },
+                { word: "壁を塗る (かべをぬる)", meaning: "Mengecat dinding", sentence: "私は壁を塗りました。", meaningSentence: "Saya mengecat dinding." },
+                { word: "看板 (かんばん)", meaning: "Papan nama / Papan iklan", sentence: "ほかの友達は紙をたくさん切ったり、看板を作ったりしました。", meaningSentence: "Teman-teman yang lain memotong banyak kertas dan membuat papan nama." },
+                { word: "のり", meaning: "Lem", sentence: "来週はみんなでのりや新しいはさみを使います。", meaningSentence: "Minggu depan semua orang akan menggunakan lem dan gunting baru." },
+                { word: "絵の具 (えのぐ)", meaning: "Cat air / Alat lukis", sentence: "私は絵の具を選びました。", meaningSentence: "Saya memilih cat air." },
+                { word: "予定 (よてい)", meaning: "Rencana / Jadwal", sentence: "花も飾る予定です。", meaningSentence: "Rencananya kami juga akan menghias dengan bunga." },
+                { word: "会計 (かいけい)", meaning: "Kasir / Pembayaran", sentence: "「会計の近くで売りましょう。」", meaningSentence: "Mari kita menjualnya di dekat kasir." },
+                { word: "売り切れ (うりきれ)", meaning: "Habis terjual", sentence: "「焼きそばは売り切れですか。」「はい、もう売り切れです。」", meaningSentence: "Apakah yakisoba sudah habis terjual? Ya, sudah habis terjual." },
+                { word: "おつり", meaning: "Uang kembalian", sentence: "「田中さん、1000円のおつりがありますか。」", meaningSentence: "Tanaka-san, apakah ada uang kembalian 1000 yen?" },
+                { word: "大成功 (だいせいこう)", meaning: "Sukses besar", sentence: "「イベントは大成功でした。」", meaningSentence: "Acaranya sukses besar." }
             ]
         },
         {
@@ -862,19 +985,22 @@
                 { q: "また来年、何をしたいですか。", a: "みんなでピクニックをしたいです。" }
             ],
             vocabulary: [
-                { word: "卒業式 (そつぎょうしき)", meaning: "Upacara kelulusan" },
-                { word: "参加する (さんかする)", meaning: "Mengikuti / Berpartisipasi" },
-                { word: "天気予報 (てんきよほう)", meaning: "Prakiraan cuaca" },
-                { word: "荷物 (にもつ)", meaning: "Barang bawaan" },
-                { word: "のせる", meaning: "Meletakkan ke atas / Memuat" },
-                { word: "かご", meaning: "Keranjang" },
-                { word: "レジャーシート", meaning: "Tikar piknik" },
-                { word: "水筒 (すいとう)", meaning: "Botol minum" },
-                { word: "気持ちいい (きもちいい)", meaning: "Terasa nyaman / Enak (suasana/udara)" },
-                { word: "拭く (ふく)", meaning: "Mengelap" },
-                { word: "おしぼり", meaning: "Handuk basah (pemberseh tangan)" },
-                { word: "集める (あつめる)", meaning: "Mengumpulkan" },
-                { word: "畳む (たたむ)", meaning: "Melipat" }
+                { word: "卒業式 (そつぎょうしき)", meaning: "Upacara kelulusan", sentence: "今日は卒業式でした。", meaningSentence: "Hari ini adalah upacara kelulusan." },
+                { word: "参加する (さんかする)", meaning: "Mengikuti / Berpartisipasi", sentence: "今年は友達と参加しました。", meaningSentence: "Tahun ini saya mengikutinya bersama teman." },
+                { word: "天気予報 (てんきよほう)", meaning: "Prakiraan cuaca", sentence: "朝、私は天気予報を見ました。", meaningSentence: "Di pagi hari, saya melihat prakiraan cuaca." },
+                { word: "荷物 (にもつ)", meaning: "Barang bawaan", sentence: "公園へ行く前に、荷物を車にのせました。", meaningSentence: "Sebelum pergi ke taman, kami memuat barang-barang ke dalam mobil." },
+                { word: "のせる", meaning: "Meletakkan ke atas / Memuat", sentence: "公園へ行く前に、荷物を車にのせました。", meaningSentence: "Sebelum pergi ke taman, kami memuat barang-barang ke dalam mobil." },
+                { word: "かご", meaning: "Keranjang", sentence: "みんながかごやレジャーシート、水筒を持って行きました。", meaningSentence: "Semua orang membawa keranjang, tikar piknik, dan botol minum." },
+                { word: "レジャーシート", meaning: "Tikar piknik", sentence: "みんなでレジャーシートを広げて、お茶やジュース、サンドウィッチを食べました。", meaningSentence: "Kami semua menggelar tikar piknik, lalu menikmati teh, jus, dan roti lapis." },
+                { word: "水筒 (すいとう)", meaning: "Botol minum", sentence: "みんながかごやレジャーシート、水筒を持って行きました。", meaningSentence: "Semua orang membawa keranjang, tikar piknik, dan botol minum." },
+                { word: "気持ちいい (きもちいい)", meaning: "Terasa nyaman / Enak (suasana/udara)", sentence: "公園に着くと、風が気持ちよかったです。", meaningSentence: "Setibanya di taman, anginnya terasa sangat nyaman." },
+                { word: "広げる (ひろげる)", meaning: "Menggelar / Membuka lebar", sentence: "みんなでレジャーシートを広げて、お茶やジュース、サンドウィッチを食べました。", meaningSentence: "Kami semua menggelar tikar piknik, lalu menikmati teh, jus, dan roti lapis." },
+                { word: "お皿を洗う (おさらをあらう)", meaning: "Mencuci piring", sentence: "食べ終わったあと、私はお皿を洗いました。", meaningSentence: "Setelah selesai makan, saya mencuci piring." },
+                { word: "拭く (ふく)", meaning: "Mengelap", sentence: "友達はテーブルを拭いて、おしぼりを集めました。", meaningSentence: "Teman saya mengelap meja dan mengumpulkan handuk basah." },
+                { word: "おしぼり", meaning: "Handuk basah pembersih tangan", sentence: "友達はテーブルを拭いて、おしぼりを集めました。", meaningSentence: "Teman saya mengelap meja dan mengumpulkan handuk basah." },
+                { word: "集める (あつめる)", meaning: "Mengumpulkan", sentence: "そのあと、プラスチックのカップやゴミを全部集めました。", meaningSentence: "Setelah itu, kami mengumpulkan semua gelas plastik dan sampah." },
+                { word: "畳む (たたむ)", meaning: "Melipat", sentence: "「レジャーシートを畳んでくれませんか。」「はい、私が畳みます。」", meaningSentence: "Bisa tolong lipat tikar pikniknya? Ya, saya yang akan melipatnya." },
+                { word: "時間を過ごす (じかんをすごす)", meaning: "Menghabiskan waktu", sentence: "今日は天気もよくて、友達と楽しい時間を過ごしました。", meaningSentence: "Hari ini cuacanya bagus, dan saya menghabiskan waktu yang menyenangkan bersama teman." }
             ]
         },
         {
@@ -928,19 +1054,23 @@
                 { q: "また来年、何をしたいですか。", a: "みんなでピクニックをしたいです。" }
             ],
             vocabulary: [
-                { word: "卒業式 (そつぎょうしき)", meaning: "Upacara kelulusan" },
-                { word: "参加する (さんかする)", meaning: "Mengikuti / Berpartisipasi" },
-                { word: "天気予報 (てんきよほう)", meaning: "Prakiraan cuaca" },
-                { word: "荷物 (にもつ)", meaning: "Barang bawaan" },
-                { word: "のせる", meaning: "Meletakkan ke atas / Memuat" },
-                { word: "かご", meaning: "Keranjang" },
-                { word: "レジャーシート", meaning: "Tikar piknik" },
-                { word: "水筒 (すいとう)", meaning: "Botol minum" },
-                { word: "気持ちいい (きもちいい)", meaning: "Terasa nyaman / Enak (suasana/udara)" },
-                { word: "拭く (ふく)", meaning: "Mengelap" },
-                { word: "おしぼり", meaning: "Handuk basah (pemberseh tangan)" },
-                { word: "集める (あつめる)", meaning: "Mengumpulkan" },
-                { word: "畳む (たたむ)", meaning: "Melipat" }
+                { word: "卒業式 (そつぎょうしき)", meaning: "Upacara kelulusan", sentence: "今日は卒業式でした。", meaningSentence: "Hari ini adalah upacara kelulusan." },
+                { word: "参加する (さんかする)", meaning: "Mengikuti / Berpartisipasi", sentence: "今年は友達と参加しました。", meaningSentence: "Tahun ini saya mengikutinya bersama teman." },
+                { word: "話し合う (はなしあう)", meaning: "Berdiskusi / Saling berbicara", sentence: "みんなで話し合って、桜のある公園へ行くことにしました。", meaningSentence: "Kami semua berdiskusi bersama dan memutuskan untuk pergi ke taman yang ada bunga sakuranya." },
+                { word: "天気予報 (てんきよほう)", meaning: "Prakiraan cuaca", sentence: "朝、私は天気予報を見ました。", meaningSentence: "Di pagi hari, saya melihat prakiraan cuaca." },
+                { word: "荷物 (にもつ)", meaning: "Barang bawaan", sentence: "公園へ行く前に、荷物を車にのせました。", meaningSentence: "Sebelum pergi ke taman, kami memuat barang-barang ke dalam mobil." },
+                { word: "のせる", meaning: "Meletakkan ke atas / Memuat", sentence: "公園へ行く前に、荷物を車にのせました。", meaningSentence: "Sebelum pergi ke taman, kami memuat barang-barang ke dalam mobil." },
+                { word: "かご", meaning: "Keranjang", sentence: "みんながかごやレジャーシート、水筒を持って行きました。", meaningSentence: "Semua orang membawa keranjang, tikar piknik, dan botol minum." },
+                { word: "レジャーシート", meaning: "Tikar piknik", sentence: "みんなでレジャーシートを広げて、お茶やジュース、サンドウィッチを食べました。", meaningSentence: "Kami semua menggelar tikar piknik, lalu menikmati teh, jus, dan roti lapis." },
+                { word: "水筒 (すいとう)", meaning: "Botol minum", sentence: "みんながかごやレジャーシート、水筒を持って行きました。", meaningSentence: "Semua orang membawa keranjang, tikar piknik, dan botol minum." },
+                { word: "気持ちいい (きもちいい)", meaning: "Terasa nyaman / Enak (suasana/udara)", sentence: "公園に着くと、風が気持ちよかったです。", meaningSentence: "Setibanya di taman, anginnya terasa sangat nyaman." },
+                { word: "広げる (ひろげる)", meaning: "Menggelar / Membuka lebar", sentence: "みんなでレジャーシートを広げて、お茶やジュース、サンドウィッチを食べました。", meaningSentence: "Kami semua menggelar tikar piknik, lalu menikmati teh, jus, dan roti lapis." },
+                { word: "お皿を洗う (おさらをあらう)", meaning: "Mencuci piring", sentence: "食べ終わったあと、私はお皿を洗いました。", meaningSentence: "Setelah selesai makan, saya mencuci piring." },
+                { word: "拭く (ふく)", meaning: "Mengelap", sentence: "友達はテーブルを拭いて、おしぼりを集めました。", meaningSentence: "Teman saya mengelap meja dan mengumpulkan handuk basah." },
+                { word: "おしぼり", meaning: "Handuk basah pembersih tangan", sentence: "友達はテーブルを拭いて、おしぼりを集めました。", meaningSentence: "Teman saya mengelap meja dan mengumpulkan handuk basah." },
+                { word: "集める (あつめる)", meaning: "Mengumpulkan", sentence: "そのあと、プラスチックのカップやゴミを全部集めました。", meaningSentence: "Setelah itu, kami mengumpulkan semua gelas plastik dan sampah." },
+                { word: "畳む (たたむ)", meaning: "Melipat", sentence: "「レジャーシートを畳んでくれませんか。」「はい、私が畳みます。」", meaningSentence: "Bisa tolong lipat tikar pikniknya? Ya, saya yang akan melipatnya." },
+                { word: "時間を過ごす (じかんをすごす)", meaning: "Menghabiskan waktu", sentence: "今日は天気もよくて、友達と楽しい時間を過ごしました。", meaningSentence: "Hari ini cuacanya bagus, dan saya menghabiskan waktu yang menyenangkan bersama teman." }
             ]
         },
         {
@@ -990,26 +1120,20 @@
                 { q: "家に帰ってから私はどうなりましたか。", a: "少し元気になりました。" }
             ],
             vocabulary: [
-                { word: "ただいま", meaning: "Saya pulang / Aku kembali" },
-                { word: "正直 (しょうじき)", meaning: "Sejujurnya / Jujur" },
-                { word: "雨 (あめ)", meaning: "Hujan" },
-                { word: "雰囲気 (ふんいき)", meaning: "Suasana / Atmosfer" },
-                { word: "変 (へん)", meaning: "Aneh" },
-                { word: "ひどい", meaning: "Buruk / Parah" },
-                { word: "面白い (おもしろい)", meaning: "Menarik / Lucu" },
-                { word: "まずい", meaning: "Tidak enak" },
-                { word: "親切 (しんせつ)", meaning: "Baik hati / Ramah" },
-                { word: "遅い (おそい)", meaning: "Lambat / Terlambat" },
-                { word: "会う (あう)", meaning: "Bertemu" },
-                { word: "プレゼント", meaning: "Hadiah" },
-                { word: "映画 (えいが)", meaning: "Film" },
-                { word: "レストラン", meaning: "Restoran" },
-                { word: "デート", meaning: "Kencan" },
-                { word: "公園 (こうえん)", meaning: "Taman" },
-                { word: "元気 (げんき)", meaning: "Sehat / Bersemangat" },
-                { word: "家族 (かぞく)", meaning: "Keluarga" },
-                { word: "心配 (しんぱい)", meaning: "Khawatir" },
-                { word: "続ける (つづける)", meaning: "Melanjutkan" }
+                { word: "ただいま", meaning: "Saya pulang / Aku kembali", sentence: "「ただいま。デートはどうだった？」", meaningSentence: "Aku pulang. Bagaimana kencannya?" },
+                { word: "正直 (しょうじき)", meaning: "Sejujurnya / Jujur", sentence: "「うん、正直、あまりよくなかったな。」", meaningSentence: "Ya, sejujurnya tidak terlalu bagus." },
+                { word: "話し始める (はなしはじめる)", meaning: "Mulai bercerita / Bicara", sentence: "私は話し始めました。", meaningSentence: "Saya pun mulai bercerita." },
+                { word: "雰囲気 (ふんいき)", meaning: "Suasana / Atmosfer", sentence: "それに、レストランの雰囲気も悪かったです。", meaningSentence: "Selain itu, suasana restorannya juga buruk." },
+                { word: "まあまあ", meaning: "Biasa saja / Lumayan", sentence: "静かじゃなかったし、食べ物もまあまあでした。", meaningSentence: "Suasananya tidak tenang, dan makanannya pun biasa saja." },
+                { word: "まずい", meaning: "Tidak enak", sentence: "デザートのアイスクリームはまずかったです。", meaningSentence: "Es krim pencuci mulutnya tidak enak." },
+                { word: "ひどい", meaning: "Buruk / Parah", sentence: "お母さんは、「それはひどいね。」と言いました。", meaningSentence: "Ibu berkata, Itu buruk sekali ya." },
+                { word: "続ける (つづける)", meaning: "Melanjutkan", sentence: "私は続けました。", meaningSentence: "Saya melanjutkan cerita." },
+                { word: "変 (へん)", meaning: "Aneh", sentence: "でも、映画は長くて、変でした。", meaningSentence: "Tapi, filmnya panjang dan aneh." },
+                { word: "全然 (ぜんぜん)", meaning: "Sama sekali (diikuti bentuk negatif)", sentence: "全然面白くなかったです。", meaningSentence: "Sama sekali tidak menarik." },
+                { word: "親切 (しんせつ)", meaning: "Baik hati / Ramah", sentence: "彼女は私にあまり親切じゃありませんでした。", meaningSentence: "Dia tidak begitu ramah kepada saya." },
+                { word: "心配 (しんぱい)", meaning: "Khawatir", sentence: "お母さんは少し心配そうに言いました。", meaningSentence: "Ibu berkata dengan wajah yang sedikit khawatir." },
+                { word: "会う (あう)", meaning: "Bertemu", sentence: "「じゃあ、また会いたくないの。」「うん、もう会わないと思う。」", meaningSentence: "Kalau begitu, kamu tidak ingin bertemu dengannya lagi? Ya, aku pikir tidak akan bertemu lagi." },
+                { word: "元気 (げんき)", meaning: "Sehat / Bersemangat / Ceria", sentence: "でも、家に帰って家族と話したので、少し元気になりました。", meaningSentence: "Tapi, karena pulang ke rumah dan mengobrol dengan keluarga, saya menjadi sedikit lebih ceria." }
             ]
         },
         {
@@ -1054,30 +1178,79 @@
                 { q: "次の休みはどう思いましたか。", a: "楽しみだと思いました。" }
             ],
             vocabulary: [
-                { word: "新しい (あたらしい)", meaning: "Baru" },
-                { word: "ゲームセンター", meaning: "Pusat permainan (Arcade)" },
-                { word: "クレーンゲーム", meaning: "Permainan capit boneka (Claw machine)" },
-                { word: "ボーリング", meaning: "Bowling" },
-                { word: "ガチャポン", meaning: "Mesin kapsul mainan" },
-                { word: "キャラクター", meaning: "Karakter" },
-                { word: "人気 (にんき)", meaning: "Populer" },
-                { word: "賑やか (にぎやか)", meaning: "Ramai / Meriah" },
-                { word: "明るい (あかるい)", meaning: "Terang / Ceria" },
-                { word: "雰囲気 (ふんいき)", meaning: "Suasana / Atmosfer" },
-                { word: "場所 (ばしょ)", meaning: "Tempat" },
-                { word: "地図 (ちず)", meaning: "Peta" },
-                { word: "確認する (かくにんする)", meaning: "Memastikan / Mengonfirmasi" },
-                { word: "集まる (あつまる)", meaning: "Berkumpul" },
-                { word: "便利 (べんり)", meaning: "Praktis" },
-                { word: "親切 (しんせつ)", meaning: "Ramah / Baik hati" },
-                { word: "難しい (むずかしい)", meaning: "Sulit" },
-                { word: "写真 (しゃしん)", meaning: "Foto" },
-                { word: "思い出 (おもいで)", meaning: "Kenangan" },
-                { word: "満足 (まんぞく)", meaning: "Puas" },
-                { word: "次 (つぎ)", meaning: "Berikutnya" },
-                { word: "休み (やすみ)", meaning: "Libur" },
-                { word: "音楽 (おんがく)", meaning: "Musik" },
-                { word: "安い (やすい)", meaning: "Murah" }
+                { word: "集まる (あつまる)", meaning: "Berkumpul", sentence: "「何時に集まりますか。」私は「午後2時に集まりましょう。」と答えました。", meaningSentence: "Jam berapa kita akan berkumpul? Saya menjawab, Mari kita berkumpul jam 2 siang." },
+                { word: "確認する (かくにんする)", meaning: "Memastikan / Memeriksa", sentence: "みんなで場所を地図で確認しました。", meaningSentence: "Kami semua memastikan tempatnya menggunakan peta." },
+                { word: "便利 (べんり)", meaning: "Praktis / Strategis", sentence: "新しいゲームセンターは駅から近くて、とても便利です。", meaningSentence: "Pusat permainan yang baru itu dekat dari stasiun dan sangat strategis." },
+                { word: "楽しみ (たのしみ)", meaning: "Nantikan / Menantikan", sentence: "はい、とてもきれいで楽しみです。", meaningSentence: "Ya, tempatnya sangat bersih dan saya tidak sabar menantikannya." },
+                { word: "賑やか (にぎやか)", meaning: "Ramai / Meriah", sentence: "当日、ゲームセンターはとても賑やかでした。", meaningSentence: "Pada hari H, pusat permainan tersebut sangat ramai." },
+                { word: "雰囲気 (ふんいき)", meaning: "Suasana / Atmosfer", sentence: "音楽も大きくて、明るい雰囲気でした。", meaningSentence: "Musik dan suaranya keras, serta suasananya pun ceria." },
+                { word: "人気 (にんき)", meaning: "Populer / Terkenal", sentence: "人気のキャラクターのぬいぐるみがありました。", meaningSentence: "Di sana ada boneka karakter yang populer." },
+                { word: "難しい (むずかしい)", meaning: "Sulit", sentence: "クレーンゲームは少し難しかったです", meaningSentence: "Permainan capit bonekanya sedikit sulit." },
+                { word: "安い (やすい)", meaning: "Murah", sentence: "とても安くて楽しかったです。", meaningSentence: "Sangat murah dan menyenangkan." },
+                { word: "写真を撮る (しゃしんをとる)", meaning: "Mengambil foto / Berfoto", sentence: "ボーリングの後、みんなで写真を撮りました。", meaningSentence: "Setelah bowling, kami semua mengambil foto bersama." },
+                { word: "思い出 (おもいで)", meaning: "Kenangan", sentence: "「すごいね、いい思い出だね。」", meaningSentence: "Hebat ya, ini kenangan yang indah." },
+                { word: "親切 (しんせつ)", meaning: "Ramah / Baik hati", sentence: "ゲームセンターのスタッフはとても親切でした。", meaningSentence: "Staf pusat permainan tersebut sangat ramah." },
+                { word: "教える (おしえる)", meaning: "Memberitahu / Mengajarkan", sentence: "わからないことがあったときも教えてくれました。", meaningSentence: "Saat ada hal yang tidak dimengerti, mereka memberitahu kami." },
+                { word: "満足する (まんぞくする)", meaning: "Puas", sentence: "みんなはとても満足して帰りました。", meaningSentence: "Semua orang pulang dengan perasaan sangat puas." }
+            ]
+        },
+        {
+            date: "5 Juli 2026",
+            title: "留学の準備<br>(Persiapan Belajar di Luar Negeri)",
+            readingText: `<ruby>私<rt>わたし</rt></ruby>は<ruby>大学<rt>だいがく</rt></ruby>の<ruby>冬学期<rt>ふゆがっき</rt></ruby>に<ruby>留学<rt>りゅうがく</rt></ruby>したいと<ruby>思<rt>おも</rt></ruby>っています。
+<ruby>今日<rt>きょう</rt></ruby>、<ruby>学校<rt>がっこう</rt></ruby>の<ruby>掲示板<rt>けいじばん</rt></ruby>を<ruby>見<rt>み</rt></ruby>ました。そこには<ruby>新<rt>あたら</rt></ruby>しい留学プログラムのお<ruby>知<rt>し</rt></ruby>らせがありました。
+「このプログラムは<ruby>人気<rt>にんき</rt></ruby>があります。」
+「1<ruby>年間<rt>ねんかん</rt></ruby>のプログラムと6<ruby>週間<rt>しゅうかん</rt></ruby>のプログラムがあります。」
+私は<ruby>内容<rt>ないよう</rt></ruby>をよく<ruby>読<rt>よ</rt></ruby>みました。
+「このプログラムに<ruby>申し込<rt>もうしこ</rt></ruby>みたいです。」
+
+でも、留学にはビザやお金が<ruby>必要<rt>ひつよう</rt></ruby>です。そのため、<ruby>今<rt>いま</rt></ruby>は<ruby>資料<rt>しりょう</rt></ruby>を<ruby>集<rt>あつ</rt></ruby>めています。
+<ruby>先生<rt>せんせい</rt></ruby>が<ruby>言<rt>い</rt></ruby>いました。
+「内容をよく読んでください。わからないことがあったら<ruby>聞<rt>き</rt></ruby>いてください。」
+
+私は<ruby>去年<rt>きょねん</rt></ruby>から<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>しています。1<ruby>年前<rt>ねんまえ</rt></ruby>から<ruby>毎日<rt>まいにち</rt></ruby>勉強していて、アルバイトも1年間<ruby>続<rt>つづ</rt></ruby>けています。
+
+<ruby>留学生センター<rt>りゅうがくせいセンター</rt></ruby>へ<ruby>行<rt>い</rt></ruby>くと、スタッフはとても<ruby>親切<rt>しんせつ</rt></ruby>でした。
+「<ruby>海外<rt>かいがい</rt></ruby>での<ruby>生活<rt>せいかつ</rt></ruby>はどうでしたか。」
+私はフランスへ留学した<ruby>先輩<rt>せんぱい</rt></ruby>に聞きました。
+
+先輩は<ruby>笑<rt>わら</rt></ruby>って<ruby>答<rt>こた</rt></ruby>えました。
+「<ruby>大変<rt>たいへん</rt></ruby>だったけど、とても楽しかったよ。<ruby>ホームステイ<rt>ほーむすてい</rt></ruby>でいろいろな<ruby>国<rt>くに</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>と<ruby>交流<rt>こうりゅう</rt></ruby>したよ。大学では<ruby>国際関係<rt>こくさいかんけい</rt></ruby>を勉強していた。<ruby>インターンシップ<rt>いんたーんしっぷ</rt></ruby>は少し大変だったけど、とてもいい<ruby>経験<rt>けいけん</rt></ruby>になったよ。」
+
+その話を聞いて、私はもっと留学したくなりました。
+私は<ruby>将来<rt>しょうらい</rt></ruby>、海外で<ruby>働<rt>はたら</rt></ruby>きたいと思っています。そのため、日本語や<ruby>英語<rt>えいご</rt></ruby>の勉強を続けて、<ruby>スキル<rt>すきる</rt></ruby>を<ruby>身<rt>み</rt></ruby>につけたいです。
+
+先生は<ruby>最後<rt>さいご</rt></ruby>に言いました。
+「この経験はきっと将来<ruby>役<rt>やく</rt></ruby>に<ruby>立<rt>た</rt></ruby>ちますよ。」
+私は「はい、<ruby>頑張<rt>がんば</rt></ruby>ります。」と答えました。`,
+            questions: [
+                { q: "私は何を見ましたか。", options: ["A. 新聞", "B. 掲示板", "C. 地図"], correct: 1 },
+                { q: "今、私は何を集めていますか。", options: ["A. 写真", "B. 資料", "C. お金"], correct: 1 },
+                { q: "私はいつから日本語を勉強していますか。", options: ["A. 1週間前から", "B. 去年・1年前から", "C. 今日から"], correct: 1 },
+                { q: "先輩はどこへ留学しましたか。", options: ["A. 日本", "B. フランス", "C. 韓国"], correct: 1 },
+                { q: "私は将来どうしたいですか。", options: ["A. 海外で働きたいです。", "B. 日本で店を開きたいです。", "C. 毎日旅行したいです。"], correct: 0 }
+            ],
+            essayQuestions: [
+                { q: "留学には何が必要ですか。", a: "ビザとお金が必要です。" },
+                { q: "留学生センターのスタッフはどうでしたか。", a: "とても親切でした。" },
+                { q: "先輩はホームステイで何をしましたか。", a: "いろいろな国の人と交流しました。" },
+                { q: "この経験は何に役に立ちますか。", a: "将来に役に立ちます。" }
+            ],
+            vocabulary: [
+                { word: "留学 (りゅうがく)", meaning: "Belajar di luar negeri / Kuliah di luar negeri", sentence: "私は大学の冬学期に留学したいと思っています。", meaningSentence: "Saya bermaksud untuk kuliah di luar negeri pada semester musim dingin universitas." },
+                { word: "掲示板 (けいじばん)", meaning: "Papan pengumuman", sentence: "今日、学校の掲示板を見ました。", meaningSentence: "Hari ini, saya melihat papan pengumuman sekolah." },
+                { word: "申し込む (もうしこむ)", meaning: "Mendaftar", sentence: "「このプログラムに申し込みたいです。」", meaningSentence: "Saya ingin mendaftar ke program ini." },
+                { word: "必要 (ひつよう)", meaning: "Diperlukan / Butuh", sentence: "でも、留学にはビザやお金が必要です。", meaningSentence: "Namun, untuk kuliah di luar negeri memerlukan visa dan uang." },
+                { word: "資料 (しりょう)", meaning: "Dokumen / Data / Materi", sentence: "そのため、今は資料を集めています。", meaningSentence: "Oleh karena itu, saat ini saya sedang mengumpulkan dokumen." },
+                { word: "続ける (つづける)", meaning: "Melanjutkan / Meneruskan", sentence: "アルバイトも1年間続けています。", meaningSentence: "Saya juga sudah meneruskan kerja paruh waktu selama satu tahun." },
+                { word: "生活 (せいかつ)", meaning: "Kehidupan / Hidup", sentence: "「海外での生活はどうでしたか。」", meaningSentence: "Bagaimana kehidupan di luar negeri?" },
+                { word: "先輩 (せんぱい)", meaning: "Senior", sentence: "私はフランスへ留学した先輩に聞きました。", meaningSentence: "Saya bertanya kepada senior yang pernah kuliah di luar negeri ke Prancis." },
+                { word: "交流する (こうりゅうする)", meaning: "Berinteraksi / Bertukar budaya", sentence: "ホームステイでいろいろな国の人と交流したよ。", meaningSentence: "Di homestay, saya berinteraksi dengan orang-orang dari berbagai negara." },
+                { word: "国際関係 (こくさいかんけい)", meaning: "Hubungan internasional", sentence: "大学では国際関係を勉強していた。", meaningSentence: "Di universitas, saya belajar hubungan internasional." },
+                { word: "経験 (けいけん)", meaning: "Pengalaman", sentence: "インターンシップは少し大変だったけど、とてもいい経験になったよ。", meaningSentence: "Magangnya sedikit berat, tetapi menjadi pengalaman yang sangat berharga." },
+                { word: "将来 (しょうらい)", meaning: "Masa depan", sentence: "私は将来、海外で働きたいと思っています。", meaningSentence: "Saya bermaksud untuk bekerja di luar negeri di masa depan." },
+                { word: "身につける (みにつける)", meaning: "Menguasai / Memperoleh (kemampuan)", sentence: "日本語や英語の勉強を続けて、スキルを身につけたいです。", meaningSentence: "Saya ingin melanjutkan belajar bahasa Jepang dan bahasa Inggris untuk menguasai keterampilan." },
+                { word: "役に立つ (やくにたつ)", meaning: "Bermanfaat / Berguna", sentence: "「この経験はきっと将来役に立ちますよ。」", meaningSentence: "Pengalaman ini pasti akan berguna di masa depan." }
             ]
         }
         
@@ -1181,6 +1354,10 @@ function renderGrid() {
     function openQuiz(index) {
         activeQuizIndex = index;
         isChecked = false; // Reset status setiap kali membuka kuis baru
+
+        // Memaksa browser melakukan scroll otomatis ke posisi paling atas layar (koordinat X=0, Y=0)
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        // ----------------------------
         
         document.getElementById('homeView').classList.add('hidden');
         document.getElementById('quizView').classList.remove('hidden');
@@ -1404,6 +1581,133 @@ function checkAnswers() {
 
 function closeCustomAlert() {
     document.getElementById('customAlert').style.display = 'none';
+}
+
+let currentVocabList = [];
+let currentVocabIdx = 0;
+let selectedCorrectMeaning = "";
+
+function startVocabQuiz() {
+    const currentData = jftDatabase[activeQuizIndex];
+    if (!currentData || !currentData.vocabulary || currentData.vocabulary.length < 2) {
+        alert("Kosakata tidak cukup untuk membuat kuis (minimal harus ada 2 kata).");
+        return;
+    }
+
+    // Copy list kosakata dari database aktif dan acak urutan soalnya
+    currentVocabList = [...currentData.vocabulary].sort(() => Math.random() - 0.5);
+    // Batasi kuis maksimal 5 soal saja agar tidak terlalu panjang, atau sesuaikan dengan total kata yang ada
+    if(currentVocabList.length > 10) currentVocabList = currentVocabList.slice(0, 10);
+    
+    currentVocabIdx = 0;
+    document.getElementById('vocabQuizModal').style.display = 'flex';
+    showVocabQuestion();
+}
+
+function showVocabQuestion() {
+    document.getElementById('vocabNextBtn').style.display = 'none';
+
+    document.getElementById('vocabSentenceContainer').style.display = 'none';
+    
+    const totalQuestions = currentVocabList.length;
+    document.getElementById('vocabProgress').innerText = `Soal ${currentVocabIdx + 1} dari ${totalQuestions}`;
+    
+    const currentQuiz = currentVocabList[currentVocabIdx];
+    document.getElementById('vocabQuestionWord').innerText = currentQuiz.word;
+    selectedCorrectMeaning = currentQuiz.meaning;
+
+    // Ambil semua arti kata lain dari database aktif untuk dijadikan opsi pengecoh (distractor)
+    const allMeanings = jftDatabase[activeQuizIndex].vocabulary.map(v => v.meaning);
+    let wrongMeanings = allMeanings.filter(m => m !== selectedCorrectMeaning);
+    
+    // Acak pilihan pengecoh dan ambil maksimal 3
+    wrongMeanings = wrongMeanings.sort(() => Math.random() - 0.5).slice(0, 3);
+    
+    // Gabungkan jawaban benar dengan pilihan pengecoh, lalu acak posisinya (A, B, C, D)
+    const finalOptions = [selectedCorrectMeaning, ...wrongMeanings].sort(() => Math.random() - 0.5);
+
+    // Render tombol pilihan jawaban ke dalam modal
+    const container = document.getElementById('vocabOptionsContainer');
+    container.innerHTML = "";
+
+    finalOptions.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.innerText = opt;
+        // Styling dasar tombol pilihan kuis
+        Object.assign(btn.style, {
+            backgroundColor: "white",
+            color: "#333",
+            border: "2px solid #eef2f7",
+            padding: "12px 15px",
+            borderRadius: "8px",
+            cursor: "pointer",
+            textAlign: "left",
+            fontSize: "0.95rem",
+            fontWeight: "500",
+            transition: "all 0.2s"
+        });
+        
+        btn.onclick = () => checkVocabAnswer(btn, opt);
+        container.appendChild(btn);
+    });
+}
+
+function checkVocabAnswer(clickedBtn, selectedOpt) {
+    const container = document.getElementById('vocabOptionsContainer');
+    const allButtons = container.querySelectorAll('button');
+
+    // Kunci semua tombol agar pengguna tidak bisa mengganti jawaban
+    allButtons.forEach(btn => btn.disabled = true);
+
+    if (selectedOpt === selectedCorrectMeaning) {
+        // Jika Benar: Hijau
+        clickedBtn.style.backgroundColor = "#2ec4b6";
+        clickedBtn.style.color = "white";
+        clickedBtn.style.borderColor = "#2ec4b6";
+    } else {
+        // Jika Salah: Merah dan tunjukkan yang benar
+        clickedBtn.style.backgroundColor = "#e71d36";
+        clickedBtn.style.color = "white";
+        clickedBtn.style.borderColor = "#e71d36";
+
+        allButtons.forEach(btn => {
+            if (btn.innerText === selectedCorrectMeaning) {
+                btn.style.backgroundColor = "#2ec4b6";
+                btn.style.color = "white";
+                btn.style.borderColor = "#2ec4b6";
+            }
+        });
+    }
+
+    // === LOGIKA BARU: MENAMPILKAN CONTOH KALIMAT DAN ARTINYA ===
+    const currentQuiz = currentVocabList[currentVocabIdx];
+    
+    // Pastikan data sentence tersedia di dalam objek vocab tersebut
+    if (currentQuiz.sentence && currentQuiz.meaningSentence) {
+        document.getElementById('vocabExampleSentence').innerText = currentQuiz.sentence;
+        document.getElementById('vocabExampleMeaning').innerText = currentQuiz.meaningSentence;
+        
+        // Munculkan container kotak kalimat dengan efek display block
+        document.getElementById('vocabSentenceContainer').style.display = 'block';
+    }
+    // ===========================================================
+
+    // Munculkan tombol Lanjut
+    document.getElementById('vocabNextBtn').style.display = 'block';
+}
+
+function nextVocabQuestion() {
+    currentVocabIdx++;
+    if (currentVocabIdx < currentVocabList.length) {
+        showVocabQuestion();
+    } else {
+        alert("Hebat! Anda telah menyelesaikan mini kuis kosakata untuk materi hari ini. 🎉");
+        closeVocabQuiz();
+    }
+}
+
+function closeVocabQuiz() {
+    document.getElementById('vocabQuizModal').style.display = 'none';
 }
 
     window.onload = renderGrid;
