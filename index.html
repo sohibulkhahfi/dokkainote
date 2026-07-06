@@ -405,6 +405,11 @@
         <section class="card">
             <h2>読み物 (Bacaan)</h2>
             <div id="readingContent" class="reading-box"></div>
+            <div style="margin-top: 15px; text-align: left;">
+            <button id="playAudioBtn" onclick="toggleReadingSpeech()" style="background-color: #2ec4b6; color: white; border: none; padding: 10px 18px; font-size: 14px; border-radius: 6px; cursor: pointer; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s;">
+                <span>🔊</span> Dengarkan Bacaan
+            </button>
+            </div>
         </section>
 
         <section class="card">
@@ -1004,75 +1009,62 @@
             ]
         },
         {
-            date: "2 Juli 2026",
-            title: "卒業式の後のピクニック<br>(Piknik Setelah Upacara Kelulusan)",
-            readingText: `<ruby>今日<rt>きょう</rt></ruby>は<ruby>卒業式<rt>そつぎょうしき</rt></ruby>でした。<ruby>今年<rt>ことし</rt></ruby>は<ruby>友達<rt>ともだち</rt></ruby>と<ruby>参加<rt>さんか</rt></ruby>しました。
-卒業式が<ruby>終<rt>お</rt></ruby>わったあと、友達が<ruby>言<rt>い</rt></ruby>いました。
-「ピクニックをしませんか。」
-<ruby>私<rt>わたし</rt></ruby>は、
-「いいですね。どこにしましょうか。」
-と<ruby>答<rt>こた</rt></ruby>えました。
-みんなで<ruby>話<rt>はな</rt></ruby>し<ruby>合<rt>あ</rt></ruby>って、<ruby>桜<rt>さくら</rt></ruby>のある<ruby>公園<rt>こうえん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>くことにしました。
+            date: "2 Juni 2026",
+            title: "カンファレンスの日<br>(Hari Konferensi)",
+            readingText: `<ruby>昨日<rt>きのう</rt></ruby>、<ruby>私<rt>わたし</rt></ruby>は<ruby>会社<rt>かいしゃ</rt></ruby>のカンファレンスに<ruby>参加<rt>さんか</rt></ruby>しました。<ruby>東京地域<rt>とうきょうちいき</rt></ruby>や<ruby>中央<rt>ちゅうおう</rt></ruby>アメリカ、<ruby>東<rt>ひがし</rt></ruby>ヨーロッパなど、いろいろな<ruby>地域<rt>ちいき</rt></ruby>からたくさんの<ruby>人<rt>ひと</rt></ruby>が<ruby>来<rt>き</rt></ruby>ていました。
 
-<ruby>朝<rt>あさ</rt></ruby>、私は<ruby>天気予報<rt>てんきよほう</rt></ruby>を<ruby>見<rt>み</rt></ruby>ました。今日は天気がよくて、とてもうれしかったです。友達も「ピクニックの天気予報を見ましたか。」と<ruby>聞<rt>き</rt></ruby>きました。
-「はい、<ruby>大丈夫<rt>だいじょうぶ</rt></ruby>そうですよ。」と私は答えました。
+<ruby>朝<rt>あさ</rt></ruby>、<ruby>山田<rt>やまだ</rt></ruby>さんがミーティングを<ruby>開催<rt>かいさい</rt></ruby>しました。そのあと、リーダーが<ruby>発表<rt>はっぴょう</rt></ruby>を<ruby>始<rt>はじ</rt></ruby>めました。<ruby>新商品<rt>しんしょうひん</rt></ruby>や<ruby>新<rt>あたら</rt></ruby>しいプロジェクトについて<ruby>説明<rt>せつめい</rt></ruby>しました。
+私はカタログを<ruby>見<rt>み</rt></ruby>ながら<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>きました。
 
-公園へ行く<ruby>前<rt>まえ</rt></ruby>に、<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>車<rt>くるま</rt></ruby>にのせました。
-「荷物はどうしましょうか。」
-「私の車にのせましょう。」
-みんなでかごやレジャーシート、<ruby>水筒<rt>すいとう</rt></ruby>を持って行きました。
+<ruby>休憩<rt>きゅうけい</rt></ruby>の<ruby>時間<rt>じかん</rt></ruby>に、<ruby>社長<rt>しゃちょう</rt></ruby>と<ruby>少<rt>すこ</rt></ruby>し話しました。
+「あちらにもコーヒーがありますね。」
+「はい、ありがとうございます。」
 
-公園に<ruby>着<rt>つ</rt></ruby>くと、<ruby>風<rt>かぜ</rt></ruby>が<ruby>気持<rt>きも</rt></ruby>ちよかったです。
-「この<ruby>場所<rt>ばしょ</rt></ruby>はとても気持ちいいですね。」
-「そうですね。」
-みんなでレジャーシートを<ruby>広<rt>ひろ</rt></ruby>げて、お<ruby>茶<rt>ちゃ</rt></ruby>やジュース、サンドウィッチを<ruby>食<rt>た</rt></ruby>べました。
+そのあと、新商品のブースへ<ruby>行<rt>い</rt></ruby>きました。
+「あのブースに新しい商品がありますよ。」
+「そうですか。見に行きましょう。」
+東ヨーロッパのブースや中央アメリカの<ruby>料理<rt>りょうり</rt></ruby>のブースも見ました。どのブースもとても<ruby>面白<rt>おもしろ</rt></ruby>かったです。
 
-食べ終わったあと、私はお<ruby>皿<rt>さら</rt></ruby>を<ruby>洗<rt>あら</rt></ruby>いました。友達はテーブルを<ruby>拭<rt>ふ</rt></ruby>いて、おしぼりを<ruby>集<rt>あつ</rt></ruby>めました。
-「テーブルを拭きましょうか。」
-「はい、お<ruby>願い<rt>ねが</rt></ruby>いします。」
-そのあと、プラスチックのカップやゴミを<ruby>全部<rt>ぜんぶ</rt></ruby>集めました。
-「プラスチックのゴミは全部集めましたか。」
-「はい、全部集めました。」
+<ruby>午後<rt>ごご</rt></ruby>、<ruby>田中<rt>たなか</rt></ruby>さんが新商品を<ruby>紹介<rt>しょうかい</rt></ruby>していました。<ruby>部長<rt>ぶちょう</rt></ruby>は新しいプロジェクトを始めて、とても<ruby>忙<rt>いそが</rt></ruby>しそうでした。
+私は<ruby>来月<rt>らいげつ</rt></ruby>のイベントを<ruby>担当<rt>たんとう</rt></ruby>するので、部長にいろいろ<ruby>質問<rt>しつもん</rt></ruby>しました。
 
-<ruby>帰<rt>かえ</rt></ruby>る前に、友達が言いました。
-「レジャーシートを<ruby>畳<rt>たた</rt></ruby>んでくれませんか。」
-「はい、私が畳みます。」
-私は<ruby>傘<rt>かさ</rt></ruby>を拭いてから帰りました。
+<ruby>夕方<rt>ゆうがた</rt></ruby>になると、みんなは<ruby>帰<rt>かえ</rt></ruby>り始めました。
+「山田さんはまだここに<ruby>残<rt>のこ</rt></ruby>りますか。」
+「はい、もう少し残ります。」
+私も少し残って、新しい人と話しました。微、この人の<ruby>名前<rt>なまえ</rt></ruby>は<ruby>覚<rt>おぼ</rt></ruby>えていません。
 
-今日は天気もよくて、友達と<ruby>楽しい<rt>たのしい</rt></ruby><ruby>時間<rt>じかん</rt></ruby>を<ruby>過<rt>すご</rt></ruby>しました。また<ruby>来年<rt>らいねん</rt></ruby>もみんなでピクニックをしたいと<ruby>思<rt>おも</rt></ruby>います。`,
+帰る前に、友達が言いました。
+「<ruby>再来年<rt>さらいねん</rt></ruby>もこのカンファレンスに来ますか。」
+私は<ruby>笑<rt>わら</rt></ruby>って答えました。
+「はい。また来たいです。」`,
             questions: [
-                { q: "卒業式の後で何をしましたか。", options: ["A. 映画を見ました。", "B. ピクニックをしました。", "C. 買い物をしました。"], correct: 1 },
-                { q: "公園へ行く前に荷物をどこにのせましたか。", options: ["A. バス", "B. 電車", "C. 車"], correct: 2 },
-                { q: "公園で何を食べましたか。", options: ["A. ラーメン", "B. サンドウィッチ", "C. カレー"], correct: 1 },
-                { q: "食事の後、私は何をしましたか。", options: ["A. 写真を撮りました。", "B. お皿を洗いました。", "C. 花を見ました。"], correct: 1 },
-                { q: "最後にみんなは何を集めましたか。", options: ["A. 花", "B. 本", "C. ゴミ"], correct: 2 }
+                { q: "カンファレンスにはどこから人が来ましたか。", options: ["A. 東京地域だけ", "B. 日本だけ", "C. いろいろな地域"], correct: 2 },
+                { q: "リーダーは何を始めましたか。", options: ["A. 食事", "B. 発表", "C. 会議"], correct: 1 },
+                { q: "私は誰と少し話しましたか。", options: ["A. 社長", "B. 学生", "C. お客さん"], correct: 0 },
+                { q: "私は来月何を担当しますか。", options: ["A. 旅行", "B. イベント", "C. 会議"], correct: 1 },
+                { q: "山田さんはどうしましたか。", options: ["A. すぐ帰りました。", "B. もう少し残りました。", "C. 旅行へ行きました。"], correct: 1 }
             ],
             essayQuestions: [
-                { q: "ピクニックへ行く前に何を見ましたか。", a: "天気予報を見ました。" },
-                { q: "公園の風はどうでしたか。", a: "気持ちよかったです。" },
-                { q: "誰がレジャーシートを畳みましたか。", a: "私が畳みました。" },
-                { q: "また来年、何をしたいですか。", a: "みんなでピクニックをしたいです。" }
+                { q: "私は何を見ながら話を聞きましたか。", a: "カタログを見ながら話を聞きました。" },
+                { q: "午後、田中さんは何を紹介していましたか。", a: "新商品を紹介していました。" },
+                { q: "私は覚えていないものは何ですか。", a: "新しい人の名前です。" },
+                { q: "再来年も私はカンファレンスに来たいですか。", a: "はい、来たいです。" }
             ],
             vocabulary: [
-                { word: "卒業式 (そつぎょうしき)", meaning: "Upacara kelulusan", sentence: "今日は卒業式でした。", meaningSentence: "Hari ini adalah upacara kelulusan." },
-                { word: "参加する (さんかする)", meaning: "Mengikuti / Berpartisipasi", sentence: "今年は友達と参加しました。", meaningSentence: "Tahun ini saya mengikutinya bersama teman." },
-                { word: "話し合う (はなしあう)", meaning: "Berdiskusi / Saling berbicara", sentence: "みんなで話し合って、桜のある公園へ行くことにしました。", meaningSentence: "Kami semua berdiskusi bersama dan memutuskan untuk pergi ke taman yang ada bunga sakuranya." },
-                { word: "天気予報 (てんきよほう)", meaning: "Prakiraan cuaca", sentence: "朝、私は天気予報を見ました。", meaningSentence: "Di pagi hari, saya melihat prakiraan cuaca." },
-                { word: "荷物 (にもつ)", meaning: "Barang bawaan", sentence: "公園へ行く前に、荷物を車にのせました。", meaningSentence: "Sebelum pergi ke taman, kami memuat barang-barang ke dalam mobil." },
-                { word: "のせる", meaning: "Meletakkan ke atas / Memuat", sentence: "公園へ行く前に、荷物を車にのせました。", meaningSentence: "Sebelum pergi ke taman, kami memuat barang-barang ke dalam mobil." },
-                { word: "かご", meaning: "Keranjang", sentence: "みんながかごやレジャーシート、水筒を持って行きました。", meaningSentence: "Semua orang membawa keranjang, tikar piknik, dan botol minum." },
-                { word: "レジャーシート", meaning: "Tikar piknik", sentence: "みんなでレジャーシートを広げて、お茶やジュース、サンドウィッチを食べました。", meaningSentence: "Kami semua menggelar tikar piknik, lalu menikmati teh, jus, dan roti lapis." },
-                { word: "水筒 (すいとう)", meaning: "Botol minum", sentence: "みんながかごやレジャーシート、水筒を持って行きました。", meaningSentence: "Semua orang membawa keranjang, tikar piknik, dan botol minum." },
-                { word: "気持ちいい (きもちいい)", meaning: "Terasa nyaman / Enak (suasana/udara)", sentence: "公園に着くと、風が気持ちよかったです。", meaningSentence: "Setibanya di taman, anginnya terasa sangat nyaman." },
-                { word: "広げる (ひろげる)", meaning: "Menggelar / Membuka lebar", sentence: "みんなでレジャーシートを広げて、お茶やジュース、サンドウィッチを食べました。", meaningSentence: "Kami semua menggelar tikar piknik, lalu menikmati teh, jus, dan roti lapis." },
-                { word: "お皿を洗う (おさらをあらう)", meaning: "Mencuci piring", sentence: "食べ終わったあと、私はお皿を洗いました。", meaningSentence: "Setelah selesai makan, saya mencuci piring." },
-                { word: "拭く (ふく)", meaning: "Mengelap", sentence: "友達はテーブルを拭いて、おしぼりを集めました。", meaningSentence: "Teman saya mengelap meja dan mengumpulkan handuk basah." },
-                { word: "おしぼり", meaning: "Handuk basah pembersih tangan", sentence: "友達はテーブルを拭いて、おしぼりを集めました。", meaningSentence: "Teman saya mengelap meja dan mengumpulkan handuk basah." },
-                { word: "集める (あつめる)", meaning: "Mengumpulkan", sentence: "そのあと、プラスチックのカップやゴミを全部集めました。", meaningSentence: "Setelah itu, kami mengumpulkan semua gelas plastik dan sampah." },
-                { word: "畳む (たたむ)", meaning: "Melipat", sentence: "「レジャーシートを畳んでくれませんか。」「はい、私が畳みます。」", meaningSentence: "Bisa tolong lipat tikar pikniknya? Ya, saya yang akan melipatnya." },
-                { word: "時間を過ごす (じかんをすごす)", meaning: "Menghabiskan waktu", sentence: "今日は天気もよくて、友達と楽しい時間を過ごしました。", meaningSentence: "Hari ini cuacanya bagus, dan saya menghabiskan waktu yang menyenangkan bersama teman." }
+                { word: "開催する (かいさいする)", meaning: "Menyelenggarakan / Mengadakan", sentence: "朝、山田さんがミーティングを開催しました。", meaningSentence: "Di pagi hari, sdr. Yamada menyelenggarakan pertemuan." },
+                { word: "発表 (はっぴょう)", meaning: "Presentasi / Pengumuman", sentence: "そのあと、リーダーが発表を始めました。", meaningSentence: "Setelah itu, ketua memulai presentasi." },
+                { word: "説明する (せつめいする)", meaning: "Menjelaskan", sentence: "新商品や新しいプロジェクトについて説明しました。", meaningSentence: "Dia menjelaskan tentang produk baru dan proyek baru." },
+                { word: "地域 (ちいき)", meaning: "Wilayah / Daerah", sentence: "東京地域や中央アメリカ、東ヨーロッパなど、いろいろな地域からたくさんの人が来ていました。", meaningSentence: "Banyak orang datang dari berbagai wilayah seperti wilayah Tokyo, Amerika Tengah, dan Eropa Timur." },
+                { word: "社長 (しゃちょう)", meaning: "Direktur / Presiden perusahaan", sentence: "休憩の時間に、社長と少し話しました。", meaningSentence: "Pada saat waktu istirahat, saya berbicara sebentar dengan direktur." },
+                { word: "ブース", meaning: "Stan / Booth", sentence: "そのあと、新商品のブースへ行きました。", meaningSentence: "Setelah itu, kami pergi ke stan produk baru." },
+                { word: "紹介する (しょうかいする)", meaning: "Memperkenalkan", sentence: "午後、田中さんが新商品を紹介していました。", meaningSentence: "Di siang hari, sdr. Tanaka sedang memperkenalkan produk baru." },
+                { word: "部長 (ぶちょう)", meaning: "Kepala divisi / Manajer", sentence: "部長は新しいプロジェクトを始めて、とても忙しそうでした。", meaningSentence: "Kepala divisi memulai proyek baru dan terlihat sangat sibuk." },
+                { word: "担当する (たんとうする)", meaning: "Bertanggung jawab atas / Memegang kendali", sentence: "私は来月のイベントを担当するので、部長にいろいろ質問しました。", meaningSentence: "Karena saya bertanggung jawab atas acara bulan depan, saya mengajukan berbagai pertanyaan kepada kepala divisi." },
+                { word: "残る (のこる)", meaning: "Tetap tinggal / Menetap", sentence: "「山田さんはまだここに残りますか。」「はい、もう少し残ります。」", meaningSentence: "\"Apakah sdr. Yamada masih akan tinggal di sini?\" \"Ya, saya akan tinggal sebentar lagi.\"" },
+                { word: "覚える (おぼえる)", meaning: "Meningat", sentence: "でも、この人の名前は覚えていません。", meaningSentence: "Namun, saya tidak mengingat nama orang ini." },
+                { word: "再来年 (さらいねん)", meaning: "Dua tahun lagi", sentence: "「再来年もこのカンファレンスに来ますか。」", meaningSentence: "\"Apakah dua tahun lagi kamu akan datang juga ke konferensi ini?\"" }
             ]
-        },
+},
         {
             date: "3 Juli 2026",
             title: "デートの日<br>(Hari Kencan)",
@@ -1352,6 +1344,7 @@ function renderGrid() {
 }
 
     function openQuiz(index) {
+        window.speechSynthesis.cancel();
         activeQuizIndex = index;
         isChecked = false; // Reset status setiap kali membuka kuis baru
 
@@ -1435,6 +1428,9 @@ function renderGrid() {
     }
 
     function goHome() {
+        window.speechSynthesis.cancel(); 
+        resetAudioButton();
+
         document.getElementById('quizView').classList.add('hidden');
         document.getElementById('homeView').classList.remove('hidden');
         document.getElementById('headerSubtitle').style.display = 'block';
@@ -1708,6 +1704,71 @@ function nextVocabQuestion() {
 
 function closeVocabQuiz() {
     document.getElementById('vocabQuizModal').style.display = 'none';
+}
+
+let currentUtterance = null; // Menyimpan status audio yang sedang berjalan
+
+function toggleReadingSpeech() {
+    const playBtn = document.getElementById('playAudioBtn');
+
+    // 1. Jika audio sedang berjalan, maka klik berikutnya akan menghentikannya (Stop)
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        resetAudioButton();
+        return;
+    }
+
+    // 2. Ambil element kontainer teks asli
+    const originalReading = document.getElementById('readingContent');
+    if (!originalReading) return;
+
+    // 3. TRIK JALUR CEPAT: Kloning elemen agar teks di layar tidak rusak/hilang
+    const cloneDiv = originalReading.cloneNode(true);
+    
+    // Hapus semua elemen <rt> (furigana kecil) di dalam klon tersebut
+    const rts = cloneDiv.querySelectorAll('rt');
+    rts.forEach(rt => rt.remove());
+
+    // Ambil teks bersihnya saja (Kanji dan Kana utama tetap utuh)
+    let cleanText = cloneDiv.textContent || cloneDiv.innerText;
+    
+    // Bersihkan spasi kosong atau baris baru yang berlebihan
+    cleanText = cleanText.trim();
+
+    if (!cleanText) {
+        alert("Tidak ada teks yang bisa dibaca.");
+        return;
+    }
+
+    // 4. Konfigurasi Mesin Suara (SpeechSynthesisUtterance)
+    currentUtterance = new SpeechSynthesisUtterance(cleanText);
+    currentUtterance.lang = 'ja-JP'; // Set mutlak ke bahasa Jepang asli
+    currentUtterance.rate = 0.7;    // Kecepatan diatur agak lambat (0.85) agar cocok untuk belajar JFT
+
+    // 5. Event Listener saat suara mulai dan selesai
+    currentUtterance.onstart = () => {
+        playBtn.innerHTML = "🛑 Hentikan Suara";
+        playBtn.style.backgroundColor = "#e71d36"; // Berubah merah saat berbunyi
+    };
+
+    currentUtterance.onend = () => {
+        resetAudioButton();
+    };
+
+    currentUtterance.onerror = () => {
+        resetAudioButton();
+    };
+
+    // 6. Jalankan Suara
+    window.speechSynthesis.speak(currentUtterance);
+}
+
+function resetAudioButton() {
+    const playBtn = document.getElementById('playAudioBtn');
+    if (playBtn) {
+        playBtn.innerHTML = "🔊 Dengarkan Bacaan";
+        playBtn.style.backgroundColor = "#2ec4b6"; // Kembali ke warna hijau toska
+    }
 }
 
     window.onload = renderGrid;
