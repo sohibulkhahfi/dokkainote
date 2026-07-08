@@ -130,20 +130,15 @@
             background-color: #6c757d;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 10px;
             font-size: 14px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            margin-bottom: 20px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: background 0.2s;
-
-            position: sticky;        /* Membuat tombol dapat menempel saat di-scroll */
-            top: 10px;               /* Jarak tempel dari batas atas layar sebesar 10px */
-            z-index: 999;            /* Memastikan tombol berada di atas lapisan teks bacaan */
             box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Memberikan bayangan halus saat melayang */
         }
 
@@ -383,6 +378,103 @@
     background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
     border-color: #f1c40f;
 }
+
+/* Kontainer Bar Atas Melayang dengan Jarak Aman */
+.sticky-action-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    backdrop-filter: blur(5px);
+    
+    /* Jarak vertikal (atas-bawah) 12px, jarak horizontal (kiri-kanan) 15px */
+    padding: 12px 15px; 
+        
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eef2f7;
+    box-sizing: border-box; /* Memastikan padding tidak membuat lebar kontainer melebihi layar */
+}
+
+/* Jika sebelumnya Anda mengatur 'position: sticky' di .btn-back, silakan hapus bagian sticky, top, dan z-index di .btn-back lama Anda agar tidak bentrok */
+.btn-back {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Desain Komponen Toggle Switch */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle-label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #cbd5e1;
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background-color: #2ec4b6; /* Warna hijau toska saat ON */
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* Membuat slider berbentuk bulat rapi */
+.slider.round {
+    border-radius: 24px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Tambahkan rule CSS global untuk menyembunyikan <rt> secara instan */
+.hide-furigana rt {
+    display: none !important;
+}
+
     </style>
 </head>
 <body>
@@ -398,7 +490,20 @@
 
     <!-- BAGIAN 2: TAMPILAN SOAL & BACAAN -->
     <div id="quizView" class="hidden">
-        <button class="btn-back" onclick="goHome()">&#8592; Kembali ke Menu Pilihan</button>
+            <!-- Kontainer Utama yang Melayang di Atas Layar -->
+            <div class="sticky-action-bar">
+                <!-- Tombol Kembali (Sisi Kiri) -->
+                <button class="btn-back" onclick="goHome()">&#8592; Kembali ke Menu Pilihan</button>
+    
+                <!-- Tombol Toggle Furigana (Sisi Kanan) -->
+                <div class="toggle-container">
+                <span class="toggle-label">Furigana</span>
+                <label class="switch">
+                <input type="checkbox" id="furiganaToggle" checked onclick="toggleFurigana()">
+                <span class="slider round"></span>
+                </label>
+                </div>
+            </div>
         
         <h2 id="quizMainTitle" class="quiz-title-header"></h2>
 
@@ -1062,9 +1167,9 @@
                 { word: "紹介する (しょうかいする)", meaning: "Memperkenalkan", sentence: "午後、田中さんが新商品を紹介していました。", meaningSentence: "Di siang hari, sdr. Tanaka sedang memperkenalkan produk baru." },
                 { word: "部長 (ぶちょう)", meaning: "Kepala divisi / Manajer", sentence: "部長は新しいプロジェクトを始めて、とても忙しそうでした。", meaningSentence: "Kepala divisi memulai proyek baru dan terlihat sangat sibuk." },
                 { word: "担当する (たんとうする)", meaning: "Bertanggung jawab atas / Memegang kendali", sentence: "私は来月のイベントを担当するので、部長にいろいろ質問しました。", meaningSentence: "Karena saya bertanggung jawab atas acara bulan depan, saya mengajukan berbagai pertanyaan kepada kepala divisi." },
-                { word: "残る (のこる)", meaning: "Tetap tinggal / Menetap", sentence: "「山田さんはまだここに残りますか。」「はい、もう少し残ります。」", meaningSentence: "\"Apakah sdr. Yamada masih akan tinggal di sini?\" \"Ya, saya akan tinggal sebentar lagi.\"" },
+                { word: "残る (のこる)", meaning: "Tetap tinggal / Menetap", sentence: "「山田さんはまだここに残りますか。」「はい、もう少し残ります。」", meaningSentence: "Apakah sdr. Yamada masih akan tinggal di sini? Ya, saya akan tinggal sebentar lagi." },
                 { word: "覚える (おぼえる)", meaning: "Meningat", sentence: "でも、この人の名前は覚えていません。", meaningSentence: "Namun, saya tidak mengingat nama orang ini." },
-                { word: "再来年 (さらいねん)", meaning: "Dua tahun lagi", sentence: "「再来年もこのカンファレンスに来ますか。」", meaningSentence: "\"Apakah dua tahun lagi kamu akan datang juga ke konferensi ini?\"" }
+                { word: "再来年 (さらいねん)", meaning: "Dua tahun lagi", sentence: "「再来年もこのカンファレンスに来ますか。」", meaningSentence: "Apakah dua tahun lagi kamu akan datang juga ke konferensi ini?" }
             ]
 },
         {
@@ -1305,29 +1410,112 @@
             vocabulary: [
                 { word: "冷たい (つめたい)", meaning: "Dingin (untuk benda/minuman/angin)", sentence: "当日、冷たい風が吹いていました。", meaningSentence: "Pada hari H, angin dingin bertiup." },
                 { word: "風 (かぜ)", meaning: "Angin", sentence: "当日、冷たい風が吹いていました。", meaningSentence: "Pada hari H, angin dingin bertiup." },
-                { word: "タコス", meaning: "Tacos", sentence: "「みんなでタコスを作りましょう。」", meaningSentence: "\"Mari kita buat tacos bersama-sama.\"" },
-                { word: "レシピ", meaning: "Resep", sentence: "「いいですね。タコスのレシピを持ってきます。」", meaningSentence: "\"Bagus ya. Saya akan membawa resep tacos.\"" },
+                { word: "タコス", meaning: "Tacos", sentence: "「みんなでタコスを作りましょう。」", meaningSentence: "Mari kita buat tacos bersama-sama." },
+                { word: "レシピ", meaning: "Resep", sentence: "「いいですね。タコスのレシピを持ってきます。」", meaningSentence: "Bagus ya. Saya akan membawa resep tacos." },
                 { word: "パーティー", meaning: "Pesta", sentence: "友達の家でタコスパーティーをすることになりました。", meaningSentence: "Jadilah diadakan pesta tacos di rumah teman." },
-                { word: "弟 (おとうと)", meaning: "Adik laki-laki", sentence: "「はい。弟がゲームを持ってきます。」", meaningSentence: "\"Ya. Adik laki-laki saya akan membawa game.\"" },
+                { word: "弟 (おとうと)", meaning: "Adik laki-laki", sentence: "「はい。弟がゲームを持ってきます。」", meaningSentence: "Ya. Adik laki-laki saya akan membawa game." },
                 { word: "妹 (いもうと)", meaning: "Adik perempuan", sentence: "家に着くと、友達の妹さんと弟さんも来ていました。", meaningSentence: "Saat tiba di rumah, adik perempuan dan adik laki-laki teman saya juga sudah datang." },
                 { word: "ダーツ", meaning: "Darts (permainan lempar panah)", sentence: "食事の後、みんなでダーツをしました。", meaningSentence: "Setelah makan, kami semua bermain darts." },
                 { word: "観戦する (かんせんする)", meaning: "Menonton pertandingan", sentence: "そのあと、テレビでサッカーを観戦しました。", meaningSentence: "Setelah itu, kami menonton pertandingan sepak bola di televisi." },
-                { word: "飲み物 (のみもの)", meaning: "Minuman", sentence: "「飲み物は冷たいものがいいですか。」", meaningSentence: "\"Apakah minumannya lebih baik yang dingin?\"" },
-                { word: "会議 (かいぎ)", meaning: "Rapat / Pertemuan", sentence: "「会議があるんです。」", meaningSentence: "\"Karena ada rapat.\"" },
-                { word: "スケジュール", meaning: "Jadwal", sentence: "「スケジュールが変わったんです。」", meaningSentence: "\"Jadwalnya berubah.\"" },
+                { word: "飲み物 (のみもの)", meaning: "Minuman", sentence: "「飲み物は冷たいものがいいですか。」", meaningSentence: "Apakah minumannya lebih baik yang dingin?" },
+                { word: "会議 (かいぎ)", meaning: "Rapat / Pertemuan", sentence: "「会議があるんです。」", meaningSentence: "Karena ada rapat." },
+                { word: "スケジュール", meaning: "Jadwal", sentence: "「スケジュールが変わったんです。」", meaningSentence: "Jadwalnya berubah." },
                 { word: "変わる (かわる)", meaning: "Berubah", sentence: "場所は変わりませんが、時間が変わりました。", meaningSentence: "Tempatnya tidak berubah, tetapi waktunya berubah." },
-                { word: "得意 (とくい)", meaning: "Pandai / Mahir", sentence: "「すみません。ポーカーはあまり得意じゃないんです。」", meaningSentence: "\"Maaf. Saya tidak terlalu jago bermain poker.\"" },
-                { word: "負ける (まける)", meaning: "Kalah", sentence: "「きっと負けます。」", meaningSentence: "\"Saya pasti kalah.\"" },
+                { word: "得意 (とくい)", meaning: "Pandai / Mahir", sentence: "「すみません。ポーカーはあまり得意じゃないんです。」", meaningSentence: "Maaf. Saya tidak terlalu jago bermain poker." },
+                { word: "負ける (まける)", meaning: "Kalah", sentence: "「きっと負けます。」", meaningSentence: "Saya pasti kalah." },
                 { word: "誘う (さそう)", meaning: "Mengajak", sentence: "友達がポーカーに誘いました。", meaningSentence: "Teman saya mengajak bermain poker." },
                 { word: "用意する (よういする)", meaning: "Menyiapkan", sentence: "冷たいお茶やコーヒーも用意しました。", meaningSentence: "Kami juga menyiapkan teh dingin dan kopi." },
                 { word: "吹く (ふく)", meaning: "Bertiup", sentence: "当日、冷たい風が吹いていました。", meaningSentence: "Pada hari H, angin dingin bertiup." },
                 { word: "温かい (あたたかい)", meaning: "Hangat", sentence: "少し寒かったので、私は温かい服を着て行きました。", meaningSentence: "Karena sedikit dingin, saya pergi memakai pakaian yang hangat." },
                 { word: "服 (ふく)", meaning: "Pakaian / Baju", sentence: "少し寒かったので、私は温かい服を着て行きました。", meaningSentence: "Karena sedikit dingin, saya pergi memakai pakaian yang hangat." },
-                { word: "一緒に (いっしょに)", meaning: "Bersama-sama", sentence: "「ポーカー、一緒にどうですか。」", meaningSentence: "\"Bagaimana kalau main poker bersama-sama?\"" },
-                { word: "きっと", meaning: "Pasti", sentence: "「きっと負けます。」", meaningSentence: "\"Saya pasti kalah.\"" },
-                { word: "本当に (ほんとうに)", meaning: "Benar-benar", sentence: "「今日は本当に楽しかったですね。」", meaningSentence: "\"Hari ini benar-benar menyenangkan ya.\"" }
+                { word: "一緒に (いっしょに)", meaning: "Bersama-sama", sentence: "「ポーカー、一緒にどうですか。」", meaningSentence: "Bagaimana kalau main poker bersama-sama?" },
+                { word: "きっと", meaning: "Pasti", sentence: "「きっと負けます。」", meaningSentence: "Saya pasti kalah." },
+                { word: "本当に (ほんとうに)", meaning: "Benar-benar", sentence: "「今日は本当に楽しかったですね。」", meaningSentence: "Hari ini benar-benar menyenangkan ya." }
             ]
-}
+        },
+        {
+            date: "7 Juli 2026",
+            title: "パソコンの修理<br>(Perbaikan Laptop)",
+            readingText: `<ruby>昨日<rt>きのう</rt></ruby>、<ruby>仕事<rt>しごと</rt></ruby>で<ruby>使<rt>つか</rt></ruby>っているパソコンに<ruby>問題<rt>もんだい</rt></ruby>がありました。
+<ruby>朝<rt>あさ</rt></ruby>、パソコンの<ruby>電源<rt>でんげん</rt></ruby>を<ruby>入<rt>い</rt></ruby>れましたが、<ruby>動<rt>うご</rt></ruby>きませんでした。
+「どうしたらいいですか。」
+<ruby>私<rt>わたし</rt></ruby>は少し<ruby>困<rt>こま</rt></ruby>りました。
+
+ファイルも<ruby>開<rt>ひら</rt></ruby>けませんでした。<ruby>大切<rt>たいせつ</rt></ruby>なデータや<ruby>写真<rt>しゃしん</rt></ruby>が<ruby>消<rt>き</rt></ruby>えたようでした。
+「うっかり何かダウンロードしましたか。」
+<ruby>同僚<rt>どうりょう</rt></ruby>に聞かれました。
+「はい。昨日、<ruby>無料<rt>むりょう</rt></ruby>のアプリをダウンロードしてインストールしました。」
+そのあと、<ruby>画面<rt>がめん</rt></ruby>が<ruby>暗<rt>くら</rt></ruby>くなって、メールも<ruby>送<rt>おく</rt></ruby>れなくなりました。
+
+私は<ruby>駅前<rt>えきまえ</rt></ruby>の<ruby>修理屋<rt>しゅうりや</rt></ruby>へ行きました。
+<ruby>店員<rt>てんいん</rt></ruby>さんが言いました。
+「どうしましたか。」
+私は<ruby>説明<rt>せつめい</rt></ruby>しました。
+「このパソコンが動きません。ファイルも開けません。<ruby>接続<rt>せつぞく</rt></ruby>もうまくいかないんです。」
+
+店員さんはパソコンを<ruby>確認<rt>かくにん</rt></ruby>しながら言いました。
+「システムに問題がありますね。アップデートをして、接続テストもしてみます。」
+私は<ruby>急<rt>いそ</rt></ruby>いでいたので言いました。
+「明日仕事があるんです。<ruby>今日中<rt>きょうじゅう</rt></ruby>に<ruby>直<rt>なお</rt></ruby>りますか。」
+店員さんは少し考えて、
+「少し<ruby>時間<rt>じかん</rt></ruby>がかかりますが、できるだけ今日中に修理します。」
+と言いました。
+
+私は近くのカフェで待ちました。
+しばらくすると、修理屋から電話がありました。
+「お待たせしました。修理が終わりました。」
+私はすぐに店へ行きました。
+
+店員さんがパソコンを見せながら言いました。
+「システムはもう大丈夫です。問題ありません。アップデートも終わりました。」
+私はパソコンを確認しました。
+「ファイルも開けます。メールも送れます。それで仕事ができます。」
+私は<ruby>安心<rt>あんしん</rt></ruby>しました。
+「ありがとうございました。」
+
+店員さんは<ruby>笑顔<rt>えがお</rt></ruby>で答えました。
+「また何かありましたら、いつでも来てください。」`,
+            questions: [
+                { q: "パソコンはどうなりましたか。", options: ["A. とても速くなりました。", "B. 動きませんでした。", "C. 新しくなりました。"], correct: 1 },
+                { q: "私は最近何をしましたか。", options: ["A. 新しいゲームを買いました。", "B. 無料のアプリをダウンロードしてインストールしました。", "C. 新しいパソコンを買いました。"], correct: 1 },
+                { q: "修理屋はどこにありますか。", options: ["A. 学校の中", "B. 駅前", "C. 家の近く"], correct: 1 },
+                { q: "店員さんは何をしましたか。", options: ["A. 新しいパソコンを売りました。", "B. システムをアップデートして接続を確認しました。", "C. パソコンを捨てました。"], correct: 1 },
+                { q: "修理の後、パソコンはどうなりましたか。", options: ["A. まだ動きませんでした。", "B. 問題がなくなりました。", "C. 電池が切れました。"], correct: 1 }
+            ],
+            essayQuestions: [
+                { q: "どうして私は急いでいましたか。", a: "明日仕事があるからです。" },
+                { q: "修理が終わるまで私はどこで待ちましたか。", a: "近くのカフェで待ちました。" },
+                { q: "修理が終わったあと、何ができるようになりましたか。", a: "ファイルを開いたり、メールを送ったり、仕事ができるようになりました。" },
+                { q: "店員さんは最後に何と言いましたか。", a: "「また何かありましたら、いつでも来てください。」と言いました。" }
+            ],
+            vocabulary: [
+                { word: "問題 (もんだい)", meaning: "Masalah", sentence: "昨日、仕事で使っているパソコンに問題がありました。", meaningSentence: "Kemarin, ada masalah pada laptop yang saya gunakan untuk bekerja." },
+                { word: "ファイル", meaning: "File", sentence: "ファイルも開けませんでした。", meaningSentence: "File pun tidak dapat dibuka." },
+                { word: "開ける (ひらける)", meaning: "Dapat dibuka", sentence: "ファイルも開けませんでした。", meaningSentence: "File pun tidak dapat dibuka." },
+                { word: "修理屋 (しゅうりや)", meaning: "Tempat servis / Toko reparasi", sentence: "私は駅前の修理屋へ行きました。", meaningSentence: "Saya pergi ke toko reparasi di depan stasiun." },
+                { word: "動く (うごく)", meaning: "Berfungsi / Bergerak", sentence: "朝、パソコンの電源を入れましたが、動きませんでした。", meaningSentence: "Di pagi hari, saya menyalakan laptop, tetapi tidak berfungsi." },
+                { word: "データ", meaning: "Data", sentence: "大切なデータや写真が消えたようでした。", meaningSentence: "Tampaknya data penting dan foto-foto telah hilang." },
+                { word: "消える (きえる)", meaning: "Hilang", sentence: "大切なデータや写真が消えたようでした。", meaningSentence: "Tampaknya data penting dan foto-foto telah hilang." },
+                { word: "接続 (せつぞく)", meaning: "Koneksi", sentence: "「接続もうまくいかないんです。」", meaningSentence: "Koneksinya juga tidak berjalan dengan baik." },
+                { word: "うっかり", meaning: "Tanpa sengaja / Lalai", sentence: "「うっかり何かダウンロードしましたか。」", meaningSentence: "Apakah kamu tanpa sengaja mengunduh sesuatu?" },
+                { word: "画面 (がめん)", meaning: "Layar", sentence: "そのあと、画面が暗くなって、メールも送れなくなりました。", meaningSentence: "Setelah itu, layarnya menjadi gelap dan tidak bisa mengirim email juga." },
+                { word: "ダウンロードする", meaning: "Mengunduh (Download)", sentence: "「昨日、無料のアプリをダウンロードしてインストールしました。」", meaningSentence: "Kemarin, saya mengunduh dan menginstal aplikasi gratis." },
+                { word: "インストールする", meaning: "Menginstal (Install)", sentence: "「昨日、無料のアプリをダウンロードしてインストールしました。」", meaningSentence: "Kemarin, saya mengunduh dan menginstal aplikasi gratis." },
+                { word: "修理 (しゅうり)", meaning: "Perbaikan / Reparasi", sentence: "「少し時間がかかりますが、できるだけ今日中に修理します。」", meaningSentence: "Meskipun memerlukan sedikit waktu, saya akan memperbaikinya hari ini sedapat mungkin." },
+                { word: "直る (なおる)", meaning: "Selesai diperbaiki / Menjadi baik", sentence: "「今日中に直りますか。」", meaningSentence: "Apakah akan selesai diperbaiki hari ini juga?" },
+                { word: "システム", meaning: "Sistem", sentence: "「システムに問題がありますね。」", meaningSentence: "Ada masalah pada sistemnya ya." },
+                { word: "お待たせしました", meaning: "Maaf sudah menunggu", sentence: "「お待たせしました。修理が終わりました。」", meaningSentence: "Maaf sudah menunggu. Perbaikannya sudah selesai." },
+                { word: "時間がかかる", meaning: "Memerlukan waktu", sentence: "「少し時間がかかりますが、できるだけ今日中に修理します。」", meaningSentence: "Meskipun memerlukan sedikit waktu, saya akan memperbaikinya hari ini sedapat mungkin." },
+                { word: "アップデートする", meaning: "Memperbarui (Update)", sentence: "「アップデートをして、接続テストもしてみます。」", meaningSentence: "Saya akan memperbarui dan mencoba tes koneksi juga." },
+                { word: "確認する (かくにんする)", meaning: "Memeriksa / Memastikan", sentence: "店員さんはパソコンを確認しながら言いました。", meaningSentence: "Pegawai toko berkata sambil memeriksa laptop." },
+                { word: "今日中 (きょうじゅう)", meaning: "Hari ini juga (sebelum berganti hari)", sentence: "「今日中に直りますか。」", meaningSentence: "Apakah akan selesai diperbaiki hari ini juga?" },
+                { word: "メールを送る", meaning: "Mengirim email", sentence: "「ファイルも開けます。メールも送れます。」", meaningSentence: "File bisa dibuka. Email juga bisa dikirim." },
+                { word: "店員 (てんいん)", meaning: "Pegawai toko", sentence: "店員さんが言いました。「どうしましたか。」", meaningSentence: "Pegawai toko berkata, Ada yang bisa dibantu?" },
+                { word: "同僚 (どうりょう)", meaning: "Rekan kerja", sentence: "同僚に聞かれました。", meaningSentence: "Saya ditanya oleh rekan kerja." },
+                { word: "安心する (あんしんする)", meaning: "Merasa lega", sentence: "私は安心しました。", meaningSentence: "Saya pun merasa lega." },
+                { word: "笑顔 (えがお)", meaning: "Senyuman", sentence: "店員さんは笑顔で答えました。", meaningSentence: "Pegawai toko menjawab dengan senyuman." }
+            ]
+        }
         
     ];
 
@@ -1443,6 +1631,16 @@ function renderGrid() {
         const actionBtn = document.getElementById('actionBtn');
         actionBtn.innerText = "Periksa Jawaban";
         actionBtn.classList.remove('btn-reset');
+
+        // RESET TOGGLE FURIGANA KE ON SETIAP BUKA KUIS BARU
+        const toggleInput = document.getElementById('furiganaToggle');
+        if (toggleInput) {
+            toggleInput.checked = true;
+        }
+        const readingContent = document.getElementById('readingContent');
+        if (readingContent) {
+            readingContent.classList.remove('hide-furigana');
+        }
 
         const currentData = jftDatabase[index];
         document.getElementById('quizMainTitle').innerHTML = currentData.title;
@@ -1867,6 +2065,19 @@ function resetAudioButton() {
     if (playBtn) {
         playBtn.innerHTML = "🔊 Dengarkan Bacaan";
         playBtn.style.backgroundColor = "#2ec4b6"; // Kembali ke warna hijau toska
+    }
+}
+
+function toggleFurigana() {
+    const isChecked = document.getElementById('furiganaToggle').checked;
+    const readingContent = document.getElementById('readingContent');
+    
+    if (isChecked) {
+        // Jika centang ON, hapus class penyembunyi (Furigana muncul)
+        readingContent.classList.remove('hide-furigana');
+    } else {
+        // Jika centang OFF, tambah class penyembunyi (Furigana hilang)
+        readingContent.classList.add('hide-furigana');
     }
 }
 
