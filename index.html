@@ -1515,7 +1515,109 @@ input:checked + .slider:before {
                 { word: "安心する (あんしんする)", meaning: "Merasa lega", sentence: "私は安心しました。", meaningSentence: "Saya pun merasa lega." },
                 { word: "笑顔 (えがお)", meaning: "Senyuman", sentence: "店員さんは笑顔で答えました。", meaningSentence: "Pegawai toko menjawab dengan senyuman." }
             ]
-        }
+        },
+        {
+            date: "8 Juli 2026",
+            title: "病院での診察<br>(Pemeriksaan Medis di Rumah Sakit)",
+            readingText: `<ruby>昨日<rt>きのう</rt></ruby>、<ruby>私<rt>わたし</rt></ruby>は<ruby>階段<rt>かいだん</rt></ruby>で<ruby>転<rt>ころ</rt></ruby>んでしまいました。<ruby>左足<rt>ひだりあし</rt></ruby>がとても<ruby>痛<rt>いた</rt></ruby>かったので、<ruby>今日<rt>きょう</rt></ruby><ruby>病院<rt>びょういん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きました。
+
+<ruby>受付<rt>うけつけ</rt></ruby>でスタッフが<ruby>聞<rt>き</rt></ruby>きました。
+「お<ruby>名前<rt>なまえ</rt></ruby>と<ruby>名字<rt>みょうじ</rt></ruby>を<ruby>教<rt>おし</rt></ruby>えてください。」
+私は名前を書いて、<ruby>保険<rt>ほけん</rt></ruby>のカードを出しました。
+「保険を使いたいです。」
+「はい、分かりました。<ruby>診察<rt>しんさつ</rt></ruby>の<ruby>予約<rt>よやく</rt></ruby>を作りますね。」
+
+少し待つと、<ruby>先生<rt>せんせい</rt></ruby>が来ました。
+「<ruby>患者<rt>かんじゃ</rt></ruby>さん、こちらへどうぞ。」
+私は<ruby>診察室<rt>しんさつしつ</rt></ruby>に入りました。
+
+先生は優しく聞きました。
+「どこが痛いですか。」
+「左足が痛いんです。」
+「そうですか。新しい<ruby>症状<rt>しょうじょう</rt></ruby>はありますか。」
+「いいえ。でも、あまり歩けません。」
+
+先生は私の話を聞いてから言いました。
+「では、レントゲンを取りましょうか。」
+「はい、お願いします。」
+
+レントゲンを取った<ruby>後<rt>あと</rt></ruby>、先生は言いました。
+「もうすぐ<ruby>結果<rt>けっか</rt></ruby>が出ますから、ちょっと待ってください。」
+私は<ruby>待合室<rt>まちあいしつ</rt></ruby>で待ちました。
+
+しばらくして、先生に呼ばれました。
+「レントゲンの結果が出ました。足の<ruby>骨<rt>ほね</rt></ruby>が少し<ruby>折<rt>お</rt></ruby>れています。」
+「えっ、本当ですか。」
+「はい。でも、<ruby>手術<rt>しゅづつ</rt></ruby>は<ruby>必要<rt>ひつよう</rt></ruby>ありません。<ruby>リハビリ<rt>りはびり</rt></ruby>を<ruby>続<rt>つづ</rt></ruby>けてください。」
+
+先生は続けて言いました。
+「ゆっくり手を動かしてみてきださい。」
+「はい、動かせます。」
+「足はどうですか。立てますか。」
+私はゆっくり立ちました。
+「痛いですが、少し立てます。」
+
+先生は安心したように言いました。
+「それなら大丈夫です。今日はゆっくり休んでください。そして、<ruby>薬<rt>くすり</rt></ruby>を飲んでください。」
+
+私は質問しました。
+「いつ家に帰れますか。」
+「明日は家に帰れますよ。」
+私は安心しました。
+
+帰る前に先生は言いました。
+「来週からリハビリを始めましょうか。」
+「はい、お願いします。」
+
+病院を出る前に家族へ電話しました。
+「骨が少し折れたんですが、大丈夫です。明日は家に帰れます。」
+家族は、
+「よかったですね。<ruby>無理<rt>むり</rt></ruby>をしないでください。」
+と言いました。
+私は、
+「はい。しばらくゆっくり休みます。」
+と答えました。`,
+            questions: [
+                { q: "なぜ病院へ行きましたか。", options: ["A. 風邪をひいたから", "B. 左足が痛かったから", "C. 頭が痛かったから"], correct: 1 },
+                { q: "先生は最初に何をしましたか。", options: ["A. 薬を出した", "B. レントゲンを見た", "C. 症状を聞いた"], correct: 2 },
+                { q: "レントゲンの結果はどうでしたか。", options: ["A. 問題ありませんでした", "B. 骨が少し折れていました", "C. 手が折れていました"], correct: 1 },
+                { q: "手術は必要でしたか。", options: ["A. はい", "B. いいえ", "C. まだ分かりません"], correct: 1 },
+                { q: "来週から何を始めますか。", options: ["A. 水泳", "B. 仕事", "C. リハビリ"], correct: 2 }
+            ],
+            essayQuestions: [
+                { q: "私はどこで転んでしまいましたか。", a: "階段で転んでしまいました。" },
+                { q: "新しい症状はありましたか。", a: "いいえ、新しい症状はありませんでした。" },
+                { q: "いつ家に帰れますか。", a: "明日は家に帰れます。" },
+                { q: "病院を出る前に誰に電話しましたか。", a: "家族に電話しました。" }
+            ],
+            vocabulary: [
+                { word: "先生 (せんせい)", meaning: "Dokter / Guru", sentence: "少し待つと、先生が来ました。", meaningSentence: "Setelah menunggu sebentar, dokter pun datang." },
+                { word: "患者 (かんじゃ)", meaning: "Pasien", sentence: "「患者さん、こちらへどうぞ。」", meaningSentence: "\"Pasien, silakan lewat sini.\"" },
+                { word: "症状 (しょうじょう)", meaning: "Gejala", sentence: "「新しい症状はありますか。」", meaningSentence: "\"Apakah ada gejala yang baru?\"" },
+                { word: "診察 (しんさつ)", meaning: "Pemeriksaan medis", sentence: "「診察の予約を作りますね。」", meaningSentence: "\"Saya buatkan janji temu untuk pemeriksaan medis ya.\"" },
+                { word: "予約 (よやく)", meaning: "Reservasi / Janji temu", sentence: "「診察の予約を作りますね。」", meaningSentence: "\"Saya buatkan janji temu untuk pemeriksaan medis ya.\"" },
+                { word: "保険 (ほけん)", meaning: "Asuransi", sentence: "「保険を使いたいです。」", meaningSentence: "\"Saya ingin menggunakan asuransi.\"" },
+                { word: "名字 (みょうじ)", meaning: "Nama keluarga / Nama belakang", sentence: "「お名前と名字を教えてください。」", meaningSentence: "\"Tolong beri tahu nama depan dan nama belakang Anda.\"" },
+                { word: "レントゲン", meaning: "Foto rontgen / X-ray", sentence: "「では、レントゲンを取りましょうか。」", meaningSentence: "\"Kalau begitu, bagaimana jika kita foto rontgen?\"" },
+                { word: "結果 (けっか)", meaning: "Hasil", sentence: "「もうすぐ結果が出ますから、ちょっと待ってください。」", meaningSentence: "\"Karena hasilnya akan segera keluar, tolong tunggu sebentar.\"" },
+                { word: "骨 (ほね)", meaning: "Tulang", sentence: "「足の骨が少し折れています。」", meaningSentence: "\"Tulang kakinya sedikit patah.\"" },
+                { word: "折れる (おれる)", meaning: "Patah", sentence: "「足の骨が少し折れています。」", meaningSentence: "\"Tulang kakinya sedikit patah.\"" },
+                { word: "左足 (ひだりあし)", meaning: "Kaki kiri", sentence: "「左足が痛いんです。」", meaningSentence: "\"Kaki kiri saya sakit.\"" },
+                { word: "動かす (うごかす)", meaning: "Menggerakkan", sentence: "「ゆっくり手を動かしてみてください。」", meaningSentence: "\"Cobalah gerakkan tangan Anda perlahan.\"" },
+                { word: "立つ (たつ)", meaning: "Berdiri", sentence: "「足はどうですか。立てますか。」", meaningSentence: "\"Bagaimana dengan kakinya? Apakah bisa berdiri?\"" },
+                { word: "薬 (くすり)", meaning: "Obat", sentence: "「そして、薬を飲んでください。」", meaningSentence: "\"Dan juga, tolong minum obatnya.\"" },
+                { word: "リハビリ", meaning: "Rehabilitasi", sentence: "「リハビリを続けてください。」", meaningSentence: "\"Silakan lanjutkan rehabilitasinya.\"" },
+                { word: "続ける (つづける)", meaning: "Melanjutkan", sentence: "「リハビリを続けてください。」", meaningSentence: "\"Silakan lanjutkan rehabilitasinya.\"" },
+                { word: "痛い (いたい)", meaning: "Sakit / Nyeri", sentence: "「痛いですが、少し立てます。」", meaningSentence: "\"Meskipun sakit, saya bisa berdiri sedikit.\"" },
+                { word: "休む (やすむ)", meaning: "Beristirahat", sentence: "「はい。しばらくゆっくり休みます。」", meaningSentence: "\"Ya. Saya akan beristirahat dengan tenang untuk sementara waktu.\"" },
+                { word: "家族 (かぞく)", meaning: "Keluarga", sentence: "病院を出る前に家族へ電話しました。", meaningSentence: "Sebelum keluar dari rumah sakit, saya menelepon keluarga." },
+                { word: "無理 (むり)", meaning: "Memaksakan diri / Mustahil", sentence: "「よかったですね。無理をしないでください。」", meaningSentence: "\"Syukurlah ya. Jangan memaksakan diri.\"" },
+                { word: "安心する (あんしんする)", meaning: "Merasa lega", sentence: "私は安心しました。", meaningSentence: "Saya pun merasa lega." },
+                { word: "待合室 (まちあいしつ)", meaning: "Ruang tunggu", sentence: "私は待合室で待ちました。", meaningSentence: "Saya menunggu di ruang tunggu." },
+                { word: "受付 (うけつけ)", meaning: "Loket pendaftaran / Resepsionis", sentence: "受付でスタッフが聞きました。", meaningSentence: "Staf di loket pendaftaran bertanya." },
+                { word: "手術 (しゅじゅつ)", meaning: "Operasi", sentence: "「でも、手術は必要ありません。」", meaningSentence: "\"Tetapi, tidak diperlukan operasi.\"" }
+            ]
+}
         
     ];
 
