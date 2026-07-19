@@ -2160,6 +2160,94 @@ input:checked + .slider:before {
                 { word: "借りる (かりる)", meaning: "Menyewa / Meminjam", sentence: "来年は新しいアパートを借りて、一人暮らしをする予定です。", meaningSentence: "Tahun depan saya berencana menyewa apartemen baru dan tinggal sendiri." },
                 { word: "頑張る (がんばる)", meaning: "Berusaha keras", sentence: "「いいえ。最近、ちょっとイライラしています。でも、できるだけ頑張ります。」", meaningSentence: "\"Tidak. Akhir-akhir ini saya agak sedikit kesal. Tetapi, saya akan berusaha keras semampu saya.\"" }
             ]
+},
+{
+            date: "17 Juli 2026",
+            title: "喉の問題<br>(Masalah Tenggorokan)",
+            readingText: `<ruby>ある日<rt>あるひ</rt></ruby>、<ruby>私<rt>わたし</rt></ruby>は<ruby>喉<rt>のど</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>くて、<ruby>鼻水<rt>はなみず</rt></ruby>も出ました。<ruby>咳<rt>せき</rt></ruby>もひどかったので、<ruby>病院<rt>びょういん</rt></ruby>へ行くことにしました。
+
+病院の前に<ruby>車<rt>くるま</rt></ruby>を<ruby>止め<rt>とめ</rt></ruby>て、<ruby>受付<rt>うけつけ</rt></ruby>で<ruby>処方箋<rt>しょほうせん</rt></ruby>を見せました。受付の人が「<ruby>生年月日<rt>せいねんがっぴ</rt></ruby>を書いてください」と言ったので、すぐに書きました。
+
+そのあと<ruby>看護師<rt>かんごし</rt></ruby>さんが、
+「では、まず<ruby>体温<rt>たいおん</rt></ruby>を<ruby>測<rt>はか</rt></ruby>りましょう。」
+と言いました。<ruby>検査<rt>けんさ</rt></ruby>の前に<ruby>血圧<rt>けつあつ</rt></ruby>も測りました。
+
+<ruby>先生<rt>せんせい</rt></ruby>が来て、
+「喉が痛いですか。まだ<ruby>痒<rt>かゆ</rt></ruby>いですか。」
+と聞きました。
+私は、
+「はい。<ruby>昨日<rt>きのう</rt></ruby>から鼻水が出ます。喉が痛くて、ひどい咳も出ます。<ruby>薬<rt>くすり</rt></ruby>を飲んだけど、あまり<ruby>効<rt>き</rt></ruby>きませんでした。」
+と答えました。
+
+先生は、
+「<ruby>花<rt>はな</rt></ruby>のアレルギーかもしれませんね。では、検査を受けましょう。<ruby>結果<rt>けっか</rt></ruby>を待ってください。」
+と言いました。
+
+少し待つと、検査の結果が出ました。先生は、
+「大きな問題はありません。この新しい薬はよく効きます。<ruby>痛み止め<rt>いたみどめ</rt></ruby>も出しますので、毎日飲んでください。はちみつは喉にいいでしょう。」
+と説明してくれました。
+
+私は、
+「薬を飲まなくても大丈夫ですか。」
+と聞くと、先生は、
+「いいえ、それでは良くなりません。薬を飲んでください。<ruby>来週<rt>らいしゅう</rt></ruby>もう一度検査を受けられますか。」
+と言いました。
+
+私は、
+「はい、大丈夫です。受けます。<ruby>診察<rt>しんさつ</rt></ruby>の後に質問してもいいですか。」
+と聞きました。
+先生は、
+「もちろんです。何でも聞いてください。」
+と優しく答えてくれました。
+
+診察が終わった後、<ruby>薬局<rt>やっきょく</rt></ruby>で薬をもらいました。<ruby>薬剤師<rt>やくざいし</rt></ruby>さんが、
+「この薬は処方箋が必要です。<ruby>食後<rt>しょくご</rt></ruby>に飲んでください。」
+と説明してくれました。
+
+家に帰って薬を飲むと、少しずつ喉の痛みがよくなりました。来週の検査まで、ゆっくり休んで体を大切にしたいと思います。`,
+            questions: [
+                { q: "私はどうして病院へ行くことにしましたか。", options: ["A. 頭が痛くて熱があったから", "B. 喉が痛くて咳もひどかったから", "C. お腹が痛かったから"], correct: 1 },
+                { q: "受付の人に何を書くように言われましたか。", options: ["A. 住所と電話番号", "B. 会社の名前", "C. 生年月日"], correct: 2 },
+                { q: "看護師さんは最初に何を測りましたか。", options: ["A. 体温", "B. 身長", "C. 体重"], correct: 0 },
+                { q: "先生は喉に何がいいと言いましたか。", options: ["A. 冷たいお茶", "B. はちみつ", "C. コーヒー"], correct: 1 },
+                { q: "薬局で誰が薬について説明してくれましたか。", options: ["A. 看護師さん", "B. 先生", "C. 薬剤師さん"], correct: 2 }
+            ],
+            essayQuestions: [
+                { q: "昨日からどんな症状が出ていましたか。", a: "鼻水が出て、喉が痛くて、ひどい咳も出ていました。" },
+                { q: "先生は何のアレルギーかもしれないと言いましたか。", a: "花のアレルギーかもしれないと言いました。" },
+                { q: "診察が終わった後、どこで薬をもらいましたか。", a: "薬局で薬をもらいました。" },
+                { q: "薬剤師さんは薬をいつ飲むように言いましたか。", a: "食後に飲むように言いました。" }
+            ],
+            vocabulary: [
+                { word: "喉 (のど)", meaning: "Tenggorokan", sentence: "ある日、私は喉が痛くて、鼻水も出ました。", meaningSentence: "Suatu hari, tenggorokan saya sakit dan ingus juga keluar." },
+                { word: "問題 (もんだい)", meaning: "Masalah", sentence: "先生は、「大きな問題はありません」と説明してくれました。", meaningSentence: "Dokter menjelaskan, \"Tidak ada masalah besar.\"" },
+                { word: "薬 (くすり)", meaning: "Obat", sentence: "薬を飲んだけど、あまり効きませんでした。", meaningSentence: "Saya sudah minum obat, tetapi tidak terlalu mempan." },
+                { word: "処方箋 (しょほうせん)", meaning: "Resep dokter", sentence: "病院の前に車を止めて、受付で処方箋を見せました。", meaningSentence: "Saya memarkirkan mobil di depan rumah sakit, lalu menunjukkan resep dokter di resepsionis." },
+                { word: "薬局 (やっきょく)", meaning: "Apotek", sentence: "診察が終わった後、薬局で薬をもらいました。", meaningSentence: "Setelah pemeriksaan selesai, saya menerima obat di apotek." },
+                { word: "薬剤師 (やくざいし)", meaning: "Apoteker", sentence: "薬局で薬をもらうと、薬剤師さんが説明してくれました。", meaningSentence: "Saat menerima obat di apotek, apoteker memberikan penjelasan kepada saya." },
+                { word: "鼻水 (はなみず)", meaning: "Ingus / Air hidung", sentence: "はい。昨日から鼻水が出ます。", meaningSentence: "Ya. Sejak kemarin ingus saya keluar." },
+                { word: "咳 (せき)", meaning: "Batuk", sentence: "咳もひどかったので、病院へ行くことにしました。", meaningSentence: "Karena batuknya juga parah, saya memutuskan untuk pergi ke rumah sakit." },
+                { word: "体温 (たいおん)", meaning: "Suhu tubuh", sentence: "「では、まず体温を測りましょう。」", meaningSentence: "\"Kalau begitu, mari kita ukur suhu tubuh terlebih dahulu.\"" },
+                { word: "検査 (けんさ)", meaning: "Pemeriksaan / Tes medis", sentence: "「では、検査を受けましょう。結果を待ってください。」", meaningSentence: "\"Kalau begitu, mari kita lakukan pemeriksaan. Silakan tunggu hasilnya.\"" },
+                { word: "結果 (けっか)", meaning: "Hasil", sentence: "少し待つと、検査の結果が出ました。", meaningSentence: "Setelah menunggu sebentar, hasil pemeriksaan pun keluar." },
+                { word: "生年月日 (せいねんがっぴ)", meaning: "Tanggal lahir", sentence: "受付の人が「生年月日を書いてください」と言いました。", meaningSentence: "Petugas resepsionis berkata, \"Silakan tulis tanggal lahir Anda.\"" },
+                { word: "止める (とめる)", meaning: "Memarkirkan / Menghentikan", sentence: "病院の前に車を止めて、受付で処方箋を見せました。", meaningSentence: "Saya memarkirkan mobil di depan rumah sakit, lalu menunjukkan resep dokter di resepsionis." },
+                { word: "血圧 (けつあつ)", meaning: "Tekanan darah", sentence: "検査の前に血圧も測りました。", meaningSentence: "Sebelum pemeriksaan, tekanan darah juga diukur." },
+                { word: "痛み止め (いたみどめ)", meaning: "Obat pereda nyeri / Painkiller", sentence: "「痛み止めも出しますので、毎日飲んでください。」", meaningSentence: "\"Saya juga akan memberikan obat pereda nyeri, jadi silakan diminum setiap hari.\"" },
+                { word: "効く (きく)", meaning: "Manjur / Berkhasiat / Mempan", sentence: "この新しい薬はよく効きます。", meaningSentence: "Obat baru ini sangat manjur." },
+                { word: "はちみつ", meaning: "Madu", sentence: "「はちみつは喉にいいでしょう。」", meaningSentence: "\"Madu sepertinya akan bagus untuk tenggorokan.\"" },
+                { word: "型い (かゆい)", meaning: "Gatal", sentence: "「喉が痛いですか。まだ痒いですか。」", meaningSentence: "\"Apakah tenggorokan Anda sakit? Apakah masih gatal?\"" },
+                { word: "診察 (しんさつ)", meaning: "Pemeriksaan dokter", sentence: "「診察の後に質問してもいいですか。」", meaningSentence: "\"Bolehkah saya bertanya setelah pemeriksaan dokter?\"" },
+                { word: "病院 (びょういん)", meaning: "Rumah sakit", sentence: "咳もひどかったので、病院へ行くことにしました。", meaningSentence: "Karena batuknya juga parah, saya memutuskan untuk pergi ke rumah sakit." },
+                { word: "受付 (うけつけ)", meaning: "Loket pendaftaran / Resepsionis", sentence: "病院の前に車を止めて、受付で処方箋を見せました。", meaningSentence: "Saya memarkirkan mobil di depan rumah sakit, lalu menunjukkan resep dokter di resepsionis." },
+                { word: "測る (はかる)", meaning: "Mengukur", sentence: "検査の前に血圧も測りました。", meaningSentence: "Sebelum pemeriksaan, tekanan darah juga diukur." },
+                { word: "昨日から (きのうから)", meaning: "Sejak kemarin", sentence: "はい。昨日から鼻水が出ます。", meaningSentence: "Ya. Sejak kemarin ingus saya keluar." },
+                { word: "来週 (らいしゅう)", meaning: "Minggu depan", sentence: "「来週もう一度検査を受けられますか。」", meaningSentence: "\"Apakah Anda bisa menerima pemeriksaan sekali lagi minggu depan?\"" },
+                { word: "大丈夫 (だいじょうぶ)", meaning: "Tidak apa-apa / Baik-baik saja", sentence: "「はい、大丈夫です。受けます。」", meaningSentence: "\"Ya, tidak apa-apa. Saya akan menerimanya.\"" },
+                { word: "食後 (しょくご)", meaning: "Setelah makan", sentence: "「この薬は処方箋が必要です。食後に飲んでください。」", meaningSentence: "\"Obat ini memerlukan resep dokter. Silakan diminum setelah makan.\"" },
+                { word: "良くなる (よくなる)", meaning: "Membaik / Menjadi sembuh", sentence: "家に帰って薬を飲むと、少しずつ喉の痛みがよくなりました。", meaningSentence: "Setelah pulang ke rumah dan minum obat, perlahan-lhes rasa sakit di tenggorokan membaik." },
+                { word: "看護師 (かんごし)", meaning: "Perawat / Suster", sentence: "そのあと看護師さんが、「では、まず体温を測りましょう」と言いました。", meaningSentence: "Setelah itu perawat berkata, \"Kalau begitu, mari kita ukur suhu tubuh terlebih dahulu.\"" }
+            ]
 }
         
     ];
