@@ -1727,6 +1727,136 @@
                 { word: "寂しい (さびしい)", meaning: "Sedih / Sepi", sentence: "連休の終わりは少し寂しかったです。", meaningSentence: "Akhir libur panjang terasa sedikit sedih." },
                 { word: "過ごす (すごす)", meaning: "Menghabiskan (waktu)", sentence: "久しぶりに家族と会って、たくさん話して、とても幸せな時間を過ごすことができました。", meaningSentence: "Setelah sekian lama, saya bisa bertemu keluarga, berbincang banyak hal, dan menghabiskan waktu yang sangat membahagiakan." }
             ]
+},
+{
+            date: "23 Juli 2026",
+            title: "ショッピングモールで楽しい一日<br>(Hari yang Menyenangkan di Pusat Perbelanjaan)",
+            readingText: `<ruby>今日<rt>きょう</rt></ruby>は<ruby>友達<rt>ともだち</rt></ruby>とショッピングモールへ<ruby>行<rt>い</rt></ruby>きました。まず、<ruby>映画館<rt>えいがかん</rt></ruby>に<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>に行きました。映画はとても<ruby>面白<rt>おもしろ</rt></ruby>かったので、<ruby>最後<rt>さいご</rt></ruby>までゆっくり見ました。
+
+映画を見た後、お<ruby>腹<rt>なか</rt></ruby>が<ruby>空<rt>す</rt></ruby>いたのでフードコートに<ruby>昼<rt>ひる</rt></ruby>ご飯を食べに行きました。<ruby>私<rt>わたし</rt></ruby>はカレーを食べて、友達はハンバーガーを<ruby>注文<rt>ちゅうもん</rt></ruby>しました。
+
+昼ご飯の後、私は<ruby>大好<rt>だいす</rt></ruby>かないちごのクレープを食べました。
+友達が、
+「どのクレープが<ruby>一番<rt>いちばん</rt></ruby><ruby>人気<rt>にんき</rt></ruby>ですか。」
+と聞くと、<ruby>店員<rt>てんいん</rt></ruby>さんは、
+「いちごのクレープが一番人気ですよ。」
+と<ruby>答<rt>こた</rt></ruby>えました。
+私は、
+「クレープが大好きです。」
+と言って、すぐに<ruby>買<rt>か</rt></ruby>いました。
+
+そのあと、デパートへ<ruby>服<rt>ふく</rt></ruby>を見に行きました。
+<ruby>店<rt>みせ</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>には「<ruby>閉店<rt>へいてん</rt></ruby>のお<ruby>知<rt>し</rt></ruby>らせ」が<ruby>貼<rt>は</rt></ruby>ってありました。
+友達が、
+「へー、いいね。でも今日はまだ<ruby>開<rt>あ</rt></ruby>いていますね。」
+と言いました。
+
+私はかわいいジャケットを<ruby>見<rt>み</rt></ruby>つけましたが、
+「すみません、<ruby>試着室<rt>しちゃくしつ</rt></ruby>はどこですか。」
+と店員さんに<ruby>聞<rt>き</rt></ruby>きました。
+店員さんは、
+「あちらですよ。」
+と<ruby>教<rt>おし</rt></ruby>えてくれました。
+試着室はとてもきれいだったので、<ruby>気持<rt>きも</rt></ruby>ちよく服を<ruby>着<rt>き</rt></ruby>てみました。
+私は、
+「この服を着てみます。」
+と言いました。
+でも、サイズが少し<ruby>大<rt>おお</rt></ruby>きかったので、
+「サイズがちょっと大きいので、もう少し<ruby>考<rt>かんが</rt></ruby>えます。」
+と答えました。
+
+その後、ユニセックスのアクセサリーを見に行きました。<ruby>デザイン<rt>でざいん</rt></ruby>はとてもおしゃれでしたが、<ruby>同<rt>おな</rt></ruby>じデザインの<ruby>商品<rt>しょうひん</rt></ruby>はもうありませんでした。
+
+友達が、
+「ついでにセールの<ruby>靴<rt>くつ</rt></ruby>も見ましょう。」
+と言ったので、<ruby>一緒<rt>いっしょ</rt></ruby>に靴<ruby>売<rt>う</rt></ruby>り<ruby>場<rt>ば</rt></ruby>へ行きました。
+セールでは、「50パーセント<ruby>引<rt>び</rt></ruby>き」や「5パーセント引き」の商品がたくさんありました。
+
+私はズボンを一つ<ruby>選<rt>えら</rt></ruby>びました。
+レジで店員さんが、
+「<ruby>全<rt>ぜん</rt></ruby>ぶで<ruby>税込<rt>ぜいこ</rt></ruby>み3,500<ruby>円<rt>えん</rt></ruby>になります。」
+と言いました。
+
+私はATMへ行って、
+「お<ruby>金<rt>かね</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>き<ruby>出<rt>だ</rt></ruby>しますから、ちょっと待ってください。」
+と言いました。
+
+<ruby>模<rt>も</rt></ruby>どってきて、
+「<ruby>小銭<rt>こぜに</rt></ruby>で<ruby>払<rt>はら</rt></ruby>ってもいいですか。」
+と聞くと、
+「はい、<ruby>大丈夫<rt>だいじょうぶ</rt></ruby>ですよ。」
+と言われました。
+
+<ruby>買<rt>か</rt></ruby>い<ruby>物<rt>もの</rt></ruby>が終わった後、友達が、
+「今日はどうだった。」
+と聞きました。
+私は、
+「映画も見られたし、クレープも食べられたし、服も買えたので、とても楽しかったです。」
+と答えました。
+
+<ruby>本当<rt>ほんとう</rt></ruby>に楽しい<ruby>一日<rt>いちにち</rt></ruby>でした。`,
+            questions: [
+                { q: "映画を見た後、どこへ昼ご飯を食べに行きましたか。", options: ["A. レストラン", "B. フードコート", "C. カフェ"], correct: 1 },
+                { q: "一番人気のクレープは何ですか。", options: ["A. バナナのクレープ", "B. チョコのクレープ", "C. いちごのクレープ"], correct: 2 },
+                { q: "ジャケットを購入するのをやめた理由は何ですか。", options: ["A. サイズが少し大きかったから", "B. 色が好きじゃなかったから", "C. 値段が高すぎたから"], correct: 0 },
+                { q: "レジで全部でいくらになりましたか。", options: ["A. 2,500円", "B. 3,500円", "C. 5,000円"], correct: 1 },
+                { q: "お金を払う時、何で払ってもいいか聞きましたか。", options: ["A. クレジットカード", "B. 小銭", "C. 電子マネー"], correct: 1 }
+            ],
+            essayQuestions: [
+                { q: "フードコートで私と友達はそれぞれ何を注文しましたか。", a: "私はカレーを食べて、友達はハンバーガーを注文しました。" },
+                { q: "デパートの店の前には何が貼ってありましたか。", a: "「閉店のお知らせ」が貼ってありました。" },
+                { q: "お金を引き出すためにどこへ行きましたか。", a: "ATMへ行きました。" },
+                { q: "どうして「とても楽しかった」と言いましたか。", a: "映画も見られたし、クレープも食べられたし、服も買えたからです。" }
+            ],
+            vocabulary: [
+                { word: "クレープ", meaning: "Kue krep (Crepe)", sentence: "昼ご飯の後、私は大好きないちごのクレープを食べました。", meaningSentence: "Setelah makan siang, saya makan crepe stroberi kesukaan saya." },
+                { word: "映画 (えいが)", meaning: "Film", sentence: "映画館に映画を見に行きました。", meaningSentence: "Saya pergi ke bioskop untuk menonton film." },
+                { word: "映画館 (えいがかん)", meaning: "Bioskop", sentence: "まず、映画館に映画を見に行きました。", meaningSentence: "Pertama-tama, saya pergi ke bioskop untuk menonton film." },
+                { word: "フードコート", meaning: "Pujasera (Food court)", sentence: "お腹が空いたのでフードコートに昼ご飯を食べに行きました。", meaningSentence: "Karena lapar, kami pergi ke food court untuk makan siang." },
+                { word: "メニュー", meaning: "Menu", sentence: "フードコートでメニューを見て、何を食べるか決めました。", meaningSentence: "Kami melihat menu di food court lalu memutuskan apa yang akan dimakan." },
+                { word: "昼ご飯 (ひるごはん)", meaning: "Makan siang", sentence: "お腹が空いたのでフードコートに昼ご飯を食べに行きました。", meaningSentence: "Karena lapar, kami pergi ke food court untuk makan siang." },
+                { word: "店員 (てんいん)", meaning: "Pegawai toko / Pelayan", sentence: "店員さんは、「いちごのクレープが一番人気ですよ。」と答えました。", meaningSentence: "Pegawai toko menjawab, \"Crepe stroberi adalah yang paling populer.\"" },
+                { word: "閉店 (へいてん)", meaning: "Tutup toko", sentence: "店の前には「閉店のお知らせ」が貼ってありました。", meaningSentence: "Di depan toko tertempel \"Pengumuman Penutupan Toko\"." },
+                { word: "お知らせ (おしらせ)", meaning: "Pengumuman / Pemberitahuan", sentence: "店の前には「閉店のお知らせ」が貼ってありました。", meaningSentence: "Di depan toko tertempel \"Pengumuman Penutupan Toko\"." },
+                { word: "ついでに", meaning: "Sekalian / Sambil menyelam minum air", sentence: "「ついでにセールの靴も見ましょう。」と言いました。", meaningSentence: "Dia berkata, \"Sekalian mari kita lihat sepatu yang diskon.\"" },
+                { word: "質 (しつ)", meaning: "Kualitas", sentence: "このお店の服は質がとてもいいです。", meaningSentence: "Pakaian di toko ini kualitasnya sangat bagus." },
+                { word: "お客さん (おきゃくさん)", meaning: "Pelanggan / Tamu", sentence: "週末のショッピングモールにはたくさんのお客さんがいます。", meaningSentence: "Di akhir pekan, ada banyak pelanggan di pusat perbelanjaan." },
+                { word: "静か (しずか)", meaning: "Tenang / Sunyi", sentence: "平日のモールは人も少なくて静かです。", meaningSentence: "Mall di hari kerja sedikit pengunjung dan tenang." },
+                { word: "帽子 (ぼうし)", meaning: "Topi", sentence: "服のほかに、かわいい帽子も探していました。", meaningSentence: "Selain pakaian, saya juga mencari topi yang lucu." },
+                { word: "デザイン", meaning: "Desain / Rancangan", sentence: "デザインはとてもおしゃれでしたが、同じ商品の在庫はありませんでした。", meaningSentence: "Desainnya sangat modis, tetapi stok barang yang sama sudah tidak ada." },
+                { word: "柔らかい (やわらかい)", meaning: "Empuk / Lembut", sentence: "この服の生地はとても柔らかいです。", meaningSentence: "Bahan pakaian ini sangat lembut." },
+                { word: "ワンピース", meaning: "Gaun terusan (One-piece)", sentence: "友達は新しいワンピースを選びました。", meaningSentence: "Teman saya memilih gaun terusan baru." },
+                { word: "試着室 (しちゃくしつ)", meaning: "Ruang pas / Kamar ganti", sentence: "「すみません、試着室はどこですか。」と店員さんに聞きました。", meaningSentence: "Saya bertanya kepada pegawai toko, \"Permisi, ruang pas ada di mana?\"" },
+                { word: "着てみる (きてみる)", meaning: "Mencoba memakai (pakaian)", sentence: "試着室でこの服を着てみました。", meaningSentence: "Saya mencoba memakai pakaian ini di ruang pas." },
+                { word: "時計 (とけい)", meaning: "Jam / Jam tangan", sentence: "アクセサリーの売り場で綺麗な時計も見ました。", meaningSentence: "Saya juga melihat jam tangan yang indah di area penjualan aksesori." },
+                { word: "アクセサリー", meaning: "Aksesori / Perhiasan", sentence: "その後、ユニセックスのアクセサリーを見に行きました。", meaningSentence: "Setelah itu, kami pergi melihat aksesori uniseks." },
+                { word: "靴 (くつ)", meaning: "Sepatu", sentence: "「ついでにセールの靴も見ましょう。」と言いました。", meaningSentence: "Dia berkata, \"Sekalian mari kita lihat sepatu yang diskon.\"" },
+                { word: "デパート", meaning: "Toko serba ada (Department store)", sentence: "そのあと、デパートへ服を見に行きました。", meaningSentence: "Setelah itu, kami pergi ke department store untuk melihat-lihat pakaian." },
+                { word: "商店街 (しょうてんがい)", meaning: "Kawasan pertokoan / Pasar", sentence: "モールの近くには賑やかな商店街もあります。", meaningSentence: "Di dekat mall juga ada kawasan pertokoan yang ramai." },
+                { word: "見つける (みつける)", meaning: "Menemukan", sentence: "私はかわいいジャケットを見つけました。", meaningSentence: "Saya menemukan jaket yang lucu." },
+                { word: "間違える (まちがえる)", meaning: "Salah / Keliru", sentence: "サイズを間違えないように気をつけて選びました。", meaningSentence: "Saya memilih dengan hati-hati agar tidak salah ukuran." },
+                { word: "引き出す (ひきだす)", meaning: "Menarik (uang)", sentence: "ATMへ行って、お金を引き出します。", meaningSentence: "Saya pergi ke ATM untuk menarik uang." },
+                { word: "同じ (おなじ)", meaning: "Sama", sentence: "同じデザインの商品はもうありませんでした。", meaningSentence: "Barang dengan desain yang sama sudah tidak ada lagi." },
+                { word: "ユニセックス", meaning: "Uniseks (untuk pria & wanita)", sentence: "ユニセックスのアクセサリーを見に行きました。", meaningSentence: "Kami pergi melihat aksesori uniseks." },
+                { word: "中古店 (ちゅうこてん)", meaning: "Toko barang bekas", sentence: "モールの中に古い本を売る中古店もありました。", meaningSentence: "Di dalam mall juga ada toko barang bekas yang menjual buku-buku lama." },
+                { word: "探す (さがす)", meaning: "Mencari", sentence: "自分に合う服を探すのは楽しいです。", meaningSentence: "Mencari pakaian yang cocok untuk diri sendiri itu menyenangkan." },
+                { word: "サイズ", meaning: "Ukuran", sentence: "サイズが少し大きかったので、購入を諦めました。", meaningSentence: "Karena ukurannya sedikit agak besar, saya batal membelinya." },
+                { word: "色 (いろ)", meaning: "Warna", sentence: "このジャケットの色とデザインが好きです。", meaningSentence: "Saya suka warna dan desain jaket ini." },
+                { word: "人気 (にんき)", meaning: "Populer / Dikenal luas", sentence: "いちごのクレープが一番人気ですよ。", meaningSentence: "Crepe stroberi adalah yang paling populer." },
+                { word: "ジャケット", meaning: "Jaket", sentence: "私はかわいいジャケットを見つけました。", meaningSentence: "Saya menemukan jaket yang lucu." },
+                { word: "試着 (しちゃく)", meaning: "Mencoba pakaian", sentence: "買う前に試着をしてサイズを確認します。", meaningSentence: "Sebelum membeli, saya mencoba pakaian untuk memastikan ukurannya." },
+                { word: "レジ", meaning: "Kasir", sentence: "レジで店員さんが「全部で税込3,500円になります」と言いました。", meaningSentence: "Di kasir pegawai toko berkata, \"Totalnya menjadi 3.500 yen termasuk pajak.\"" },
+                { word: "ATM", meaning: "Mesin ATM", sentence: "お金が足りなかったので、ATMへ行って引き出しました。", meaningSentence: "Karena uangnya kurang, saya pergi ke ATM dan menarik uang." },
+                { word: "税込み (ぜいこみ)", meaning: "Termasuk pajak", sentence: "全部で税込み3,500円になります。", meaningSentence: "Totalnya menjadi 3.500 yen termasuk pajak." },
+                { word: "小銭 (こぜに)", meaning: "Uang receh / Uang koin", sentence: "小銭で払ってもいいですか。", meaningSentence: "Apakah boleh membayar dengan uang koin?" },
+                { word: "会計 (かいけい)", meaning: "Pembayaran / Kasir", sentence: "レジでお会計を済ませました。", meaningSentence: "Saya menyelesaikan pembayaran di kasir." },
+                { word: "セール", meaning: "Obral / Diskon", sentence: "セールではたくさんの商品が安くなっていました。", meaningSentence: "Di acara diskon, banyak barang menjadi murah." },
+                { word: "割引 (わりびき)", meaning: "Potongan harga", sentence: "セールで割引されている服を選びました。", meaningSentence: "Saya memilih pakaian yang mendapat potongan harga saat diskon." },
+                { word: "50パーセント引き (ごじゅっぱーせんとびき)", meaning: "Diskon 50%", sentence: "セールでは「50パーセント引き」の商品がたくさんありました。", meaningSentence: "Saat diskon, ada banyak barang dengan diskon 50%." },
+                { word: "選ぶ (えらぶ)", meaning: "Memilih", sentence: "私は気に入ったズボンを一つ選びました。", meaningSentence: "Saya memilih satu celana panjang yang saya sukai." },
+                { word: "考える (かんがえる)", meaning: "Berpikir / Mempertimbangkan", sentence: "「サイズがちょっと大きいので、もう少し考えます。」と答えました。", meaningSentence: "Saya menjawab, \"Ukuran ini agak sedikit besar, jadi saya akan mempertimbangkannya sebentar lagi.\"" },
+                { word: "払う (はらう)", meaning: "Membayar", sentence: "レジでお金を払って買い物を終えました。", meaningSentence: "Saya membayar uang di kasir dan menyelesaikan belanja." }
+            ]
 }
         
     ];

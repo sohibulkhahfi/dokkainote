@@ -94,6 +94,31 @@ function renderGrid() {
     });
 }
 
+function wrapTextForSpeech(htmlString) {
+    // Memecah teks berdasarkan "。" atau "、", dan tetap menyimpan tanda baca tersebut di dalam array
+    const segments = htmlString.split(/([。、])/);
+    let wrappedText = "";
+    let currentChunk = "";
+    let spanIndex = 0;
+
+    for (let i = 0; i < segments.length; i++) {
+        currentChunk += segments[i];
+        // Jika elemen saat ini adalah tanda baca, tutup span dan simpan
+        if (segments[i] === "。" || segments[i] === "、") {
+            wrappedText += `<span class="speech-segment" id="speech-${spanIndex}">${currentChunk}</span>`;
+            currentChunk = "";
+            spanIndex++;
+        }
+    }
+    
+    // Masukkan sisa teks jika ada kalimat di akhir yang tidak memiliki tanda baca
+    if (currentChunk.trim() !== "") {
+        wrappedText += `<span class="speech-segment" id="speech-${spanIndex}">${currentChunk}</span>`;
+    }
+
+    return wrappedText;
+}
+
     function openQuiz(index) {
         window.speechSynthesis.cancel();
         activeQuizIndex = index;
@@ -124,7 +149,9 @@ function renderGrid() {
 
         const currentData = jftDatabase[index];
         document.getElementById('quizMainTitle').innerHTML = currentData.title;
-        document.getElementById('readingContent').innerHTML = currentData.readingText;
+        // Teks dilewatkan ke wrapTextForSpeech sebelum dicetak ke layar
+        const wrappedReadingText = wrapTextForSpeech(currentData.readingText);
+        document.getElementById('readingContent').innerHTML = wrappedReadingText;
 
         // === SEMBUNYIKAN/MUNCULKAN TOMBOL AUDIO BERDASARKAN STATUS ===
         // =================================================================
@@ -485,59 +512,109 @@ function closeVocabQuiz() {
 
 let currentUtterance = null; // Menyimpan status audio yang sedang berjalan
 
+// Variabel global untuk mengatur antrean suara
+let speechQueue = [];
+let currentSpeechIndex = 0;
+let isReading = false;
+
 function toggleReadingSpeech() {
     const playBtn = document.getElementById('playAudioBtn');
-
-    // 1. Jika audio sedang berjalan, maka klik berikutnya akan menghentikannya (Stop)
-    if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-        resetAudioButton();
+    
+    // 1. Jika audio sedang berjalan, Stop
+    if (isReading || window.speechSynthesis.speaking) {
+        stopReading();
         return;
     }
 
-    // 2. Ambil element kontainer teks asli
-    const originalReading = document.getElementById('readingContent');
-    if (!originalReading) return;
-
-    // 3. TRIK JALUR CEPAT: Kloning elemen agar teks di layar tidak rusak/hilang
-    const cloneDiv = originalReading.cloneNode(true);
-    
-    // Hapus semua elemen <rt> (furigana kecil) di dalam klon tersebut
-    const rts = cloneDiv.querySelectorAll('rt');
-    rts.forEach(rt => rt.remove());
-
-    // Ambil teks bersihnya saja (Kanji dan Kana utama tetap utuh)
-    let cleanText = cloneDiv.textContent || cloneDiv.innerText;
-    
-    // Bersihkan spasi kosong atau baris baru yang berlebihan
-    cleanText = cleanText.trim();
-
-    if (!cleanText) {
+    // 2. Ambil semua elemen segmen (span) yang sudah kita bungkus sebelumnya
+    const segments = document.querySelectorAll('.speech-segment');
+    if (segments.length === 0) {
         alert("Tidak ada teks yang bisa dibaca.");
         return;
     }
 
-    // 4. Konfigurasi Mesin Suara (SpeechSynthesisUtterance)
-    currentUtterance = new SpeechSynthesisUtterance(cleanText);
-    currentUtterance.lang = 'ja-JP'; // Set mutlak ke bahasa Jepang asli
-    currentUtterance.rate = 0.7;    // Kecepatan diatur agak lambat (0.85) agar cocok untuk belajar JFT
+    // 3. Persiapan membaca
+    isReading = true;
+    playBtn.innerHTML = "🛑 Hentikan Suara";
+    playBtn.style.backgroundColor = "#e71d36"; 
 
-    // 5. Event Listener saat suara mulai dan selesai
-    currentUtterance.onstart = () => {
-        playBtn.innerHTML = "🛑 Hentikan Suara";
-        playBtn.style.backgroundColor = "#e71d36"; // Berubah merah saat berbunyi
+    const readingBox = document.getElementById("ReadingBox");
+    if(readingBox) readingBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    speechQueue = Array.from(segments);
+    currentSpeechIndex = 0;
+
+    // Mulai membaca setelah jeda 0.5 detik
+    setTimeout(() => {
+        playNextSegment();
+    }, 500);
+}
+
+function playNextSegment() {
+    if (!isReading) return; // Berhenti jika user menekan tombol Hentikan
+
+    if (currentSpeechIndex >= speechQueue.length) {
+        // Jika sudah mencapai segmen terakhir, selesaikan
+        stopReading();
+        return;
+    }
+
+    const segmentEl = speechQueue[currentSpeechIndex];
+    
+    // -- EKSTRAKSI TEKS (Hapus furigana <rt> seperti fungsi lama) --
+    const clone = segmentEl.cloneNode(true);
+    const rts = clone.querySelectorAll('rt');
+    rts.forEach(rt => rt.remove());
+    let cleanText = clone.textContent || clone.innerText;
+    cleanText = cleanText.trim();
+
+    // Jika segmen hanya berisi spasi kosong atau enter, lewati ke segmen berikutnya
+    if (!cleanText) {
+        currentSpeechIndex++;
+        playNextSegment();
+        return;
+    }
+
+    // -- HIGHLIGHT BACKGROUND --
+    removeHighlights();
+    segmentEl.classList.add('highlight-speech');
+
+    // -- JALANKAN SUARA --
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = 'ja-JP';
+    utterance.rate = 0.7;
+
+    utterance.onend = () => {
+        // Setelah satu kalimat/potongan selesai, lanjut ke potongan berikutnya
+        currentSpeechIndex++;
+        playNextSegment();
     };
 
-    currentUtterance.onend = () => {
-        resetAudioButton();
+    utterance.onerror = (e) => {
+        console.error("Terjadi kesalahan pada SpeechSynthesis", e);
+        stopReading();
     };
 
-    currentUtterance.onerror = () => {
-        resetAudioButton();
-    };
+    window.speechSynthesis.speak(utterance);
+}
 
-    // 6. Jalankan Suara
-    window.speechSynthesis.speak(currentUtterance);
+function stopReading() {
+    isReading = false;
+    window.speechSynthesis.cancel(); // Menghentikan mesin suara
+    removeHighlights(); // Menghapus warna kuning dari teks
+    
+    // Kembalikan tombol ke kondisi semula
+    const playBtn = document.getElementById('playAudioBtn');
+    if(playBtn) {
+        playBtn.innerHTML = "🔊 Putar Suara";
+        playBtn.style.backgroundColor = "";
+    }
+}
+
+function removeHighlights() {
+    document.querySelectorAll('.speech-segment').forEach(el => {
+        el.classList.remove('highlight-speech');
+    });
 }
 
 function resetAudioButton() {

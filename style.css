@@ -467,3 +467,9 @@ input:checked + .slider:before {
 .hide-furigana rt {
     display: none !important;
 }
+
+.highlight-speech {
+    background-color: #ffeb3b; /* Warna kuning terang, silakan sesuaikan */
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
