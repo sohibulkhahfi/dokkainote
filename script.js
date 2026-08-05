@@ -9,7 +9,7 @@ function renderGrid() {
     // 1. AMBIL DATABASE MASTER (Jika belum ada, buat objek kosong {})
     const masterDB = JSON.parse(localStorage.getItem('jft_quiz_master_db')) || {};
 
-    jftDatabase.slice().reverse().forEach((data, index) => {
+    jftDatabase.forEach((data, index) => {
         // Membuat sub-kunci unik berdasarkan tanggal kuis (contoh: "22_Juni_2026")
         const quizKey = data.date.replace(/ /g, "_");
         
