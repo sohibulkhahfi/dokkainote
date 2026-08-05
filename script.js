@@ -9,7 +9,7 @@ function renderGrid() {
     // 1. AMBIL DATABASE MASTER (Jika belum ada, buat objek kosong {})
     const masterDB = JSON.parse(localStorage.getItem('jft_quiz_master_db')) || {};
 
-    jftDatabase.forEach((data, index) => {
+    jftDatabase.slice().reverse().forEach((data, index) => {
         // Membuat sub-kunci unik berdasarkan tanggal kuis (contoh: "22_Juni_2026")
         const quizKey = data.date.replace(/ /g, "_");
         
@@ -70,7 +70,7 @@ function renderGrid() {
         const tanggalRingkas = data.date.split(" ").slice(0, 2).join(" ");
 
         card.innerHTML = `
-            <div style="font-size: 0.9rem; color: #666; font-weight: bold;">${tanggalRingkas}</div>
+            <!--<div style="font-size: 0.9rem; color: #666; font-weight: bold;">${tanggalRingkas}</div>-->
             <div class="grid-card-title">${data.title}</div>
             <div style="font-size: 1.4rem; color: #f1c40f; margin: 5px 0;">${stars}</div>
             
