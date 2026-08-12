@@ -1857,6 +1857,87 @@
                 { word: "考える (かんがえる)", meaning: "Berpikir / Mempertimbangkan", sentence: "「サイズがちょっと大きいので、もう少し考えます。」と答えました。", meaningSentence: "Saya menjawab, \"Ukuran ini agak sedikit besar, jadi saya akan mempertimbangkannya sebentar lagi.\"" },
                 { word: "払う (はらう)", meaning: "Membayar", sentence: "レジでお金を払って買い物を終えました。", meaningSentence: "Saya membayar uang di kasir dan menyelesaikan belanja." }
             ]
+},
+{
+            date: "25 Juli 2026",
+            title: "ゴミ拾いのボランティア<br>(Sukarelawan Memungut Sampah)",
+            readingText: `<ruby>今日<rt>きょう</rt></ruby>は<ruby>友達<rt>ともだち</rt></ruby>と<ruby>公園<rt>こうえん</rt></ruby>で<ruby>会<rt>あ</rt></ruby>いました。公園が<ruby>汚<rt>きたな</rt></ruby>かったので、みんなでゴミを<ruby>拾<rt>ひろ</rt></ruby>うことにしました。
+
+「ゴミがたくさんありますね。<ruby>一緒<rt>いっしょ</rt></ruby>に拾いましょうか。」
+「はい、お願いします。」
+
+公園にはペットボトルやびん、<ruby>紙<rt>かみ</rt></ruby>など、いろいろな<ruby>種類<rt>しゅるい</rt></ruby>のゴミがありました。<ruby>私<rt>わたし</rt></ruby>はペットボトルを<ruby>集<rt>あつ</rt></ruby>めて、びんと<ruby>分<rt>わ</rt></ruby>けました。
+
+「これはどの種類のゴミですか。」
+「それはプラスチックごみですよ。ペットボトルは<ruby>洗<rt>あら</rt></ruby>ってから、<ruby>袋<rt>ふくろ</rt></ruby>に<ruby>入<rt>い</rt></ruby>れてください。」
+「分からました。じゃあ、洗ってきます。」
+
+ペットボトルを洗って、ラベルをはがしました。びんは<ruby>重<rt>おも</rt></ruby>いので、友達に<ruby>持<rt>も</rt></ruby>ってもらいました。
+
+「この<ruby>ゴミ袋<rt>ごみぶくろ</rt></ruby>を持ちましょうか。」
+「はい、お願いします。ゴミ袋が<ruby>大<rt>おお</rt></ruby>きいから、たくさん入れられますよ。」
+
+ゴミがたくさんたまったので、みんなで<ruby>ゴミ捨て場<rt>ごみすてば</rt></ruby>まで持って行きました。びんが<ruby>割<rt>わ</rt></ruby>れていたので、<ruby>危険物<rt>きけんぶつ</rt></ruby>には<ruby>気<rt>き</rt></ruby>をつけました。
+
+「<ruby>次<rt>つぎ</rt></ruby>は何をお<ruby>手伝<rt>てつだ</rt></ruby>いしましょうか。」
+「この<ruby>箱<rt>はこ</rt></ruby>を持ってきてください。」
+「はい、今持ってきます。」
+
+みんなで<ruby>協力<rt>きょうりょく</rt></ruby>したので、<ruby>掃除<rt>そうじ</rt></ruby>が<ruby>早<rt>はや</rt></ruby>く<ruby>終<rt>お</rt></ruby>わりました。公園もゴミ捨て場もきれいになりました。
+
+「<ruby>皆<rt>みな</rt></ruby>の協力で<ruby>町<rt>まち</rt></ruby>がきれいになりましたね。」
+「はい。ボランティアのおかげで、町が<ruby>安全<rt>あんぜん</rt></ruby>になりました。」
+
+掃除が終わったあと、きれいな<ruby>花<rt>はな</rt></ruby>を<ruby>見<rt>み</rt></ruby>つけました。お花がきれいだったので、<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>って<ruby>帰<rt>かえ</rt></ruby>ることにしました。
+
+今日は<ruby>大変<rt>たいへん</rt></ruby>でしたが、みんなで協力したので、とても<ruby>楽<rt>たの</rt></ruby>しかったです。`,
+            questions: [
+                { q: "今日はどこで友達と会いましたか。", options: ["A. 学校", "B. 公園", "C. 駅"], correct: 1 },
+                { q: "公園には何がありましたか。", options: ["A. 本や服", "B. 食べ物や水", "C. ペットボトルやびん、紙"], correct: 2 },
+                { q: "ペットボトルをどうしましたか。", options: ["A. 捨てないで持って帰りました", "B. 洗って、ラベルをはがしました", "C. 友達にあげました"], correct: 1 },
+                { q: "どうして危険物に気をつけましたか。", options: ["A. ゴミが重かったから", "B. びんが割れていたから", "C. 雨が降っていたから"], correct: 1 },
+                { q: "ボランティアのおかげで、町はどうなりましたか。", options: ["A. 静かになりました", "B. 安全になりました", "C. 大きくなりました"], correct: 1 }
+            ],
+            essayQuestions: [
+                { q: "ペットボトルは洗ったあと、どうしましたか。", a: "ラベルをはがして、袋に入れました。" },
+                { q: "どうして掃除が早く終わりましたか。", a: "みんなで協力したからです。" },
+                { q: "掃除が終わったあと、何を見つけましたか。", a: "きれいな花を見つけました。" },
+                { q: "今日はお花がきれいだったので、どうすることにしましたか。", a: "写真を撮って帰ることにしました。" }
+            ],
+            vocabulary: [
+                { word: "公園 (こうえん)", meaning: "Taman", sentence: "今日は友達と公園で会いました。", meaningSentence: "Hari ini saya bertemu dengan teman di taman." },
+                { word: "汚い (きたない)", meaning: "Kotor", sentence: "公園が汚かったので、みんなでゴミを拾うことにしました。", meaningSentence: "Karena tamannya kotor, kami memutuskan untuk memungut sampah bersama-sama." },
+                { word: "ゴミ (ごみ)", meaning: "Sampah", sentence: "公園が汚かったので、みんなでゴミを拾うことにしました。", meaningSentence: "Karena tamannya kotor, kami memutuskan untuk memungut sampah bersama-sama." },
+                { word: "拾う (ひろう)", meaning: "Memungut", sentence: "「ゴミがたくさんありますね。一緒に拾いましょうか。」", meaningSentence: "\"Ada banyak sampah ya. Bagaimana kalau kita pungut bersama?\"" },
+                { word: "集める (あつめる)", meaning: "Mengumpulkan", sentence: "私はペットボトルを集めて、びんと分けました。", meaningSentence: "Saya mengumpulkan botol plastik dan memisahkannya dari botol kaca." },
+                { word: "分ける (わける)", meaning: "Memilah / Memisahkan", sentence: "私はペットボトルを集めて、びんと分けました。", meaningSentence: "Saya mengumpulkan botol plastik dan memisahkannya dari botol kaca." },
+                { word: "種類 (しゅるい)", meaning: "Jenis", sentence: "公園にはいろいろな種類のゴミがありました。", meaningSentence: "Di taman ada berbagai jenis sampah." },
+                { word: "ペットボトル", meaning: "Botol plastik", sentence: "ペットボトルは洗ってから、袋に入れてください。", meaningSentence: "Cuci dulu botol plastik, lalu masukkan ke dalam kantong." },
+                { word: "びん", meaning: "Botol kaca", sentence: "びんは重いので、友達に持ってもらいました。", meaningSentence: "Karena botol kaca berat, saya meminta teman untuk membawakannya." },
+                { word: "紙 (かみ)", meaning: "Kertas", sentence: "公園にはペットボトルやびん、紙などがありました。", meaningSentence: "Di taman ada botol plastik, botol kaca, kertas, dan lain-lain." },
+                { word: "プラスチックごみ", meaning: "Sampah plastik", sentence: "それはプラスチックごみですよ。", meaningSentence: "Itu adalah sampah plastik." },
+                { word: "洗う (あらう)", meaning: "Mencuci", sentence: "ペットボトルを洗って、ラベルをはがしました。", meaningSentence: "Saya mencuci botol plastik dan melepas labelnya." },
+                { word: "ラベル", meaning: "Label", sentence: "ペットボトルを洗って、ラベルをはがしました。", meaningSentence: "Saya mencuci botol plastik dan melepas labelnya." },
+                { word: "はがす", meaning: "Melepas / Mengelupas", sentence: "ペットボトルを洗って、ラベルをはがしました。", meaningSentence: "Saya mencuci botol plastik dan melepas labelnya." },
+                { word: "ゴミ袋 (ごみぶくろ)", meaning: "Kantong sampah", sentence: "「このゴミ袋を持ちましょうか。」", meaningSentence: "\"Bagaimana kalau saya bawakan kantong sampah ini?\"" },
+                { word: "入れる (いれる)", meaning: "Memasukkan", sentence: "ゴミ袋が大きいから、たくさん入れられますよ。", meaningSentence: "Karena kantong sampahnya besar, kita bisa memasukkan banyak sampah." },
+                { word: "割れる (われる)", meaning: "Pecah", sentence: "びんが割れていたので、危険物には気をつけました。", meaningSentence: "Karena botol kacanya pecah, kami berhati-hati terhadap benda berbahaya." },
+                { word: "危険物 (きけんぶつ)", meaning: "Benda berbahaya", sentence: "びんが割れていたので、危険物には気をつけました。", meaningSentence: "Karena botol kacanya pecah, kami berhati-hati terhadap benda berbahaya." },
+                { word: "気をつける (きをつける)", meaning: "Berhati-hati", sentence: "びんが割れていたので、危険物には気をつけました。", meaningSentence: "Karena botol kacanya pecah, kami berhati-hati terhadap benda berbahaya." },
+                { word: "手伝う (てつだう)", meaning: "Membantu", sentence: "「次は何をお手伝いしましょうか。」", meaningSentence: "\"Selanjutnya apa yang bisa saya bantu?\"" },
+                { word: "箱 (はこ)", meaning: "Kotak", sentence: "「この箱を持ってきてください。」", meaningSentence: "\"Tolong bawakan kotak ini.\"" },
+                { word: "協力 (きょうりょく)", meaning: "Kerja sama", sentence: "みんなで協力したので、掃除が早く終わりました。", meaningSentence: "Karena semua orang bekerja sama, pembersihan selesai dengan cepat." },
+                { word: "掃除 (そうじ)", meaning: "Membersihkan", sentence: "みんなで協力したので、掃除が早く終わりました。", meaningSentence: "Karena semua orang bekerja sama, pembersihan selesai dengan cepat." },
+                { word: "ゴミ捨て場 (ごみすてば)", meaning: "Tempat pembuangan sampah", sentence: "みんなでゴミ捨て場まで持って行きました。", meaningSentence: "Kami bersama-sama membawanya ke tempat pembuangan sampah." },
+                { word: "きれい", meaning: "Bersih / Indah", sentence: "公園もゴミ捨て場もきれいになりました。", meaningSentence: "Taman maupun tempat pembuangan sampah menjadi bersih." },
+                { word: "町 (まち)", meaning: "Kota", sentence: "「皆の協力で町がきれいになりましたね。」", meaningSentence: "\"Dengan kerja sama semua orang, kota menjadi bersih ya.\"" },
+                { word: "安全 (あんぜん)", meaning: "Aman", sentence: "ボランティアのおかげで、町が安全になりました。", meaningSentence: "Berkat para sukarelawan, kota menjadi aman." },
+                { word: "ボランティア", meaning: "Sukarelawan", sentence: "ボランティアのおかげで、町が安全になりました。", meaningSentence: "Berkat para sukarelawan, kota menjadi aman." },
+                { word: "花 (はな)", meaning: "Bunga", sentence: "掃除が終わったあと、きれいな花を見つけました。", meaningSentence: "Setelah pembersihan selesai, saya menemukan bunga yang indah." },
+                { word: "写真 (しゃしん)", meaning: "Foto", sentence: "お花がきれいだったので、写真を撮って帰ることにしました。", meaningSentence: "Karena bunganya indah, saya memutuskan untuk mengambil foto sebelum pulang." },
+                { word: "大変 (たいへん)", meaning: "Berat / Sulit", sentence: "今日は大変でしたが、みんなで協力したので、とても楽しかったです。", meaningSentence: "Hari ini cukup berat, tetapi karena semua orang bekerja sama, rasanya sangat menyenangkan." },
+                { word: "楽しい (たのしい)", meaning: "Menyenangkan", sentence: "今日は大変でしたが、みんなで協力したので、とても楽しかったです。", meaningSentence: "Hari ini cukup berat, tetapi karena semua orang bekerja sama, rasanya sangat menyenangkan." }
+            ]
 }
         
     ];
