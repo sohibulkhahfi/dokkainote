@@ -1938,6 +1938,72 @@
                 { word: "大変 (たいへん)", meaning: "Berat / Sulit", sentence: "今日は大変でしたが、みんなで協力したので、とても楽しかったです。", meaningSentence: "Hari ini cukup berat, tetapi karena semua orang bekerja sama, rasanya sangat menyenangkan." },
                 { word: "楽しい (たのしい)", meaning: "Menyenangkan", sentence: "今日は大変でしたが、みんなで協力したので、とても楽しかったです。", meaningSentence: "Hari ini cukup berat, tetapi karena semua orang bekerja sama, rasanya sangat menyenangkan." }
             ]
+},
+{
+            date: "15 Agustus 2026",
+            title: "子供のころの思い出<br>(Kenangan Masa Kecil)",
+            readingText: `<ruby>子供<rt>こども</rt></ruby>の<ruby>時<rt>とき</rt></ruby>、<ruby>私<rt>わたし</rt></ruby>はよく<ruby>外<rt>そと</rt></ruby>で<ruby>遊<rt>あそ</rt></ruby>びました。<ruby>運動<rt>うんどう</rt></ruby>が<ruby>好<rt>す</rt></ruby>きだったので、<ruby>公園<rt>こうえん</rt></ruby>で<ruby>走<rt>はし</rt></ruby>ったり、<ruby>川<rt>かわ</rt></ruby>で<ruby>泳<rt>およ</rt></ruby>いだり、<ruby>木<rt>き</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>ったりしました。<ruby>夏休み<rt>なつやすみ</rt></ruby>はプールに<ruby>行<rt>い</rt></ruby>ったり、<ruby>山<rt>やま</rt></ruby>に行ったりしました。泳いだり、<ruby>転<rt>ころ</rt></ruby>んだりして、よくけがしました。
+
+ある<ruby>日<rt>ひ</rt></ruby>、<ruby>早<rt>はや</rt></ruby>く走ったので転びました。<ruby>左<rt>ひだり</rt></ruby>のひじが<ruby>赤<rt>あか</rt></ruby>くなって、<ruby>少<rt>すこ</rt></ruby>し<ruby>痛<rt>いた</rt></ruby>かったです。<ruby>兄<rt>あに</rt></ruby>もサッカーで<ruby>足<rt>あし</rt></ruby>をけがして、<ruby>手術<rt>しゅじゅつ</rt></ruby>を<ruby>受<rt>う</rt></ruby>けました。子供の時、兄もよくけがしたそうです。
+
+私は<ruby>転校生<rt>てんこうせい</rt></ruby>だった時もあります。<ruby>何度<rt>なんど</rt></ruby>も<ruby>学校<rt>がっこう</rt></ruby>が<ruby>変<rt>か</rt></ruby>わりました。<ruby>新<rt>あたら</rt></ruby>しい学校では、すぐ<ruby>友達<rt>ともだち</rt></ruby>ができました。公園で走ったり、<ruby>図書館<rt>としょかん</rt></ruby>で<ruby>勉強<rt>べんきょう</rt></ruby>したり、友達と<ruby>音楽<rt>おんがく</rt></ruby>を<ruby>聞<rt>き</rt></ruby>いたりしました。<ruby>天気<rt>てんき</rt></ruby>が<ruby>良<rt>よ</rt></ruby>かったので、外で遊んだこともあります。
+
+<ruby>弟<rt>おとうと</rt></ruby>が<ruby>八歳<rt>はっさい</rt></ruby>だった<ruby>年<rt>とし</rt></ruby>も、いろいろな<ruby>思い出<rt>おもいで</rt></ruby>があります。弟はとても<ruby>小<rt>ちい</rt></ruby>さくて、よく<ruby>部屋<rt>へや</rt></ruby>の<ruby>中<rt>なか</rt></ruby>に<ruby>隠<rt>かく</rt></ruby>れました。カーテンの<ruby>後<rt>うし</rt></ruby>ろに隠れたり、ベッドの<ruby>下<rt>した</rt></ruby>に隠れたりしました。弟が走ったり、<ruby>泣<rt>な</rt></ruby>いたりするので、私はアナウンスを聞いたり、<ruby>探<rt>さが</rt></ruby>したりしました。
+
+<ruby>家<rt>うち</rt></ruby>では<ruby>犬<rt>いぬ</rt></ruby>や<ruby>猫<rt>ねこ</rt></ruby>も<ruby>飼<rt>か</rt></ruby>っていました。私の犬はとてもかわいくて、<ruby>頭<rt>あたま</rt></ruby>もよかったです。猫の<ruby>耳<rt>みみ</rt></ruby>はとても<ruby>柔<rt>やわ</rt></ruby>らかかったです。<ruby>毎朝<rt>まいあさ</rt></ruby>、猫にえさをやりました。
+
+<ruby>家族<rt>かぞく</rt></ruby>の中では、<ruby>母<rt>はは</rt></ruby>がとても<ruby>大切<rt>たいせつ</rt></ruby>です。母が作ったらお<ruby>弁当<rt>べんとう</rt></ruby>は、大切な思い出です。兄とはいつも<ruby>仲<rt>なか</rt></ruby>がよかったです。<ruby>昔<rt>むかし</rt></ruby>の思い出を<ruby>時々<rt>ときどき</rt></ruby>母と<ruby>話<rt>はな</rt></ruby>します。公園で家族と遊んだ思い出もあります。
+
+子供の時の思い出は、けがをしたり、学校が変わったりして<ruby>大変<rt>たいへん</rt></ruby>でした。でも、家族や友達と<ruby>一緒<rt>いっしょ</rt></ruby>に<ruby>過<rt>すご</rt></ruby>した時間は、とても大切で<ruby>幸福<rt>しあわせ</rt></ruby>な思い出です。`,
+            questions: [
+                { q: "子供の時、私はどうしてよく外で遊びましたか。", options: ["A. 勉強が好きだったからです。", "B. 運動が好きだったからです。", "C. 音楽が好きだったからです。"], correct: 1 },
+                { q: "夏休みに私は何をしましたか。", options: ["A. プールや山に行きました。", "B. 毎日学校に行きました。", "C. 家でずっと寝ました。"], correct: 0 },
+                { q: "弟はよくどこに隠れましたか。", options: ["A. 学校の中", "B. 公園の木の上", "C. カーテンの後ろやベッドの下"], correct: 2 },
+                { q: "家では何を飼っていましたか。", options: ["A. 鳥と魚", "B. 犬と猫", "C. 犬とウサギ"], correct: 1 },
+                { q: "筆者にとって、母が作ったお弁当は何ですか。", options: ["A. 大変な仕事", "B. 新しい思い出", "C. 大切な思い出"], correct: 2 }
+            ],
+            essayQuestions: [
+                { q: "ある日、早く走って転んだ時、どうなりましたか。", a: "左のひじが赤くなって、少し痛かったです。" },
+                { q: "兄はサッカーで何をしましたか。", a: "足をけがして、手術を受けました。" },
+                { q: "毎朝、猫に何をしましたか。", a: "猫にえさをやりました。" },
+                { q: "昔の思い出を時々誰と話しますか。", a: "時々母と話し合います。" }
+            ],
+            vocabulary: [
+                { word: "子供の時 (こどものとき)", meaning: "Ketika masih kecil", sentence: "子供の時、私はよく外で遊びました。", meaningSentence: "Ketika masih kecil, saya sering bermain di luar." },
+                { word: "思い出 (おもいで)", meaning: "Kenangan / Memori", sentence: "弟が八歳だった年も、いろいろな思い出があります。", meaningSentence: "Pada tahun saat adik laki-laki berusia delapan tahun pun, ada berbagai kenangan." },
+                { word: "運動 (うんどう)", meaning: "Olahraga", sentence: "運動が好きだったので、公園で走ったりしました。", meaningSentence: "Karena suka berolahraga, saya berlari-lari di taman." },
+                { word: "外で遊ぶ (そとであそぶ)", meaning: "Bermain di luar", sentence: "子供の時、私はよく外で遊びました。", meaningSentence: "Ketika masih kecil, saya sering bermain di luar." },
+                { word: "夏休み (なつやすみ)", meaning: "Liburan musim panas", sentence: "夏休みはプールに行ったり、山に行ったりしました。", meaningSentence: "Saat liburan musim panas, saya pergi ke kolam renang dan gunung." },
+                { word: "プール", meaning: "Kolam renang", sentence: "夏休みはプールに行ったり、山に行ったりしました。", meaningSentence: "Saat liburan musim panas, saya pergi ke kolam renang dan gunung." },
+                { word: "山 (やま)", meaning: "Gunung", sentence: "夏休みはプールに行ったり、山に行ったりしました。", meaningSentence: "Saat liburan musim panas, saya pergi ke kolam renang dan gunung." },
+                { word: "川 (かわ)", meaning: "Sungai", sentence: "川で泳いだり、木に登ったりしました。", meaningSentence: "Saya berenang di sungai dan memanjat pohon." },
+                { word: "木に登る (きにのぼる)", meaning: "Memanjat pohon", sentence: "川で泳いだり、木に登ったりしました。", meaningSentence: "Saya berenang di sungai dan memanjat pohon." },
+                { word: "泳ぐ (およぐ)", meaning: "Berenang", sentence: "川で泳いだり、木に登ったりしました。", meaningSentence: "Saya berenang di sungai dan memanjat pohon." },
+                { word: "転ぶ (ころぶ)", meaning: "Jatuh / Terpeleset", sentence: "ある日、早く走ったので転びました。", meaningSentence: "Suatu hari, saya jatuh karena berlari kencang." },
+                { word: "けがをする", meaning: "Terluka", sentence: "兄もサッカーで足をけがして、手術を受けました。", meaningSentence: "Kakak laki-laki saya juga melukai脚/kaki saat main sepak bola dan jalani operasi." },
+                { word: "左 (ひだり)", meaning: "Kiri", sentence: "左のひじが赤くなって、少し痛かったです。", meaningSentence: "Siku sebelah kiri menjadi merah dan sedikit sakit." },
+                { word: "ひじ", meaning: "Siku", sentence: "左のひじが赤くなって、少し痛かったです。", meaningSentence: "Siku sebelah kiri menjadi merah dan sedikit sakit." },
+                { word: "赤い (あかい)", meaning: "Merah", sentence: "左のひじが赤くなって、少し痛かったです。", meaningSentence: "Siku sebelah kiri menjadi merah dan sedikit sakit." },
+                { word: "手術 (しゅじゅつ)", meaning: "Operasi", sentence: "兄もサッカーで足をけがして、手術を受けました。", meaningSentence: "Kakak laki-laki saya melukai kakinya saat bermain sepak bola dan menjalani operasi." },
+                { word: "転校生 (てんこうせい)", meaning: "Murid pindahan", sentence: "私は転校生だった時もあります。", meaningSentence: "Saya juga pernah menjadi murid pindahan." },
+                { word: "学校が変わる (がっこうがかわる)", meaning: "Pindah sekolah", sentence: "何度も学校が変わりました。", meaningSentence: "Sekolah saya berpindah berkali-kali." },
+                { word: "友達ができる (ともだちができる)", meaning: "Mendapat teman", sentence: "新しい学校では、すぐ友達ができました。", meaningSentence: "Di sekolah baru, saya langsung mendapat teman." },
+                { word: "図書館 (としょかん)", meaning: "Perpustakaan", sentence: "図書館で勉強したり、友達と音楽を聞いたりしました。", meaningSentence: "Saya belajar di perpustakaan dan mendengarkan musik bersama teman." },
+                { word: "弟 (おとうと)", meaning: "Adik laki-laki", sentence: "弟が八歳だった年も、いろいろな思い出があります。", meaningSentence: "Pada tahun saat adik laki-laki berusia delapan tahun pun, ada berbagai kenangan." },
+                { word: "隠れる (かくれる)", meaning: "Bersembunyi", sentence: "弟はとても小さくて、よく部屋の中に隠れました。", meaningSentence: "Adik laki-laki saya sangat kecil dan sering bersembunyi di dalam kamar." },
+                { word: "探す (さがす)", meaning: "Mencari", sentence: "弟が泣いたりするので、私は探したりしました。", meaningSentence: "Karena adik laki-laki menangis, saya mencarinya." },
+                { word: "泣く (なく)", meaning: "Menangis", sentence: "弟が走ったり、泣いたりするので、私は探したりしました。", meaningSentence: "Karena adik laki-laki berlari dan menangis, saya mencarinya." },
+                { word: "猫 (ねこ)", meaning: "Kucing", sentence: "家では犬や猫も飼っていました。", meaningSentence: "Di rumah, kami juga memelihara anjing dan kucing." },
+                { word: "犬 (いぬ)", meaning: "Anjing", sentence: "私の犬はとてもかわいくて、頭もよかったです。", meaningSentence: "Anjing saya sangat lucu dan pintar." },
+                { word: "飼う (かう)", meaning: "Memelihara (hewan)", sentence: "家では犬や猫も飼っていました。", meaningSentence: "Di rumah, kami juga memelihara anjing dan kucing." },
+                { word: "えさをやる", meaning: "Memberi makan hewan", sentence: "毎朝、猫にえさをやりました。", meaningSentence: "Setiap pagi, saya memberi makan kucing." },
+                { word: "家族 (かぞく)", meaning: "Keluarga", sentence: "家族の中では、母がとても大切です。", meaningSentence: "Di dalam keluarga, ibu sangat penting bagi saya." },
+                { word: "母 (はは)", meaning: "Ibu", sentence: "昔の思い出を時々母と話します。", meaningSentence: "Saya terkadang membicarakan kenangan masa lalu bersama ibu." },
+                { word: "大切 (たいせつ)", meaning: "Penting / Berharga", sentence: "母が作ったお弁当は、大切な思い出です。", meaningSentence: "Bekal makanan yang dibuat ibu adalah kenangan yang berharga." },
+                { word: "仲がいい (なかがいい)", meaning: "Akrab / Rukun", sentence: "兄とはいつも仲がよかったです。", meaningSentence: "Hubungan saya dengan kakak laki-laki selalu akrab." },
+                { word: "お弁当 (おべんとう)", meaning: "Bekal makanan", sentence: "母が作ったお弁当は、大切な思い出です。", meaningSentence: "Bekal makanan yang dibuat ibu adalah kenangan yang berharga." },
+                { word: "幸せ (しあわせ)", meaning: "Kebahagiaan / Bahagia", sentence: "家族や友達と一緒に過ごした時間は、とても大切で幸せな思い出です。", meaningSentence: "Waktu yang dihabiskan bersama keluarga dan teman adalah kenangan yang sangat berharga dan membahagiakan." }
+            ]
 }
         
     ];
